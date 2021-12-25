@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>python-反射、描述器 | luoqian</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="反射概述运行时，区别于编译时，指的是程序被加载到内存中执行的时候。反射，reflection，指的是运行时获取类型定义信息。简单说，在Python中，能够通过一个对象，找出其type、class、attribute或method的能力，称为反射或者自省。具有反射能力的函数有：type()、isinstance()、callable()、dir()、getattr()    内建函数 意义    g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python-反射、描述器">
+<meta property="og:url" content="https://vampireqian.github.io/2017/10/19/15python%E5%8F%8D%E5%B0%84%E3%80%81%E6%8F%8F%E8%BF%B0%E5%99%A8/index.html">
+<meta property="og:site_name" content="luoqian">
+<meta property="og:description" content="反射概述运行时，区别于编译时，指的是程序被加载到内存中执行的时候。反射，reflection，指的是运行时获取类型定义信息。简单说，在Python中，能够通过一个对象，找出其type、class、attribute或method的能力，称为反射或者自省。具有反射能力的函数有：type()、isinstance()、callable()、dir()、getattr()    内建函数 意义    g">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-10-18T16:00:00.000Z">
+<meta property="article:modified_time" content="2018-12-11T12:46:18.000Z">
+<meta property="article:author" content="luoqian">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="luoqian" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">luoqian</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://vampireqian.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-15python反射、描述器" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2017/10/19/15python%E5%8F%8D%E5%B0%84%E3%80%81%E6%8F%8F%E8%BF%B0%E5%99%A8/" class="article-date">
+  <time class="dt-published" datetime="2017-10-18T16:00:00.000Z" itemprop="datePublished">2017-10-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      python-反射、描述器
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>运行时，区别于编译时，指的是程序被加载到内存中执行的时候。<br>反射，reflection，指的是运行时获取类型定义信息。<br>简单说，在Python中，能够通过一个对象，找出其type、class、attribute或method的能力，称为反射或者自省。<br>具有反射能力的函数有：type()、isinstance()、callable()、dir()、getattr()</p>
+<table>
+<thead>
+<tr>
+<th>内建函数</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>getattr(object, name[, default])</td>
+<td>通过name返回object的属性值。当属性不存在，将使用default返回，如果没有default，则抛出AttributeError。name必须为字符串</td>
+</tr>
+<tr>
+<td>setattr(object, name, value)</td>
+<td>object的属性存在，则覆盖，不存在，新增</td>
+</tr>
+<tr>
+<td>hasattr(object, name)</td>
+<td>判断对象是否有这个名字的属性，name必须为字符串</td>
+</tr>
+</tbody></table>
+<p>给一个实例用setattr添加一个方法，不做绑定，不会绑定到类中，此时不能用类调用，然而类使用setattr方法，会把那个方法绑定到类的字典上。</p>
+<p>思考<br>这种动态增加属性的方式和装饰器修饰一个类、Mixin方式的差异？</p>
+<p>这种动态增删属性的方式是运行时改变类或者实例的方式，但是装饰器或Mixin都是定义时就决定了，因此反射能力具有更大的灵活性。</p>
+<h3 id="反射相关的魔术方法"><a href="#反射相关的魔术方法" class="headerlink" title="反射相关的魔术方法"></a>反射相关的魔术方法</h3><p><code>__getattr__()</code>、<code>__setattr__()</code>、<code>__delattr__()</code>这三个魔术方法。</p>
+<table>
+<thead>
+<tr>
+<th>魔术方法</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>__getattr__()</code></td>
+<td>当通过搜索实例、实例的类及祖先类查不到属性，就会调用此方法</td>
+</tr>
+<tr>
+<td><code>__setattr__()</code></td>
+<td>通过.访问实例属性，进行增加、修改都要调用它</td>
+</tr>
+<tr>
+<td><code>__delattr__()</code></td>
+<td>当通过实例来删除属性时调用此方法</td>
+</tr>
+<tr>
+<td><code>__getattribute__()</code></td>
+<td>实例所有的属性调用都从这个方法开始</td>
+</tr>
+</tbody></table>
+<p>一个类的属性会按照继承关系找，如果找不到，就会执行<code> __getattr__()</code> 方法，如果没有这个方法，就会抛出AttributeError异常表示找不到属性。<br>查找属性顺序为：<br>实例调用<code>__getattribute__()</code> –&gt;<code> instance.__dict__</code> –&gt;<code> instance.__class__.__dict__</code> –&gt; 继承的祖先类（直到object）的<code>__dict__</code>—找不到–&gt; 调用<code>__getattr__()</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span>(<span class="params">Base</span>):</span></span><br><span class="line">    z = <span class="number">6</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, x, y</span>):</span></span><br><span class="line">        self.x = x</span><br><span class="line">        self.y = y</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">show</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(self.x, self.y)</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span>(<span class="params">self, item</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;missing &#123;&#125;&quot;</span>.<span class="built_in">format</span>(item)</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setattr__</span>(<span class="params">self, key, value</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;setattr &#123;&#125;=&#123;&#125;&quot;</span>.<span class="built_in">format</span>(key,value))</span><br><span class="line">        self.__dict__[key] = value</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>__setattr__()</code>方法，可以拦截对实例属性的增加、修改操作，如果要设置生效，需要自己操作实例的<br><code>__dict__</code>。</p>
+<p><strong><code>__getattribute__</code>方法</strong></p>
+<p>实例的所有的属性访问，第一个都会调用<code>__getattribute__</code>方法，它阻止了属性的查找，该方法应该返回（计算后的）值或者抛出一个AttributeError异常。</p>
+<ul>
+<li>它的return值将作为属性查找的结果。</li>
+<li>如果抛出AttributeError异常，则会直接调用<code>__getattr__</code>方法，因为表示属性没有找到。</li>
+</ul>
+<p><code>__getattribute__</code>方法中为了避免在该方法中无限的递归，它的实现应该永远调用基类的同名方法以访问需要的任何属性，例如<code>object.__getattribute__(self, name)</code>。<br>注意，除非你明确地知道<code>__getattribute__</code>方法用来做什么，否则不要使用它。</p>
+<h2 id="描述器"><a href="#描述器" class="headerlink" title="描述器"></a>描述器</h2><p>描述器的表现<br>用到3个魔术方法:__get__()、__set__()、__delete__()<br>方法签名如下<br>object.__get__(self, instance, owner)<br>object.__set__(self, instance, value)<br>object.__delete__(self, instance)<br>self 指代当前实例，调用者<br>instance 是owner的实例<br>owner 是属性的所属的类</p>
+<h3 id="描述器定义"><a href="#描述器定义" class="headerlink" title="描述器定义"></a>描述器定义</h3><p>Python中，一个类实现了<code>__get__</code>、<code>__set__</code>、<code>__delete__</code>三个方法中的任何一个方法，就是描述器。<br>如果仅实现了<code>__get__</code>，就是<font color=red><strong>非数据描述符 non-data descriptor</strong></font>；<br>同时实现了<code>__get__</code>、<code>__set__</code>就是<font color=red><strong>数据描述符 data descriptor</strong></font></p>
+<p>如果一个类的类属性设置为描述器实例，那么它被称为owner属主。</p>
+<h3 id="属性查找顺序"><a href="#属性查找顺序" class="headerlink" title="属性查找顺序"></a>属性查找顺序</h3><p>实例的<code>__dict__</code> 优先于非数据描述器<br>数据描述器优先于实例的<code>__dict__</code><br><code>__delete__</code>方法有同样的效果，有了这个方法，也是数据描述器。</p>
+<h3 id="Python中的描述器"><a href="#Python中的描述器" class="headerlink" title="Python中的描述器"></a>Python中的描述器</h3><hr>
+<p>Python的方法（包括staticmethod()和classmethod()）都实现为非数据描述器。因此，实例可以重新定义和覆盖方法。这允许单个实例获取与同一类的其他实例不同的行为。</p>
+<p>property()函数实现为一个数据描述器。因此，实例不能覆盖属性的行为。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line"><span class="meta">    @classmethod  </span><span class="comment"># 非数据描述器</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">cls</span>):</span> </span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">    @staticmethod </span><span class="comment"># 非数据描述器</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">bar</span>():</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">    @property </span><span class="comment"># 数据描述器</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">z</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">5</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getfoo</span>(<span class="params">self</span>):</span> <span class="comment"># 非数据描述器</span></span><br><span class="line">        <span class="keyword">return</span> self.foo</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span> <span class="comment"># 非数据描述器</span></span><br><span class="line">        self.foo = <span class="number">100</span></span><br><span class="line">        self.bar = <span class="number">200</span></span><br><span class="line">        <span class="comment">#self.z = 300</span></span><br><span class="line">        </span><br><span class="line">a = A()</span><br><span class="line"><span class="built_in">print</span>(a.__dict__)</span><br><span class="line"><span class="built_in">print</span>(A.__dict__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#foo、bar都可以在实例中覆盖，但是z不可以。</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://vampireqian.github.io/2017/10/19/15python%E5%8F%8D%E5%B0%84%E3%80%81%E6%8F%8F%E8%BF%B0%E5%99%A8/" data-id="ckxlw2jbm00130zex2bpddiae" data-title="python-反射、描述器" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/11/01/16%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          网络编程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/10/11/14python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7%E3%80%81%E6%9F%A5%E7%9C%8B%E5%B1%9E%E6%80%A7%E3%80%81%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">python面向对象-特殊属性、查看属性、魔术方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/">云计算</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E9%A1%B9/">杂项</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E9%A1%B9%E6%95%99%E7%A8%8B/">杂项教程</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/" rel="tag">eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/excel/" rel="tag">excel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/" rel="tag">socket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97%EF%BC%8C%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag">云计算，阿里云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%89%E4%BD%8D%E8%AE%A1%E7%AE%97/" rel="tag">按位计算</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/" rel="tag">日志分析</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Linux/" style="font-size: 16.67px;">Linux</a> <a href="/tags/eclipse/" style="font-size: 10px;">eclipse</a> <a href="/tags/excel/" style="font-size: 10px;">excel</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/socket/" style="font-size: 10px;">socket</a> <a href="/tags/windows/" style="font-size: 13.33px;">windows</a> <a href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97%EF%BC%8C%E9%98%BF%E9%87%8C%E4%BA%91/" style="font-size: 10px;">云计算，阿里云</a> <a href="/tags/%E6%8C%89%E4%BD%8D%E8%AE%A1%E7%AE%97/" style="font-size: 10px;">按位计算</a> <a href="/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/" style="font-size: 10px;">日志分析</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/01/01/%E9%98%BF%E9%87%8C%E4%BA%91%E5%B9%B3%E5%8F%B0%E4%BD%BF%E7%94%A8%E5%AE%89%E5%85%A8/">云计算使用简介</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/05/excel%E5%90%88%E5%B9%B6%E8%A1%A8%E6%A0%BC%E7%94%A8/">excel合并表格</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/02/win10win7%E6%89%93%E5%BC%80%E8%BD%AF%E4%BB%B6%E6%8F%90%E7%A4%BA%E7%B3%BB%E7%BB%9F%E8%B5%84%E6%BA%90%E4%B8%8D%E8%B6%B3,%E6%97%A0%E6%B3%95%E5%AE%8C%E6%88%90%E8%AF%B7%E6%B1%82%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">win10win7打开软件提示系统资源不足,无法完成请求服务的解决方法</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/25/centos6%E4%B8%8B%E9%83%A8%E7%BD%B2Java%20Web%E9%A1%B9%E7%9B%AE/">centos6下部署Java Web项目</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/25/%E5%9C%A8eclipse%E4%B8%AD%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AEweb%E6%9C%89%E6%97%B6%E5%80%99%E8%AE%BF%E9%97%AEjsp%E4%BC%9A%E6%8A%9B%E5%87%BA%E4%BB%A5%E4%B8%8B%E7%B1%BB%E4%BC%BC%E7%9A%84%E5%BC%82%E5%B8%B8%E4%BF%A1%E6%81%AF/">在eclipse中部署项目web有时候访问jsp会抛出以下类似的异常信息</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 luoqian<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

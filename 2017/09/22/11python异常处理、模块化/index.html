@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>python-异常处理、模块化 | luoqian</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="异常处理异常Exception 错误 Error ：错误是可以避免的逻辑错误：算法写错了，加法写成了减法笔误：变量名写错了，语法错误函数或类使用错误，其实这也属于逻辑错误  异常 Exception ：异常不可能避免本意就是意外情况这有个前提，没有出现上面说的错误，也就是说程序写的没有问题，但是在某些情况下，会出现一些意外，导致程序无法正常的执行下去。例如open函数操作一个文件，文件不存在，或者">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python-异常处理、模块化">
+<meta property="og:url" content="https://vampireqian.github.io/2017/09/22/11python%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E3%80%81%E6%A8%A1%E5%9D%97%E5%8C%96/index.html">
+<meta property="og:site_name" content="luoqian">
+<meta property="og:description" content="异常处理异常Exception 错误 Error ：错误是可以避免的逻辑错误：算法写错了，加法写成了减法笔误：变量名写错了，语法错误函数或类使用错误，其实这也属于逻辑错误  异常 Exception ：异常不可能避免本意就是意外情况这有个前提，没有出现上面说的错误，也就是说程序写的没有问题，但是在某些情况下，会出现一些意外，导致程序无法正常的执行下去。例如open函数操作一个文件，文件不存在，或者">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-09-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2018-12-11T08:36:38.000Z">
+<meta property="article:author" content="luoqian">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="luoqian" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">luoqian</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://vampireqian.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-11python异常处理、模块化" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2017/09/22/11python%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E3%80%81%E6%A8%A1%E5%9D%97%E5%8C%96/" class="article-date">
+  <time class="dt-published" datetime="2017-09-21T16:00:00.000Z" itemprop="datePublished">2017-09-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      python-异常处理、模块化
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><h3 id="异常Exception"><a href="#异常Exception" class="headerlink" title="异常Exception"></a>异常Exception</h3><hr>
+<p><strong>错误 Error</strong> ：错误是可以避免的<br>逻辑错误：算法写错了，加法写成了减法<br>笔误：变量名写错了，语法错误<br>函数或类使用错误，其实这也属于逻辑错误 </p>
+<p><strong>异常 Exception</strong> ：异常不可能避免<br>本意就是意外情况<br>这有个前提，没有出现上面说的错误，也就是说程序写的没有问题，但是在某些情况下，会出现一些意外，导致程序无法正常的执行下去。<br>例如open函数操作一个文件，文件不存在，或者创建一个文件时已经存在了，或者访问一个网络文件，突然断网了，这就是异常，是个意外的情况。 </p>
+<p><strong>错误和异常</strong><br>在高级编程语言中，一般都有错误和异常的概念，异常是可以捕获，并被处理的，但是错误是不能被捕获的。</p>
+<h3 id="产生异常"><a href="#产生异常" class="headerlink" title="产生异常"></a>产生异常</h3><hr>
+<p>产生：</p>
+<ul>
+<li>raise 语句显式的抛出异常</li>
+<li>Python解释器自己检测到异常并引发它</li>
+</ul>
+<p>程序会在异常抛出的地方中断执行，如果不捕获，就会提前结束程序（其实是终止当前线程的执行）</p>
+<p><strong>raise语句</strong><br>raise后什么都没有，表示抛出<strong>最近一个被激活</strong>的异常，如果没有，则抛类型异常。这种方式很少用 。</p>
+<p>raise后要求应该是BaseException类的子类或实例，如果是类，将被无参实例化。</p>
+<h3 id="异常类及继承层次"><a href="#异常类及继承层次" class="headerlink" title="异常类及继承层次"></a>异常类及继承层次</h3><hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python异常的继承</span></span><br><span class="line"> </span><br><span class="line">BaseException</span><br><span class="line"> +-- SystemExit</span><br><span class="line"> +-- KeyboardInterrupt</span><br><span class="line"> +-- GeneratorExit</span><br><span class="line"> +-- Exception</span><br><span class="line">      +-- RuntimeError</span><br><span class="line">      |    +-- RecursionError</span><br><span class="line">      +-- MemoryError</span><br><span class="line">      +-- NameError</span><br><span class="line">      +-- StopIteration</span><br><span class="line">      +-- StopAsyncIteration</span><br><span class="line">      +-- ArithmeticError</span><br><span class="line">      |    +-- FloatingPointError</span><br><span class="line">      |    +-- OverflowError</span><br><span class="line">      |    +-- ZeroDivisionError</span><br><span class="line">      +-- LookupError</span><br><span class="line">      |    +-- IndexError</span><br><span class="line">      |    +-- KeyError</span><br><span class="line">      +-- SyntaxError</span><br><span class="line">      +-- OSError</span><br><span class="line">      |    +-- BlockingIOError</span><br><span class="line">      |    +-- ChildProcessError</span><br><span class="line">      |    +-- ConnectionError</span><br><span class="line">      |    |    +-- BrokenPipeError</span><br><span class="line">      |    |    +-- ConnectionAbortedError</span><br><span class="line">      |    |    +-- ConnectionRefusedError</span><br><span class="line">      |    |    +-- ConnectionResetError</span><br><span class="line">      |    +-- FileExistsError</span><br><span class="line">      |    +-- FileNotFoundError</span><br><span class="line">      |    +-- InterruptedError</span><br><span class="line">      |    +-- IsADirectoryError</span><br><span class="line">      |    +-- NotADirectoryError</span><br><span class="line">      |    +-- PermissionError</span><br><span class="line">      |    +-- ProcessLookupError</span><br><span class="line">      |    +-- TimeoutError</span><br></pre></td></tr></table></figure>
+
+<h3 id="BaseException及子类"><a href="#BaseException及子类" class="headerlink" title="BaseException及子类"></a>BaseException及子类</h3><hr>
+<p><strong>BaseException</strong><br>所有内建异常类的基类是BaseException</p>
+<p><strong>SystemExit</strong><br>sys.exit(n)函数引发的异常，异常不捕获处理，就直接交给Python解释器，解释器退出。n=0,正常退出，n=1异常退出。</p>
+<p>如果except语句捕获了该异常，则继续向后面执行，如果没有捕获住该异常SystemExit，解释器直接退出程序。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;before&#x27;</span>)</span><br><span class="line">sys.exit(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;SysExit&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;outer&#x27;</span>) <span class="comment"># 不执行</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 捕获这个异常</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    sys.exit(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">except</span> SystemExit: <span class="comment"># 换成Exception</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;SysExit&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;outer&#x27;</span>) <span class="comment"># 执行</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>KeyboardInterrupt</strong><br>对应的捕获用户中断行为Ctrl + C</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">import</span> time</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        time.sleep(<span class="number">0.5</span>)</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"><span class="keyword">except</span> KeyboardInterrupt:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;ctl + c&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;outer&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Exception及子类"><a href="#Exception及子类" class="headerlink" title="Exception及子类"></a>Exception及子类</h3><p><strong>Exception</strong>是所有内建的、非系统退出的异常的基类，自定义异常应该继承自它</p>
+<p><strong>SyntaxError</strong> 语法错误<br>Python将这种错误也归到异常类下面的Exception下的子类，但是这种错误是不可捕获的</p>
+<p><strong>ArithmeticError</strong> 所有算术计算引发的异常，其子类有除零异常等</p>
+<p><strong>LookupError</strong><br>使用映射的键或序列的索引无效时引发的异常的基类：IndexError, KeyError</p>
+<p><strong>自定义异常</strong><br>从Exception继承的类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyException</span>(<span class="params">Exception</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">raise</span> MyException()</span><br><span class="line"><span class="keyword">except</span> MyException: <span class="comment"># 捕获自定义异常</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;catch the exception&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="未实现和未实现异常"><a href="#未实现和未实现异常" class="headerlink" title="未实现和未实现异常"></a>未实现和未实现异常</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="literal">NotImplemented</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(NotImplementedError))</span><br><span class="line"></span><br><span class="line"><span class="comment">#&lt;class &#x27;NotImplementedType&#x27;&gt;</span></span><br><span class="line"><span class="comment">#&lt;class &#x27;type&#x27;&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>NotImplemented是个值，单值，是NotImplementedType的实例</p>
+<p>NotImplementedError是类型，是异常，返回type</p>
+<h3 id="异常的捕获"><a href="#异常的捕获" class="headerlink" title="异常的捕获"></a>异常的捕获</h3><hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    待捕获异常的代码块</span><br><span class="line"><span class="keyword">except</span> [异常类型]:</span><br><span class="line">    异常的处理代码块</span><br></pre></td></tr></table></figure>
+
+<p>使用了<strong>try…except语句</strong>块捕捉到了这个异常，异常生成位置之后语句将不再执行，转而执行对应的except部分的语句，最后执行try…except语句块之外的语句。</p>
+<p>except 后接异常类型，用来捕获指定类型的异常，except可以捕获多个异常。</p>
+<p>捕获规则<br>捕获是从上到下依次比较，如果匹配，则执行匹配的except语句块<br>如果被一个except语句捕获，其他except语句就不会再次捕获了<br>如果没有任何一个except语句捕获到这个异常，则该异常向外抛出</p>
+<p>捕获的原则<br>从小到大，从具体到宽泛</p>
+<p>被抛出的异常，应该是异常的实例，使用as子句接收这个抛出的异常。</p>
+<h3 id="finally子句"><a href="#finally子句" class="headerlink" title="finally子句"></a>finally子句</h3><hr>
+<p>finally<br>最终，即最后一定要执行的，try…finally语句块中，不管是否发生了异常，都要执行finally的部分</p>
+<p>finally中一般放置资源的清理、释放工作的语句，也可以在finally中再次捕捉异常。</p>
+<h3 id="异常的传递"><a href="#异常的传递" class="headerlink" title="异常的传递"></a>异常的传递</h3><hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo1</span>():</span></span><br><span class="line">​    <span class="keyword">return</span> <span class="number">1</span>/<span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo2</span>():</span></span><br><span class="line">​    <span class="built_in">print</span>(<span class="string">&#x27;foo2 start&#x27;</span>)</span><br><span class="line">​    foo1()</span><br><span class="line">​    <span class="built_in">print</span>(<span class="string">&#x27;foo2 stop&#x27;</span>)</span><br><span class="line"></span><br><span class="line">foo2()</span><br></pre></td></tr></table></figure>
+<p>foo2调用了foo1，foo1产生的异常，传递到了foo2中。<br>异常总是向外层抛出，如果外层没有处理这个异常，就会继续向外抛出<br>如果内层捕获并处理了异常，外部就不能捕获到了<br>如果到了最外层还是没有被处理，就会中断异常所在的线程的执行。注意整个程序结束的状态返回值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 线程中测试异常</span></span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo1</span>():</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>/<span class="number">0</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo2</span>():</span></span><br><span class="line">    time.sleep(<span class="number">3</span>) <span class="comment"># 3秒后抛出异常</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;foo2 start&#x27;</span>)</span><br><span class="line">    foo1()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;foo2 stop&#x27;</span>)</span><br><span class="line"> </span><br><span class="line">t = threading.Thread(target=foo2)</span><br><span class="line">t.start()</span><br><span class="line"> </span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Everything OK&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> t.is_alive():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;alive&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;dead&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="try嵌套"><a href="#try嵌套" class="headerlink" title="try嵌套"></a>try嵌套</h3><hr>
+<p>内部捕获不到异常，会向外层传递异常<br>但是如果内层有finally且其中有return、break语句，则异常就不会继续向外抛出：异常被压制。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        ret = <span class="number">1</span> / <span class="number">0</span></span><br><span class="line">    <span class="keyword">except</span> KeyError <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(e)</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;inner fin&#x27;</span>)</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;outer catch&#x27;</span>)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;outer fin&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#输出    </span></span><br><span class="line"><span class="comment">#inner fin</span></span><br><span class="line"><span class="comment">#outer catch</span></span><br><span class="line"><span class="comment">#outer fin</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="异常的捕获的时机"><a href="#异常的捕获的时机" class="headerlink" title="异常的捕获的时机"></a>异常的捕获的时机</h3><p>1.立即捕获</p>
+<p>需要立即返回一个明确的结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_int</span>(<span class="params">s</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">int</span>(s)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span>(parse_int(<span class="string">&#x27;s&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>2.边界捕获</p>
+<p>封装产生了边界</p>
+<p>例如，写了一个模块，用户调用这个模块的时候捕获异常，模块内部不需要捕获、处理异常，一旦内部处理了，外<br>部调用者就无法感知了。<br>例如，open函数，出现的异常交给调用者处理，文件存在了，就不用再创建了，看是否修改还是删除<br>例如，自己写了一个类，使用了open函数，但是出现了异常不知道如何处理，就继续向外层抛出，一般来说最外<br>层也是边界，必须处理这个异常了，否则线程退出</p>
+<h3 id="else子句"><a href="#else子句" class="headerlink" title="else子句"></a>else子句</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    ret = <span class="number">1</span> * <span class="number">0</span></span><br><span class="line"><span class="keyword">except</span> ArithmeticError <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(e)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;OK&#x27;</span>)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;fin&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>else子句<br><strong>没有任何异常发生</strong>，则执行</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    &lt;语句&gt;    <span class="comment">#运行别的代码</span></span><br><span class="line"><span class="keyword">except</span> &lt;异常类&gt;：</span><br><span class="line">    &lt;语句&gt;    <span class="comment"># 捕获某种类型的异常</span></span><br><span class="line"><span class="keyword">except</span> &lt;异常类&gt; <span class="keyword">as</span> &lt;变量名&gt;:</span><br><span class="line">    &lt;语句&gt;    <span class="comment"># 捕获某种类型的异常并获得对象</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    &lt;语句&gt;    <span class="comment">#如果没有异常发生</span></span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    &lt;语句&gt;    <span class="comment">#退出try时总会执行</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>try的工作原理</strong> </p>
+<p>1、如果try中语句执行时发生异常，搜索except子句，并执行第一个匹配该异常的except子句<br>2、如果try中语句执行时发生异常，却没有匹配的except子句，异常将被递交到外层的try，如果外层不处理这个异常，异常将继续向外层传递。如果都不处理该异常，则会传递到最外层，如果还没有处理，就终止异常所在的线程<br>3、如果在try执行时没有发生异常，将执行else子句中的语句<br>4、无论try中是否发生异常，finally子句最终都会执行。</p>
+<h2 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h2><p>Python中只有一种模块对象类型，但是为了模块化组织模块的便利，提供了“包”的概念。模块module，指的是Python的源代码文件。</p>
+<p>包package，指的是模块组织在一起的和包名同名的目录及其相关文件。</p>
+<h3 id="导入语句"><a href="#导入语句" class="headerlink" title="导入语句"></a>导入语句</h3><table>
+<thead>
+<tr>
+<th>语句</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>import 模块1，[模块2….]</td>
+<td>完全导入</td>
+</tr>
+<tr>
+<td>import….as…..</td>
+<td>模块别名</td>
+</tr>
+</tbody></table>
+<p><strong>import语句</strong></p>
+<p>1、找到指定的模块，加载和初始化它，生成模块对象。找不到，抛出ImportError</p>
+<p>2、在import所在的作用域的局部命名空间中，增加名称和上一步创建的对象关联。</p>
+<p><strong>总结</strong></p>
+<p>导入顶级模块，其名称会加入到本地名词空间中，并绑定到其模块对象。</p>
+<p>导入非顶层模块，只将其顶级模块名称加入到本地名称空间中。导入的模块必须使用完全限定名称来访问。</p>
+<p>如果使用了as，as后的名称直接绑定到导入的模块对象，并将该名称加入到本地名词空间中。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://vampireqian.github.io/2017/09/22/11python%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E3%80%81%E6%A8%A1%E5%9D%97%E5%8C%96/" data-id="ckxlw2jbi000o0zexdq0o9cm0" data-title="python-异常处理、模块化" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/09/30/12python%E7%9B%B4%E6%8E%A5%E8%B5%8B%E5%80%BC%E3%80%81%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          python直接赋值、深拷贝和浅拷贝
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/10/09python%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E3%80%81%E8%B7%AF%E5%BE%84%E5%A4%84%E7%90%86%E3%80%81%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">python-文件处理、路径处理、序列化和反序列化</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/">云计算</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E9%A1%B9/">杂项</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E9%A1%B9%E6%95%99%E7%A8%8B/">杂项教程</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/" rel="tag">eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/excel/" rel="tag">excel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/" rel="tag">socket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97%EF%BC%8C%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag">云计算，阿里云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%89%E4%BD%8D%E8%AE%A1%E7%AE%97/" rel="tag">按位计算</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/" rel="tag">日志分析</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Linux/" style="font-size: 16.67px;">Linux</a> <a href="/tags/eclipse/" style="font-size: 10px;">eclipse</a> <a href="/tags/excel/" style="font-size: 10px;">excel</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/socket/" style="font-size: 10px;">socket</a> <a href="/tags/windows/" style="font-size: 13.33px;">windows</a> <a href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97%EF%BC%8C%E9%98%BF%E9%87%8C%E4%BA%91/" style="font-size: 10px;">云计算，阿里云</a> <a href="/tags/%E6%8C%89%E4%BD%8D%E8%AE%A1%E7%AE%97/" style="font-size: 10px;">按位计算</a> <a href="/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/" style="font-size: 10px;">日志分析</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/01/01/%E9%98%BF%E9%87%8C%E4%BA%91%E5%B9%B3%E5%8F%B0%E4%BD%BF%E7%94%A8%E5%AE%89%E5%85%A8/">云计算使用简介</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/05/excel%E5%90%88%E5%B9%B6%E8%A1%A8%E6%A0%BC%E7%94%A8/">excel合并表格</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/02/win10win7%E6%89%93%E5%BC%80%E8%BD%AF%E4%BB%B6%E6%8F%90%E7%A4%BA%E7%B3%BB%E7%BB%9F%E8%B5%84%E6%BA%90%E4%B8%8D%E8%B6%B3,%E6%97%A0%E6%B3%95%E5%AE%8C%E6%88%90%E8%AF%B7%E6%B1%82%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">win10win7打开软件提示系统资源不足,无法完成请求服务的解决方法</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/25/centos6%E4%B8%8B%E9%83%A8%E7%BD%B2Java%20Web%E9%A1%B9%E7%9B%AE/">centos6下部署Java Web项目</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/25/%E5%9C%A8eclipse%E4%B8%AD%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AEweb%E6%9C%89%E6%97%B6%E5%80%99%E8%AE%BF%E9%97%AEjsp%E4%BC%9A%E6%8A%9B%E5%87%BA%E4%BB%A5%E4%B8%8B%E7%B1%BB%E4%BC%BC%E7%9A%84%E5%BC%82%E5%B8%B8%E4%BF%A1%E6%81%AF/">在eclipse中部署项目web有时候访问jsp会抛出以下类似的异常信息</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 luoqian<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
