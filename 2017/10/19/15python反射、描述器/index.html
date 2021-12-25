@@ -1,37 +1,367 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vampireqian.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"بحث...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="反射概述运行时，区别于编译时，指的是程序被加载到内存中执行的时候。反射，reflection，指的是运行时获取类型定义信息。简单说，在Python中，能够通过一个对象，找出其type、class、attribute或method的能力，称为反射或者自省。具有反射能力的函数有：type()、isinstance()、callable()、dir()、getattr()    内建函数 意义    g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python-反射、描述器">
+<meta property="og:url" content="https://vampireqian.github.io/2017/10/19/15python%E5%8F%8D%E5%B0%84%E3%80%81%E6%8F%8F%E8%BF%B0%E5%99%A8/index.html">
+<meta property="og:site_name" content="luoqian">
+<meta property="og:description" content="反射概述运行时，区别于编译时，指的是程序被加载到内存中执行的时候。反射，reflection，指的是运行时获取类型定义信息。简单说，在Python中，能够通过一个对象，找出其type、class、attribute或method的能力，称为反射或者自省。具有反射能力的函数有：type()、isinstance()、callable()、dir()、getattr()    内建函数 意义    g">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-10-18T16:00:00.000Z">
+<meta property="article:modified_time" content="2018-12-11T12:46:18.000Z">
+<meta property="article:author" content="luoqian">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://vampireqian.github.io/2017/10/19/15python%E5%8F%8D%E5%B0%84%E3%80%81%E6%8F%8F%E8%BF%B0%E5%99%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh","comments":true,"permalink":"https://vampireqian.github.io/2017/10/19/15python%E5%8F%8D%E5%B0%84%E3%80%81%E6%8F%8F%E8%BF%B0%E5%99%A8/","path":"2017/10/19/15python反射、描述器/","title":"python-反射、描述器"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>python-反射、描述器 | luoqian</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="تشغيل شريط التصفح" role="button">
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">luoqian</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          المحتويات
+        </li>
+        <li class="sidebar-nav-overview">
+          عام
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84"><span class="nav-number">1.</span> <span class="nav-text">反射</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84%E7%9B%B8%E5%85%B3%E7%9A%84%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">反射相关的魔术方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">描述器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0%E5%99%A8%E5%AE%9A%E4%B9%89"><span class="nav-number">2.1.</span> <span class="nav-text">描述器定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7%E6%9F%A5%E6%89%BE%E9%A1%BA%E5%BA%8F"><span class="nav-number">2.2.</span> <span class="nav-text">属性查找顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python%E4%B8%AD%E7%9A%84%E6%8F%8F%E8%BF%B0%E5%99%A8"><span class="nav-number">2.3.</span> <span class="nav-text">Python中的描述器</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">luoqian</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">المقالات</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">التصنيفات</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">الوسوم</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh">
+    <link itemprop="mainEntityOfPage" href="https://vampireqian.github.io/2017/10/19/15python%E5%8F%8D%E5%B0%84%E3%80%81%E6%8F%8F%E8%BF%B0%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="luoqian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="luoqian">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python-反射、描述器
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2017-10-19 00:00:00" itemprop="dateCreated datePublished" datetime="2017-10-19T00:00:00+08:00">2017-10-19</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2018-12-11 20:46:18" itemprop="dateModified" datetime="2018-12-11T20:46:18+08:00">2018-12-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>运行时，区别于编译时，指的是程序被加载到内存中执行的时候。<br>反射，reflection，指的是运行时获取类型定义信息。<br>简单说，在Python中，能够通过一个对象，找出其type、class、attribute或method的能力，称为反射或者自省。<br>具有反射能力的函数有：type()、isinstance()、callable()、dir()、getattr()</p>
+<table>
+<thead>
+<tr>
+<th>内建函数</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>getattr(object, name[, default])</td>
+<td>通过name返回object的属性值。当属性不存在，将使用default返回，如果没有default，则抛出AttributeError。name必须为字符串</td>
+</tr>
+<tr>
+<td>setattr(object, name, value)</td>
+<td>object的属性存在，则覆盖，不存在，新增</td>
+</tr>
+<tr>
+<td>hasattr(object, name)</td>
+<td>判断对象是否有这个名字的属性，name必须为字符串</td>
+</tr>
+</tbody></table>
+<p>给一个实例用setattr添加一个方法，不做绑定，不会绑定到类中，此时不能用类调用，然而类使用setattr方法，会把那个方法绑定到类的字典上。</p>
+<p>思考<br>这种动态增加属性的方式和装饰器修饰一个类、Mixin方式的差异？</p>
+<p>这种动态增删属性的方式是运行时改变类或者实例的方式，但是装饰器或Mixin都是定义时就决定了，因此反射能力具有更大的灵活性。</p>
+<h3 id="反射相关的魔术方法"><a href="#反射相关的魔术方法" class="headerlink" title="反射相关的魔术方法"></a>反射相关的魔术方法</h3><p><code>__getattr__()</code>、<code>__setattr__()</code>、<code>__delattr__()</code>这三个魔术方法。</p>
+<table>
+<thead>
+<tr>
+<th>魔术方法</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>__getattr__()</code></td>
+<td>当通过搜索实例、实例的类及祖先类查不到属性，就会调用此方法</td>
+</tr>
+<tr>
+<td><code>__setattr__()</code></td>
+<td>通过.访问实例属性，进行增加、修改都要调用它</td>
+</tr>
+<tr>
+<td><code>__delattr__()</code></td>
+<td>当通过实例来删除属性时调用此方法</td>
+</tr>
+<tr>
+<td><code>__getattribute__()</code></td>
+<td>实例所有的属性调用都从这个方法开始</td>
+</tr>
+</tbody></table>
+<p>一个类的属性会按照继承关系找，如果找不到，就会执行<code> __getattr__()</code> 方法，如果没有这个方法，就会抛出AttributeError异常表示找不到属性。<br>查找属性顺序为：<br>实例调用<code>__getattribute__()</code> –&gt;<code> instance.__dict__</code> –&gt;<code> instance.__class__.__dict__</code> –&gt; 继承的祖先类（直到object）的<code>__dict__</code>—找不到–&gt; 调用<code>__getattr__()</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span>(<span class="params">Base</span>):</span></span><br><span class="line">    z = <span class="number">6</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, x, y</span>):</span></span><br><span class="line">        self.x = x</span><br><span class="line">        self.y = y</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">show</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(self.x, self.y)</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span>(<span class="params">self, item</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;missing &#123;&#125;&quot;</span>.<span class="built_in">format</span>(item)</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setattr__</span>(<span class="params">self, key, value</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;setattr &#123;&#125;=&#123;&#125;&quot;</span>.<span class="built_in">format</span>(key,value))</span><br><span class="line">        self.__dict__[key] = value</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>__setattr__()</code>方法，可以拦截对实例属性的增加、修改操作，如果要设置生效，需要自己操作实例的<br><code>__dict__</code>。</p>
+<p><strong><code>__getattribute__</code>方法</strong></p>
+<p>实例的所有的属性访问，第一个都会调用<code>__getattribute__</code>方法，它阻止了属性的查找，该方法应该返回（计算后的）值或者抛出一个AttributeError异常。</p>
+<ul>
+<li>它的return值将作为属性查找的结果。</li>
+<li>如果抛出AttributeError异常，则会直接调用<code>__getattr__</code>方法，因为表示属性没有找到。</li>
+</ul>
+<p><code>__getattribute__</code>方法中为了避免在该方法中无限的递归，它的实现应该永远调用基类的同名方法以访问需要的任何属性，例如<code>object.__getattribute__(self, name)</code>。<br>注意，除非你明确地知道<code>__getattribute__</code>方法用来做什么，否则不要使用它。</p>
+<h2 id="描述器"><a href="#描述器" class="headerlink" title="描述器"></a>描述器</h2><p>描述器的表现<br>用到3个魔术方法:__get__()、__set__()、__delete__()<br>方法签名如下<br>object.__get__(self, instance, owner)<br>object.__set__(self, instance, value)<br>object.__delete__(self, instance)<br>self 指代当前实例，调用者<br>instance 是owner的实例<br>owner 是属性的所属的类</p>
+<h3 id="描述器定义"><a href="#描述器定义" class="headerlink" title="描述器定义"></a>描述器定义</h3><p>Python中，一个类实现了<code>__get__</code>、<code>__set__</code>、<code>__delete__</code>三个方法中的任何一个方法，就是描述器。<br>如果仅实现了<code>__get__</code>，就是<font color=red><strong>非数据描述符 non-data descriptor</strong></font>；<br>同时实现了<code>__get__</code>、<code>__set__</code>就是<font color=red><strong>数据描述符 data descriptor</strong></font></p>
+<p>如果一个类的类属性设置为描述器实例，那么它被称为owner属主。</p>
+<h3 id="属性查找顺序"><a href="#属性查找顺序" class="headerlink" title="属性查找顺序"></a>属性查找顺序</h3><p>实例的<code>__dict__</code> 优先于非数据描述器<br>数据描述器优先于实例的<code>__dict__</code><br><code>__delete__</code>方法有同样的效果，有了这个方法，也是数据描述器。</p>
+<h3 id="Python中的描述器"><a href="#Python中的描述器" class="headerlink" title="Python中的描述器"></a>Python中的描述器</h3><hr>
+<p>Python的方法（包括staticmethod()和classmethod()）都实现为非数据描述器。因此，实例可以重新定义和覆盖方法。这允许单个实例获取与同一类的其他实例不同的行为。</p>
+<p>property()函数实现为一个数据描述器。因此，实例不能覆盖属性的行为。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line"><span class="meta">    @classmethod  </span><span class="comment"># 非数据描述器</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">cls</span>):</span> </span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">    @staticmethod </span><span class="comment"># 非数据描述器</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">bar</span>():</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">    @property </span><span class="comment"># 数据描述器</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">z</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">5</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getfoo</span>(<span class="params">self</span>):</span> <span class="comment"># 非数据描述器</span></span><br><span class="line">        <span class="keyword">return</span> self.foo</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span> <span class="comment"># 非数据描述器</span></span><br><span class="line">        self.foo = <span class="number">100</span></span><br><span class="line">        self.bar = <span class="number">200</span></span><br><span class="line">        <span class="comment">#self.z = 300</span></span><br><span class="line">        </span><br><span class="line">a = A()</span><br><span class="line"><span class="built_in">print</span>(a.__dict__)</span><br><span class="line"><span class="built_in">print</span>(A.__dict__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#foo、bar都可以在实例中覆盖，但是z不可以。</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/10/11/14python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7%E3%80%81%E6%9F%A5%E7%9C%8B%E5%B1%9E%E6%80%A7%E3%80%81%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/" rel="prev" title="python面向对象-特殊属性、查看属性、魔术方法">
+                  <i class="fa fa-chevron-left"></i> python面向对象-特殊属性、查看属性、魔术方法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/11/01/16%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" rel="next" title="网络编程">
+                  网络编程 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">luoqian</span>
+</div>
+  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

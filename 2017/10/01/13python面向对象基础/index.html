@@ -1,37 +1,439 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vampireqian.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"بحث...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="面向对象 一种认识世界，分析世界的方法论。将万事万物抽象为类 类class 类是抽象的概念，是万事万物的抽象，是一类事物的共同特征的集合。用计算机语言来描述就是属性和方法的集合（封装）。 对象instance、object，对象是类的具象，是一个实体，类也是对象。 属性，它是对象状态的抽象，用数据结构来描述。 操作，是对对象行为的抽象，用操作名和实现该操作的方法来描述。 哲学 一切皆对象 对象是数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python-面向对象">
+<meta property="og:url" content="https://vampireqian.github.io/2017/10/01/13python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="luoqian">
+<meta property="og:description" content="面向对象 一种认识世界，分析世界的方法论。将万事万物抽象为类 类class 类是抽象的概念，是万事万物的抽象，是一类事物的共同特征的集合。用计算机语言来描述就是属性和方法的集合（封装）。 对象instance、object，对象是类的具象，是一个实体，类也是对象。 属性，它是对象状态的抽象，用数据结构来描述。 操作，是对对象行为的抽象，用操作名和实现该操作的方法来描述。 哲学 一切皆对象 对象是数">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-09-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2018-12-07T14:22:32.000Z">
+<meta property="article:author" content="luoqian">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://vampireqian.github.io/2017/10/01/13python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh","comments":true,"permalink":"https://vampireqian.github.io/2017/10/01/13python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/","path":"2017/10/01/13python面向对象基础/","title":"python-面向对象"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>python-面向对象 | luoqian</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="تشغيل شريط التصفح" role="button">
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">luoqian</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          المحتويات
+        </li>
+        <li class="sidebar-nav-overview">
+          عام
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.</span> <span class="nav-text">面向对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%89%E8%A6%81%E7%B4%A0"><span class="nav-number">1.1.</span> <span class="nav-text">面向对象三要素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Python%E7%9A%84%E7%B1%BB"><span class="nav-number">1.2.</span> <span class="nav-text">Python的类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E5%AF%B9%E8%B1%A1%E5%92%8C%E7%B1%BB%E5%B1%9E%E6%80%A7"><span class="nav-number">1.3.</span> <span class="nav-text">类对象和类属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E5%8C%96"><span class="nav-number">1.4.</span> <span class="nav-text">实例化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E5%AF%B9%E8%B1%A1instance"><span class="nav-number">1.5.</span> <span class="nav-text">实例对象instance</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E5%8F%98%E9%87%8F%E5%92%8C%E7%B1%BB%E5%8F%98%E9%87%8F"><span class="nav-number">1.6.</span> <span class="nav-text">实例变量和类变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A3%85%E9%A5%B0%E4%B8%80%E4%B8%AA%E7%B1%BB"><span class="nav-number">1.7.</span> <span class="nav-text">装饰一个类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E6%96%B9%E6%B3%95%E5%92%8C%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="nav-number">1.8.</span> <span class="nav-text">类方法和静态方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="nav-number">1.9.</span> <span class="nav-text">访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A7%81%E6%9C%89-Private-%E5%B1%9E%E6%80%A7"><span class="nav-number">1.9.1.</span> <span class="nav-text">私有(Private)属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%9D%E6%8A%A4%E5%8F%98%E9%87%8F"><span class="nav-number">1.9.2.</span> <span class="nav-text">保护变量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A7%81%E6%9C%89%E6%96%B9%E6%B3%95"><span class="nav-number">1.9.3.</span> <span class="nav-text">私有方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A5%E4%B8%81"><span class="nav-number">1.10.</span> <span class="nav-text">补丁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="nav-number">1.11.</span> <span class="nav-text">属性装饰器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%94%80%E6%AF%81"><span class="nav-number">1.12.</span> <span class="nav-text">对象的销毁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD-overload"><span class="nav-number">1.13.</span> <span class="nav-text">方法重载(overload)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%81%E8%A3%85"><span class="nav-number">1.14.</span> <span class="nav-text">封装</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">luoqian</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">المقالات</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">التصنيفات</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">الوسوم</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh">
+    <link itemprop="mainEntityOfPage" href="https://vampireqian.github.io/2017/10/01/13python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="luoqian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="luoqian">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python-面向对象
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2017-10-01 00:00:00" itemprop="dateCreated datePublished" datetime="2017-10-01T00:00:00+08:00">2017-10-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2018-12-07 22:22:32" itemprop="dateModified" datetime="2018-12-07T22:22:32+08:00">2018-12-07</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><hr>
+<p>一种认识世界，分析世界的方法论。将万事万物抽象为类</p>
+<p>类class</p>
+<p>类是抽象的概念，是万事万物的抽象，是一类事物的共同特征的集合。用计算机语言来描述就是<strong>属性</strong>和<strong>方法</strong>的集合（封装）。</p>
+<p>对象instance、object，对象是类的具象，是一个实体，类也是对象。</p>
+<p>属性，它是对象状态的抽象，用数据结构来描述。</p>
+<p>操作，是对对象行为的抽象，用操作名和实现该操作的方法来描述。</p>
+<p><strong>哲学</strong></p>
+<p>一切皆对象</p>
+<p>对象是数据和操作的封装</p>
+<p>对象是独立的，但是对象之间可以相互作用</p>
+<p>目前OOP是最接近人类认知的编程范式</p>
+<h4 id="面向对象三要素"><a href="#面向对象三要素" class="headerlink" title="面向对象三要素"></a>面向对象三要素</h4><p><font color = red><strong>封装</strong></font>：将属性和方法组装到一起，隐藏数据，对外只暴露一些接口用于连接。</p>
+<p><font color = red><strong>继承</strong></font>：目的：多复用，继承来的就不用自己写了；多继承少修改（开闭原则），OCP(open_closed principle)，使用继承来改变。作用：就是为了修改不一样的属性。</p>
+<p><font color = red><strong>多态</strong></font>：面向对象编程最灵活的地方，多种表现，动态绑定。</p>
+<h4 id="Python的类"><a href="#Python的类" class="headerlink" title="Python的类"></a>Python的类</h4><p>定义：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassName</span>：</span></span><br><span class="line"><span class="class">	语句块</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>要求：</strong></p>
+<ol>
+<li><p>必须使用class关键字</p>
+</li>
+<li><p>类名必须使用大驼峰命名</p>
+</li>
+<li><p>类定义完成后会产生一个类对象，会绑定到ClassName这个标识符上面。</p>
+</li>
+</ol>
+<h4 id="类对象和类属性"><a href="#类对象和类属性" class="headerlink" title="类对象和类属性"></a>类对象和类属性</h4><p><font color = red><strong>类对象</strong></font>，类的定义就会生成一个类对象</p>
+<p><font color = red><strong>类的属性</strong></font>，类定义中的变量和类中定义的方法都是类的属性</p>
+<p><font color = red><strong>类变量</strong></font>，定义在类中的变量</p>
+<h4 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h4><p>在类对象名称后面加上一个括号，就调用类的实例化方法，完成实例化，实例化就真正创建一个该类的对象（实例）。</p>
+<p>每一次实例化，只能生成该类的一个具体实例，生成的是不同的实例。即使通过相同的参数实例化，得到的对象也不相同。</p>
+<p>python类实例化后，会自动调用<code>__init__</code>方法，可以不定义，如果没有定义会在实例化后<strong>隐式</strong>调用，初始化函数可以有多个参数，第一参数必须留给self，init方法不能有返回值，也就是只能有return None</p>
+<p>作用：对实例进行<font color = red><strong>初始化</strong></font></p>
+<p>类里面的函数叫做方法对象method，不是普通的函数对象function，一般至少要有一个参数，第一个参数可以是self（一般习惯上用self），这个参数位置指代的就是当前这个实例本身。</p>
+<h4 id="实例对象instance"><a href="#实例对象instance" class="headerlink" title="实例对象instance"></a>实例对象instance</h4><p>类实例化后一定会获得一个对象，就是<font color = red><strong>实例对象</strong></font>。init方法的第一个参数self就是指代某一个实例。</p>
+<h4 id="实例变量和类变量"><a href="#实例变量和类变量" class="headerlink" title="实例变量和类变量"></a>实例变量和类变量</h4><p>实例变量是每个实例自己的变量，是自己独有的；列变量是类的变量，是类的所有实例共享的属性和方法。</p>
+<table>
+<thead>
+<tr>
+<th>特殊属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>_<em>name</em>_</td>
+<td>对象名</td>
+</tr>
+<tr>
+<td>_<em>class</em>_</td>
+<td>对象的类型</td>
+</tr>
+<tr>
+<td>_<em>dict</em>_</td>
+<td>对象的属性的字典</td>
+</tr>
+<tr>
+<td>_<em>qualname</em>_</td>
+<td>类的限定名</td>
+</tr>
+</tbody></table>
+<p>类属性保存在类的dict中，实例属性保存在实例的dict中，如果从实例访问类的属性，就要借助class找到所属的类。</p>
+<p>类有类名字，实例没有实体名。</p>
+<p>python中每一种对象都拥有不同的属性。函数、类都是对象，类的实例也是对象。</p>
+<p>类不可以访问实例的属性，实例可以访问类的属性。（是类的，也是这个类所有实例的，其实例都可以访问到；是实例的，就是这个实例自己的，通过类访问不到。）</p>
+<p>对象（实例或类）可以动态的给自己增加一个属性，实例._<em>dict</em>_[变量名]可以访问到，实例的同名变量会隐藏掉类变量，或者说是覆盖了这个类的变量。</p>
+<p>一般来说，属性使用字典保存是为了提升查找效率，必须用空间换时间，但是也有个问题，如果数百万个对象，那么字典占的比较大，所以可以使用__slots__方法。</p>
+<p>slots告诉解释器，实例的属性都叫什么，一般来说，既然要节省内存，那就最好还是使用元组。</p>
+<p>一旦类提供了slots，就阻止实例产生dict来保存实例的属性。子类不会继承slots</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    X = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    __slots__ = (<span class="string">&#x27;z&#x27;</span>,<span class="string">&#x27;y&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.y = <span class="number">5</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">show</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(self.X,self.y)</span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">a.show()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;A&quot;</span>,A.__dict__.keys())</span><br><span class="line"><span class="comment"># print(&quot;obj&quot;,a.__dict__.keys())</span></span><br></pre></td></tr></table></figure>
+
+<p><font color = red>**实例属性的查找顺序 **</font><br>指的是实例使用.点号来访问属性，会先找实例自己的__dict__，如果没有，然后通过属性__class__找到自己的类，再去类的__dict__中找类属性中没找到就往类继承的父类中去查找，最终找到根基类object，没找到则抛出异常 。<br>注意，如果实例使用__dict__[变量名]访问变量，将不会按照上面的查找顺序找变量了，这是指明使用字典的key查找，不是属性查找。<br>一般来说，类变量可使用全大写来命名。</p>
+<h4 id="装饰一个类"><a href="#装饰一个类" class="headerlink" title="装饰一个类"></a>装饰一个类</h4><p>为一个类通过装饰，添加一些类属性。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#增加类变量</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">adda_name</span>(<span class="params">name,cls</span>):</span></span><br><span class="line">    cls.NAME = name  <span class="comment">#动态增加类属性</span></span><br><span class="line"><span class="comment">#改进成装饰器</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_name</span>(<span class="params">name</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span>(<span class="params">cls</span>):</span></span><br><span class="line">        cls.NAME = name</span><br><span class="line">        <span class="keyword">return</span> cls</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"><span class="meta">@add_name(<span class="params"><span class="string">&quot;jerry&quot;</span></span>)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>():</span>  <span class="comment">#Person =  add_name(&quot;jerry&quot;)(Person) = wrapper(person) =  Person</span></span><br><span class="line">    AGE = <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># adda_name(Person ,&quot;tom&quot;)</span></span><br><span class="line">	</span><br><span class="line"><span class="built_in">print</span>(Person.__dict__)</span><br><span class="line"><span class="built_in">print</span>(Person.NAME)</span><br></pre></td></tr></table></figure>
+
+<p>之所以能够装饰，本质上是为类对象动态的添加了一个属性，而Person这个标识符指向这个类对象。</p>
+<hr>
+<h4 id="类方法和静态方法"><a href="#类方法和静态方法" class="headerlink" title="类方法和静态方法"></a>类方法和静态方法</h4><p>类方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">class_method</span>(<span class="params">cls</span>):</span> <span class="comment"># cls是什么</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;class = &#123;0.__name__&#125; (&#123;0&#125;)&#x27;</span>.<span class="built_in">format</span>(cls))</span><br><span class="line">        cls.HEIGHT = <span class="number">170</span></span><br><span class="line"> </span><br><span class="line">Person.class_method()</span><br><span class="line"><span class="built_in">print</span>(Person.__dict__)</span><br></pre></td></tr></table></figure>
+<p>类方法</p>
+<ol>
+<li><p>在类定义中，使用@classmethod装饰器修饰的方法，不管使用实例还是类来调用，调用的都是类的方法，传入当前类自身。</p>
+</li>
+<li><p>必须至少有一个参数，且第一个参数留给了cls，cls指代调用者即<font color = red><strong>类对象自身</strong></font></p>
+</li>
+<li><p>cls这个标识符可以是任意合法名称，但是为了易读，请不要修改</p>
+</li>
+<li><p>通过cls可以直接操作类的属性</p>
+</li>
+</ol>
+<p>静态方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">method</span>(<span class="params">self,name</span>)： #普通方法</span></span><br><span class="line"><span class="function">    	<span class="title">print</span>(<span class="params">self</span>)</span></span><br><span class="line"><span class="function">   </span></span><br><span class="line"><span class="function">    @<span class="title">classmethod</span>   #类方法</span></span><br><span class="line"><span class="function">    <span class="title">def</span> <span class="title">class_method</span>(<span class="params">cls ， age</span>):</span>  <span class="comment"># cls是什么  是当前类</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;class = &#123;0.__name__&#125; (&#123;0&#125;)&#x27;</span>.<span class="built_in">format</span>(cls))</span><br><span class="line">        cls.HEIGHT = <span class="number">170</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod  </span><span class="comment">#静态方法</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">static_methd</span>(<span class="params">a</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(Person.HEIGHT , a)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">Person.method(Person(),<span class="string">&quot;ken&quot;</span>)  <span class="comment">#第一参数不会自动传入，自己传Person（）</span></span><br><span class="line">Person().method(<span class="string">&quot;tom&quot;</span>)  <span class="comment">#第一参数自动传入Person（）</span></span><br><span class="line"></span><br><span class="line">Person.class_method(<span class="number">20</span>)  <span class="comment">#第一参数cls自动传入</span></span><br><span class="line">Person().method(<span class="number">18</span>)  <span class="comment">#第一参数cls自动传入</span></span><br><span class="line"></span><br><span class="line">Person.static_methd()   <span class="comment">#第一参数不用传</span></span><br><span class="line">Person().static_method()  <span class="comment">#第一参数不用传</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(Person.__dict__)</span><br></pre></td></tr></table></figure>
+
+<p>静态方法</p>
+<ol>
+<li>在类定义中，使用@staticmethod装饰器修饰的方法</li>
+<li>调用时，不管是实例还是类调用，不会隐式的传入参数 。<br> 静态方法，只是表明这个方法属于这个名词空间。函数归在一起，方便组织管理。</li>
+</ol>
+<p>总结：<br>类除了普通方法都可以调用，普通方法需要对象的实例作为第一参数。<br>实例可以调用所有类中定义的方法（包括类方法、静态方法），普通方法传入实例自身，静态方法和类方法需要找到实例的类。</p>
+<p>实例方法</p>
+<p>如果用实例，第一参数则传入self，则叫做绑定。如果使用类调用，则没有绑定（未绑定行为）。</p>
+<h4 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h4><h5 id="私有-Private-属性"><a href="#私有-Private-属性" class="headerlink" title="私有(Private)属性"></a>私有(Private)属性</h5><p>使用双下划线开头的属性名，就是私有属性</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, age=<span class="number">18</span></span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.__age = age</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">growup</span>(<span class="params">self, i=<span class="number">1</span></span>):</span></span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">0</span> <span class="keyword">and</span> i &lt; <span class="number">150</span>: <span class="comment"># 控制逻辑</span></span><br><span class="line">            self.__age += i</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getage</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.__age</span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span>(Person(<span class="string">&#x27;tom&#x27;</span>).getage())</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>私有变量的本质：<br>类定义的时候，如果声明一个实例变量的时候，使用双下划线，Python解释器会将其改名，转换名称为<strong>_类名__变量名</strong>的名称，所以用原来的名字访问不到了。</p>
+<h5 id="保护变量"><a href="#保护变量" class="headerlink" title="保护变量"></a>保护变量</h5><p>在变量名前使用一个下划线，称为保护变量。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, age=<span class="number">18</span></span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self._age = age</span><br><span class="line"> </span><br><span class="line">tom = Person(<span class="string">&#x27;Tom&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(tom._age)</span><br><span class="line"><span class="built_in">print</span>(tom.__dict__)</span><br></pre></td></tr></table></figure>
+<p>可以看出，这个_age属性根本就没有改变名称，和普通的属性一样，解释器不做任何特殊处理。 这只是开发者共同的约定，看见这种变量，就如同私有变量，不要直接使用。</p>
+<h5 id="私有方法"><a href="#私有方法" class="headerlink" title="私有方法"></a>私有方法</h5><p>参照保护变量、私有变量，使用单下划线、双下划线命名方法。</p>
+<p>私有方法的本质 </p>
+<p>单下划线的方法只是开发者之间的约定，解释器不做任何改变。 </p>
+<p>双下划线的方法，是私有方法，解释器会改名，改名策略和私有变量相同，**_类名__方法名 <strong>。<br>方法变量都在类的</strong>__dict__**中可以找到。</p>
+<p>私有成员的总结 :</p>
+<p>在Python中使用_单下划线或者 __ 双下划线来标识一个成员被保护或者被私有化隐藏起来。<br>但是，不管使用什么样的访问控制，都不能真正的阻止用户修改类的成员。Python中没有绝对的安全的保护成员或者私有成员。<br>因此，前导的下划线只是一种警告或者提醒，请遵守这个约定。除非真有必要，不要修改或者使用保护成员或者私有成员，更不要修改它们。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, age=<span class="number">18</span></span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self._age = age</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_getname</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.name</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getage</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self._age</span><br><span class="line"> </span><br><span class="line">tom = Person(<span class="string">&#x27;Tom&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(tom._getname()) <span class="comment"># 没改名</span></span><br><span class="line"><span class="built_in">print</span>(tom.__getage()) <span class="comment"># 无此属性</span></span><br><span class="line"><span class="built_in">print</span>(tom.__dict__)</span><br><span class="line"><span class="built_in">print</span>(tom.__class__.__dict__)</span><br><span class="line"><span class="built_in">print</span>(tom._Person__getage()) <span class="comment"># 改名了</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="补丁"><a href="#补丁" class="headerlink" title="补丁"></a>补丁</h4><p>可以通过修改或者替换类的成员。使用者调用的方式没有改变，但是，类提供的功能可能已经改变了。</p>
+<p>猴子补丁（Monkey Patch）：<br>在运行时，对属性、方法、函数等进行动态替换。<br>其目的往往是为了通过替换、修改来增强、扩展原有代码的能力。<br>黑魔法，慎用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># test1.py</span></span><br><span class="line"><span class="keyword">from</span> test2 <span class="keyword">import</span> Person</span><br><span class="line"><span class="keyword">from</span> test3 <span class="keyword">import</span> get_score</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">monkeypatch4Person</span>():</span></span><br><span class="line">    Person.get_score = get_score</span><br><span class="line"> </span><br><span class="line">monkeypatch4Person() <span class="comment"># 打补丁</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="built_in">print</span>(Person().get_score())</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># test2.py</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_score</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment"># connect to mysql</span></span><br><span class="line">        ret = &#123;<span class="string">&#x27;English&#x27;</span>:<span class="number">78</span>, <span class="string">&#x27;Chinese&#x27;</span>:<span class="number">86</span>, <span class="string">&#x27;History&#x27;</span>:<span class="number">82</span>&#125;</span><br><span class="line">        <span class="keyword">return</span> ret</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># test3.py</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_score</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">dict</span>(name=self.__class__.__name__,English=<span class="number">88</span>, Chinese=<span class="number">90</span>, History=<span class="number">85</span>)</span><br></pre></td></tr></table></figure>
+
+<p>上例中，假设Person类get_score方法是从数据库拿数据，但是测试的时候，不方便。<br>为了测试时方便，使用猴子补丁，替换了get_score方法，返回模拟的数据。</p>
+<h4 id="属性装饰器"><a href="#属性装饰器" class="headerlink" title="属性装饰器"></a>属性装饰器</h4><p>一般好的设计是：把实例的属性保护起来，不让外部直接访问，外部使用getter读取属性和setter方法设置属性。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, age=<span class="number">18</span></span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.__age = age</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">age</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.__age</span><br><span class="line"></span><br><span class="line"><span class="meta">    @age.setter</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">age</span>(<span class="params">self, age</span>):</span></span><br><span class="line">        self.__age = age</span><br><span class="line"></span><br><span class="line"><span class="meta">    @age.deleter</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">age</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment"># del self.__age</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;del&#x27;</span>)</span><br><span class="line"></span><br><span class="line">tom = Person(<span class="string">&#x27;Tom&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(tom.age)</span><br><span class="line">tom.age = <span class="number">20</span></span><br><span class="line"><span class="built_in">print</span>(tom.age)</span><br><span class="line"><span class="keyword">del</span> tom.age</span><br></pre></td></tr></table></figure>
+
+<p>特别注意：使用property装饰器的时候这三个方法<strong>同名</strong><br>property装饰器<br>后面跟的函数名就是以后的属性名。它就是getter。这个必须有，有了它至少是只读属性</p>
+<p>setter装饰器<br>与属性名同名，且接收2个参数，第一个是self，第二个是将要赋值的值。有了它，属性可写</p>
+<p>deleter装饰器<br>可以控制是否删除属性。很少用</p>
+<p>property装饰器必须在前，setter、deleter装饰器在后。<br>property装饰器能通过简单的方式，把对方法的操作变成对属性的访问，并起到了一定隐藏效果.</p>
+<h4 id="对象的销毁"><a href="#对象的销毁" class="headerlink" title="对象的销毁"></a>对象的销毁</h4><p>类中可以定义 __del__ 方法，称为析构函数（方法）。</p>
+<p>作用：销毁类的实例的时候调用，以释放占用的资源。其中就放些清理资源的代码，比如释放连接。</p>
+<p>注意这个方法不能引起对象的真正销毁，只是对象销毁的时候会自动调用它。</p>
+<p>使用del语句删除实例，引用计数减1。当引用计数为0时，会自动调用__del__ 方法。<br>由于Python实现了垃圾回收机制，不能确定对象何时执行垃圾回收。</p>
+<p>由于垃圾回收对象销毁时，才会真正清理对象，还会在回收对象之前自动调用__del__ 方法，除非你明确知道自己的目的，建议不要手动调用这个方法。</p>
+<h4 id="方法重载-overload"><a href="#方法重载-overload" class="headerlink" title="方法重载(overload)"></a>方法重载(overload)</h4><p>其他面向对象的高级语言中，会有重载的概念。<br>所谓重载，就是同一个方法名，但是参数数量、类型不一样，就是同一个方法的重载。</p>
+<p>Python没有重载！<br>Python不需要重载！<br>Python中，方法（函数）定义中，形参非常灵活，不需要指定类型（就算指定了也只是一个说明而非约束），参数个数也不固定（可变参数）。一个函数的定义可以实现很多种不同形式实参的调用。所以Python不需要方法的重载。</p>
+<p>或者说Python本身就实现了其它语言的重载。</p>
+<h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4><p>面向对象的三要素之一，封装Encapsulation</p>
+<p>将数据和操作组织到类中，即属性和方法 </p>
+<p>将数据隐藏起来，给使用者提供操作（方法）。使用者通过操作就可以获取或者修改数据。getter和setter。 </p>
+<p>通过访问控制，暴露适当的数据和操作给用户，该隐藏的隐藏起来，例如保护成员或私有成员。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/09/30/12python%E7%9B%B4%E6%8E%A5%E8%B5%8B%E5%80%BC%E3%80%81%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/" rel="prev" title="python直接赋值、深拷贝和浅拷贝">
+                  <i class="fa fa-chevron-left"></i> python直接赋值、深拷贝和浅拷贝
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/10/11/14python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7%E3%80%81%E6%9F%A5%E7%9C%8B%E5%B1%9E%E6%80%A7%E3%80%81%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/" rel="next" title="python面向对象-特殊属性、查看属性、魔术方法">
+                  python面向对象-特殊属性、查看属性、魔术方法 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">luoqian</span>
+</div>
+  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

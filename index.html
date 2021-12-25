@@ -1,23 +1,1714 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
 
-{% block title %}{{ config.title }}{% if theme.index_with_subtitle and config.subtitle %} - {{config.subtitle }}{% endif %}{% endblock %}
 
-{% block page_class %}
-  {% if is_home() %}page-home{% endif -%}
-{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block content %}
-  <section id="posts" class="posts-expand">
-    {% for post in page.posts %}
-      {{ post_template.render(post, true) }}
-    {% endfor %}
-  </section>
+<link rel="stylesheet" href="/css/main.css">
 
-  {% include '_partials/pagination.swig' %}
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vampireqian.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"بحث...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta property="og:type" content="website">
+<meta property="og:title" content="luoqian">
+<meta property="og:url" content="https://vampireqian.github.io/index.html">
+<meta property="og:site_name" content="luoqian">
+<meta property="og:locale">
+<meta property="article:author" content="luoqian">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://vampireqian.github.io/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh","comments":"","permalink":"","path":"index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>luoqian</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="تشغيل شريط التصفح" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">luoqian</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          المحتويات
+        </li>
+        <li class="sidebar-nav-overview">
+          عام
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">luoqian</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">المقالات</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">التصنيفات</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">الوسوم</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://vampireqian.github.io/2019/01/01/%E9%98%BF%E9%87%8C%E4%BA%91%E5%B9%B3%E5%8F%B0%E4%BD%BF%E7%94%A8%E5%AE%89%E5%85%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="luoqian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="luoqian">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/01/01/%E9%98%BF%E9%87%8C%E4%BA%91%E5%B9%B3%E5%8F%B0%E4%BD%BF%E7%94%A8%E5%AE%89%E5%85%A8/" class="post-title-link" itemprop="url">云计算使用简介</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2019-01-01 20:58:17" itemprop="dateCreated datePublished" datetime="2019-01-01T20:58:17+08:00">2019-01-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2019-01-19 18:05:44" itemprop="dateModified" datetime="2019-01-19T18:05:44+08:00">2019-01-19</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">云计算</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="云计算的三种服务方式"><a href="#云计算的三种服务方式" class="headerlink" title="云计算的三种服务方式"></a>云计算的三种服务方式</h3><ul>
+<li>IAAS（基础设置即服务）：虚拟的服务器、存储、网络</li>
+<li>PASS（平台即服务）：中间件、应用服务器平台等</li>
+<li>SAAS（软件即服务)：行业应用，CRM，ERP、OA等</li>
+</ul>
+<h3 id="常见的安全风险"><a href="#常见的安全风险" class="headerlink" title="常见的安全风险"></a>常见的安全风险</h3><h4 id="IT系统风险构成："><a href="#IT系统风险构成：" class="headerlink" title="IT系统风险构成："></a>IT系统风险构成：</h4><p>按照等保的划分维度包括：</p>
+<ul>
+<li>物理和环境安全：包括机房供电、温湿度控制、防风防雨防雷措施等</li>
+<li>网络和通信安全：包括网络架构、边界防护、访问控制、入侵防范、通信加密等</li>
+<li>设备和计算安全：包括入侵防范、恶意代码防范、身份鉴别、访问控制、集中管控和安全审计等</li>
+<li>应用和数据安全：包括安全审计、数据完整性和保密信</li>
+</ul>
+<h3 id="云上安全风控的服务方式"><a href="#云上安全风控的服务方式" class="headerlink" title="云上安全风控的服务方式"></a>云上安全风控的服务方式</h3><p>ALL in one部署安全注意事项：</p>
+<ul>
+<li>登陆安全</li>
+<li>账号授权管理</li>
+<li>服务器安全漏洞</li>
+<li>应用访问攻击</li>
+<li>数据备份和加密</li>
+<li>网络攻击风险</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/11830691-d5500a4288a2c033.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ALL in one"></p>
+<p>应用和数据分离新增安全注意事项：</p>
+<ul>
+<li>数据传输安全</li>
+<li>网络通信安全</li>
+<li>数据库访问白名单授权</li>
+<li>数据库的备份和容灾</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/11830691-c49f3dd419a9e9a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="数据与应用分离"></p>
+<p>应用集群部署新增安全注意事项：</p>
+<ul>
+<li>服务器访问授权</li>
+<li>服务器安全区域隔离</li>
+<li>负载均衡加密访问</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/11830691-87de159d46f7dc50.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="集群部署"></p>
+<p>动静资源分离新增安全注意事项：</p>
+<ul>
+<li>云存储数据备份和加密</li>
+<li>云存储数据容灾</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/11830691-f644ed29c1518efa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="动静资源分离"></p>
+<h3 id="云上账号和资源的安全管理"><a href="#云上账号和资源的安全管理" class="headerlink" title="云上账号和资源的安全管理"></a>云上账号和资源的安全管理</h3><h4 id="云上账号安全的指导原则"><a href="#云上账号安全的指导原则" class="headerlink" title="云上账号安全的指导原则"></a>云上账号安全的指导原则</h4><p>账号安全</p>
+<ul>
+<li>登录验证<ul>
+<li>配置强密码策略</li>
+<li>定期轮转用户登陆密码</li>
+</ul>
+</li>
+<li>账号授权<ul>
+<li>遵循最小授权原则</li>
+<li>及时撤销不再需要的权限</li>
+</ul>
+</li>
+<li>权限分配<ul>
+<li>不要为根账号创建访问密钥</li>
+<li>将用户管理、权限管理与资源管理分离</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://vampireqian.github.io/2018/10/05/excel%E5%90%88%E5%B9%B6%E8%A1%A8%E6%A0%BC%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="luoqian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="luoqian">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/10/05/excel%E5%90%88%E5%B9%B6%E8%A1%A8%E6%A0%BC%E7%94%A8/" class="post-title-link" itemprop="url">excel合并表格</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2018-10-05 20:15:17" itemprop="dateCreated datePublished" datetime="2018-10-05T20:15:17+08:00">2018-10-05</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2018-12-11 20:56:00" itemprop="dateModified" datetime="2018-12-11T20:56:00+08:00">2018-12-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9D%82%E9%A1%B9%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">杂项教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>写在前面，朋友前几天找到我江湖救急，问我怎么合并多张表格，虽然是计算机专业毕业的我但是真的没做过几张表格啊，最后找了好多网站的资料介绍，找到下面可行的方法，回馈给需要的朋友。</p>
+<p>在一个excel文件中如果存在几张附表，就可以使用下面的VBA代码合并附表到一个主表中。</p>
+<p>方法是先新建一个主表，右键最下面的主表，然后选择查看代码，贴入下面的代码。然后保存运行即可发现已经合并成功。</p>
+<hr>
+<p>方案一：</p>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> main()</span><br><span class="line"></span><br><span class="line"><span class="keyword">For</span> <span class="keyword">Each</span> sh <span class="keyword">In</span> Sheets</span><br><span class="line"></span><br><span class="line"><span class="keyword">If</span> sh.Name &lt;&gt; <span class="string">&quot;总表&quot;</span> <span class="keyword">Then</span></span><br><span class="line"></span><br><span class="line">i = sh.Range(<span class="string">&quot;I65536&quot;</span>).<span class="keyword">End</span>(<span class="number">3</span>).Row</span><br><span class="line"></span><br><span class="line">k = Range(<span class="string">&quot;A65536&quot;</span>).<span class="keyword">End</span>(<span class="number">3</span>).Row</span><br><span class="line"></span><br><span class="line">sh.Range(<span class="string">&quot;A1:I50&quot;</span> &amp; i).Copy Range(<span class="string">&quot;A&quot;</span> &amp; k + <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Next</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+<p>方案二：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Sub main()</span><br><span class="line">Application.ScreenUpdating = False</span><br><span class="line"></span><br><span class="line">For j = 1 To Sheets.Count</span><br><span class="line"></span><br><span class="line">If Sheets(j).Name &lt;&gt; ActiveSheet.Name Then</span><br><span class="line"></span><br><span class="line">X = Range(&quot;A65536&quot;).End(xlUp).Row + 1</span><br><span class="line"></span><br><span class="line">Sheets(j).UsedRange.Copy Cells(X, 1)</span><br><span class="line"></span><br><span class="line">End If</span><br><span class="line"></span><br><span class="line">Next</span><br><span class="line"></span><br><span class="line">Range(&quot;B1&quot;).Select</span><br><span class="line"></span><br><span class="line">Application.ScreenUpdating = True</span><br><span class="line"></span><br><span class="line">MsgBox &quot;当前工作簿下的全部工作表已经合并完毕！&quot;, vbInformation, &quot;提示&quot;</span><br><span class="line"></span><br><span class="line">End Sub</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://vampireqian.github.io/2018/08/02/win10win7%E6%89%93%E5%BC%80%E8%BD%AF%E4%BB%B6%E6%8F%90%E7%A4%BA%E7%B3%BB%E7%BB%9F%E8%B5%84%E6%BA%90%E4%B8%8D%E8%B6%B3,%E6%97%A0%E6%B3%95%E5%AE%8C%E6%88%90%E8%AF%B7%E6%B1%82%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="luoqian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="luoqian">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/08/02/win10win7%E6%89%93%E5%BC%80%E8%BD%AF%E4%BB%B6%E6%8F%90%E7%A4%BA%E7%B3%BB%E7%BB%9F%E8%B5%84%E6%BA%90%E4%B8%8D%E8%B6%B3,%E6%97%A0%E6%B3%95%E5%AE%8C%E6%88%90%E8%AF%B7%E6%B1%82%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">win10win7打开软件提示系统资源不足,无法完成请求服务的解决方法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2018-08-02 20:15:17" itemprop="dateCreated datePublished" datetime="2018-08-02T20:15:17+08:00">2018-08-02</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2018-08-11 09:49:10" itemprop="dateModified" datetime="2018-08-11T09:49:10+08:00">2018-08-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9D%82%E9%A1%B9%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">杂项教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>有些win7、win10用户莫名的遇到了一个问题，就是安装部分软件的时候提示系统资源不足,无法完成请求服务，刚开始以为是系统缺少了某些组件，结果发现是国外杀毒迈克菲（McAfee）在捣鬼。<br><img src="https://upload-images.jianshu.io/upload_images/11830691-25f0e4f8306d8f93.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="报错"></p>
+<p>关闭迈克菲的实时防护或者卸载即可。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://vampireqian.github.io/2018/07/25/centos6%E4%B8%8B%E9%83%A8%E7%BD%B2Java%20Web%E9%A1%B9%E7%9B%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="luoqian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="luoqian">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/07/25/centos6%E4%B8%8B%E9%83%A8%E7%BD%B2Java%20Web%E9%A1%B9%E7%9B%AE/" class="post-title-link" itemprop="url">centos6下部署Java Web项目</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2018-07-25 20:58:17" itemprop="dateCreated datePublished" datetime="2018-07-25T20:58:17+08:00">2018-07-25</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2018-12-11 20:55:36" itemprop="dateModified" datetime="2018-12-11T20:55:36+08:00">2018-12-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>在云服务器上安装好系统后：</strong></p>
+<p>**1.**先查看系统上有无原有的旧版本的mysql；tomcat；java。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/11830691-f6dfb82105b652dd?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>若有则先卸载；卸载命令使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y remove mysql*;</span><br><span class="line">yum -y remove mysql*;</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/11830691-43d808f091a46f1f?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/11830691-ec95cd5f7262b443?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>**2.**附上能下载的jdk1.7的链接，先下载jdk1.7后tomcat7放在本地目录下；</p>
+<p>             #wget <a target="_blank" rel="noopener" href="http://zhibo100.oss-cn-hangzhou.aliyuncs.com/software/jdk-7u79-linux-x64.tar.gz">http://zhibo100.oss-cn-hangzhou.aliyuncs.com/software/jdk-7u79-linux-x64.tar.gz</a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/11830691-20b30a801774fa03?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>             #wget <a target="_blank" rel="noopener" href="http://zhibo100.oss-cn-hangzhou.aliyuncs.com/software/apache-tomcat-7.0.59.tar.gz">http://zhibo100.oss-cn-hangzhou.aliyuncs.com/software/apache-tomcat-7.0.59.tar.gz</a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/11830691-1846e005397d0a7f?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>**3.**在/usr目录下建立一个java目录，java下建立jdk和tomcat目录用来存放解压好的文件；</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/11830691-f63b1755bbb61beb?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>**4.**解压jdk ，tomcat，命令如下；</p>
+<p>            # tar -zxvf jdk-7u79-linux-x64.tar.gz -C /usr/java/</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/11830691-0a4c5d248baf452d?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>            # tar -xzvf apache-tomcat-7.0.59.tar.gz -C /usr/java/tomcat/</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/11830691-f0f055251f501663?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>**5.**配置环境变量</p>
+<p>配置JAVA环境变量并检测<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure><br>在文件末尾加上</p>
+<p>#java</p>
+<p>    JAVA_HOME=/usr/java/jdk1.7.0_79</p>
+<p>    JRE_HOME=${JAVA_HOME}/jre</p>
+<p>    CLASS_PATH=${JAVA_HOME}/lib</p>
+<p>    PATH=$PATH:${JAVA_HOME}/bin</p>
+<p>    export PATH JAVA_HOME CLASS_PATH PATH</p>
+<p>保存退出</p>
+<p>**6.**刷新环境变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@luo ~]# source /etc/profile</span><br><span class="line"></span><br><span class="line">[root@luo ~]# java -version</span><br><span class="line"></span><br><span class="line">java version &quot;1.7.0_79&quot;</span><br><span class="line"></span><br><span class="line">Java(TM) SE Runtime Environment (build 1.7.0_79-b15)</span><br><span class="line"></span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 24.79-b02, mixed mode)</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/11830691-17885fd9a976e687?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>如图说明Java安装成功。</p>
+<p>**7.**开启tomcat：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/java/tomcat/apache-tomcat-7.0.59/bin/</span><br><span class="line"></span><br><span class="line">./startup.sh</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/11830691-4bc0af23b71f1818?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>验证能否访问，在浏览器下输入localhost：8080  能出现tomcat的页面就行了。</p>
+<p>设置tomcat自启动，</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/11830691-132c6530d79a13a2?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>在进去  vim /etc/rc.d/rc.local 最下面加入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export JDK_HOME=/usr/java/jdk1.7.0_79</span><br><span class="line"></span><br><span class="line">export JAVA_HOME=/usr/java/jdk1.7.0_79</span><br><span class="line"></span><br><span class="line">/usr/java/tomcat/apache-tomcat-7.0.59/bin/startup.sh</span><br></pre></td></tr></table></figure>
+<p>然后重启服务器试验。</p>
+<p>**8.**安装mysql；因为yum源中默认没有mysql的安装源，所以需要手动添加，按照下面的语句顺序能顺利安装。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://dev.mysql.com/get/mysql57-community-release-el6-9.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<p>b.安装用来配置mysql的yum源的rpm包</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/11830691-2f80780e9aa910eb?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm -Uvh mysql57-community-release-el6-9.noarch.rpm</span><br><span class="line">或</span><br><span class="line">yum localinstall -y mysql57-community-release-el6-9.noarch.rpm</span><br></pre></td></tr></table></figure>
+<p>安装成功后在/etc/yum.repos.d/下会多出几个mysql的yum源的配置</p>
+<p>然后安装mysql</p>
+<p>yum install mysql-community-server</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/11830691-357a3cb0da52fede?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p>开启mysql服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld start</span><br></pre></td></tr></table></figure>
+<p>mysql安装成功后创建的超级用户‘root‘@’localhost’的密码会被存储在**/var/log/mysqld.log**，可以使用如下命令查看密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep &#x27;temporary password&#x27; /var/log/mysqld.log</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/11830691-657e8f3558316810?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>由于mysql修改密码时候如果你输入简单密码会报错，将不能修改密码，使用初始密码更改MySQL检测密码的规则，代码如下：</p>
+<p>首先，进入MySQL</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/11830691-8e28c51ae237a245?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>然后修改validate_password_policy参数的值（可参考mysql报错博客）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;setglobal validate_password_policy=0;</span><br><span class="line"></span><br><span class="line">setglobal validate_password_length=1;</span><br><span class="line"></span><br><span class="line">setglobal validate_password_mixed_case_count=2;</span><br></pre></td></tr></table></figure>
+
+<p>然后通过mysql安全设置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">mysql_secure_installation修改密码</span><br><span class="line"></span><br><span class="line"># mysql_secure_installation</span><br><span class="line"></span><br><span class="line">    Enter current password for root (enter for none):　←　回车 </span><br><span class="line"></span><br><span class="line">    Set root password? [Y/n]　←　回车 </span><br><span class="line"></span><br><span class="line">    New password:　←　123456 </span><br><span class="line"></span><br><span class="line">    Re-enter new password:　←　123456 </span><br><span class="line"></span><br><span class="line">    Remove anonymous users? [Y/n]　←　回车(删除匿名用户) </span><br><span class="line"></span><br><span class="line">    Disallow root login remotely? [Y/n]　←　回车(禁止远程root登录) </span><br><span class="line"></span><br><span class="line">    Remove test database and access to it? [Y/n]　←　回车(删除test库) </span><br><span class="line"></span><br><span class="line">    Reload privilege tables now? [Y/n]　←　回车 </span><br><span class="line"></span><br><span class="line">    Thanks for using MySQL! </span><br><span class="line"></span><br><span class="line"># mysql -u root -p </span><br><span class="line"></span><br><span class="line">    Enter password:123456 </span><br></pre></td></tr></table></figure>
+
+<p>设置远程登录：</p>
+<p>    CREATE USER ‘mysql‘@’%’ IDENTIFIED BY ‘123456’;</p>
+<p>    GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root‘@’%’ IDENTIFIED BY ‘123456’ WITH GRANT OPTION;</p>
+<p>清除缓存：<br><code>mysql&gt; flush privileges;</code></p>
+<p>设置默认编码集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># vim /etc/my.cnf  </span><br><span class="line"></span><br><span class="line">character-set-server=utf8</span><br><span class="line"></span><br><span class="line"># /etc/init.d/mysqld restart  </span><br><span class="line"></span><br><span class="line"># mysqld --version</span><br></pre></td></tr></table></figure>
+<p>最后把导出的war文件放到服务器中tomcat下的webapps目录下即可。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://vampireqian.github.io/2018/07/25/%E5%9C%A8eclipse%E4%B8%AD%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AEweb%E6%9C%89%E6%97%B6%E5%80%99%E8%AE%BF%E9%97%AEjsp%E4%BC%9A%E6%8A%9B%E5%87%BA%E4%BB%A5%E4%B8%8B%E7%B1%BB%E4%BC%BC%E7%9A%84%E5%BC%82%E5%B8%B8%E4%BF%A1%E6%81%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="luoqian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="luoqian">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/07/25/%E5%9C%A8eclipse%E4%B8%AD%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AEweb%E6%9C%89%E6%97%B6%E5%80%99%E8%AE%BF%E9%97%AEjsp%E4%BC%9A%E6%8A%9B%E5%87%BA%E4%BB%A5%E4%B8%8B%E7%B1%BB%E4%BC%BC%E7%9A%84%E5%BC%82%E5%B8%B8%E4%BF%A1%E6%81%AF/" class="post-title-link" itemprop="url">在eclipse中部署项目web有时候访问jsp会抛出以下类似的异常信息</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2018-07-25 20:58:17" itemprop="dateCreated datePublished" datetime="2018-07-25T20:58:17+08:00">2018-07-25</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2018-12-11 21:02:22" itemprop="dateModified" datetime="2018-12-11T21:02:22+08:00">2018-12-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9D%82%E9%A1%B9%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">杂项教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="在eclipse中部署项目web有时候访问jsp会抛出以下类似的异常信息"><a href="#在eclipse中部署项目web有时候访问jsp会抛出以下类似的异常信息" class="headerlink" title="在eclipse中部署项目web有时候访问jsp会抛出以下类似的异常信息"></a>在eclipse中部署项目web有时候访问jsp会抛出以下类似的异常信息</h1><pre><code>org.apache.jasper.JasperException: The absolute uri: http://java.sun.com/jsp 
+</code></pre>
+<p>  部署web项目，如果抛出此异常。请保证 standard.jar与jstl.jar 两个jar包是否 在部署的项目中存在，如果不存在，请把，这两个包加入 /WEB-INF/lib 中。然后保证jsp中引用的版本地址 和 此版本地址是一致的：</p>
+<pre><code>&lt;%@ taglib uri=&quot;http://java.sun.com/jsp/jstl/core&quot;prefix=&quot;c&quot;%&gt;&lt;%@ taglib uri=&quot;http://java.sun.com/jsp/jstl/fmt&quot;prefix=&quot;f&quot;%&gt;&lt;%@ taglib prefix=&quot;fn&quot;uri=&quot;http://java.sun.com/jsp/jstl/functions&quot;%&gt;
+</code></pre>
+<p>CSDN下载路径：<a target="_blank" rel="noopener" href="https://download.csdn.net/download/weixin_42216574/10416519">https://download.csdn.net/download/weixin_42216574/10416519</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://vampireqian.github.io/2018/04/26/%E5%9C%A8Windows10%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%96%B0%E5%BB%BA%E7%9A%84%E5%8F%B3%E9%94%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="luoqian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="luoqian">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/04/26/%E5%9C%A8Windows10%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%96%B0%E5%BB%BA%E7%9A%84%E5%8F%B3%E9%94%AE/" class="post-title-link" itemprop="url">在Windows10中给右键中添加新建的方式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2018-04-26 20:15:17" itemprop="dateCreated datePublished" datetime="2018-04-26T20:15:17+08:00">2018-04-26</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2018-12-11 21:02:32" itemprop="dateModified" datetime="2018-12-11T21:02:32+08:00">2018-12-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9D%82%E9%A1%B9%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">杂项教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="使用管理员权限打开window命令提示符输入如下即可"><a href="#使用管理员权限打开window命令提示符输入如下即可" class="headerlink" title="使用管理员权限打开window命令提示符输入如下即可"></a>使用管理员权限打开window命令提示符输入如下即可</h2><pre><code>cmd /k reg add &quot;HKEY_CLASSES_ROOT\Directory\Background\shellex\ContextMenuHandlers\New&quot; /ve /t REG_SZ /d &#123;D969A300-E7FF-11d0-A93B-00A0C90F2719&#125; /f
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://vampireqian.github.io/2018/02/10/20%E5%85%83%E7%BC%96%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="luoqian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="luoqian">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/02/10/20%E5%85%83%E7%BC%96%E7%A8%8B/" class="post-title-link" itemprop="url">元编程</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2018-02-10 08:00:00" itemprop="dateCreated datePublished" datetime="2018-02-10T08:00:00+08:00">2018-02-10</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2018-12-13 21:16:32" itemprop="dateModified" datetime="2018-12-13T21:16:32+08:00">2018-12-13</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="元编程"><a href="#元编程" class="headerlink" title="元编程"></a>元编程</h2><p>元编程的概念来自LISP和smalltalk。</p>
+<p>用来生成代码的程序称为元程序metaprogram，编写这种程序就称为元编程metaprogramming。<br>python主要通过反射来实现元编程。</p>
+<blockquote>
+<p>Python中<br>所有非object类都继承自Object类<br>所有类的类型包括type类都是type<br>type类继承自object类，object类的类型也是type类</p>
+</blockquote>
+<h3 id="type类"><a href="#type类" class="headerlink" title="type类"></a>type类</h3><h4 id="type构建类"><a href="#type构建类" class="headerlink" title="type构建类"></a>type构建类</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">type</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">cls, what, bases=<span class="literal">None</span>, <span class="built_in">dict</span>=<span class="literal">None</span></span>):</span> <span class="comment"># known special case of type.__init__</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        type(object_or_name, bases, dict)</span></span><br><span class="line"><span class="string">        type(object) -&gt; the object&#x27;s type </span></span><br><span class="line"><span class="string">        type(name, bases, dict) -&gt; a new type</span></span><br><span class="line"><span class="string">        # (copied from class doc)</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+<p>构建</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">    self.x = <span class="number">1000</span></span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">return</span> self.__dict__</span><br><span class="line"></span><br><span class="line">XClass = <span class="built_in">type</span>(<span class="string">&#x27;myclass&#x27;</span>, (<span class="built_in">object</span>,), &#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">100</span>, <span class="string">&#x27;b&#x27;</span>: <span class="string">&#x27;string&#x27;</span>, <span class="string">&#x27;show&#x27;</span>:show, <span class="string">&#x27;__init__&#x27;</span>:__init__&#125;) <span class="comment"># 字典是类属性 print(XClass) </span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(XClass) </span><br><span class="line"><span class="built_in">print</span>(XClass.__name__) </span><br><span class="line"><span class="built_in">print</span>(XClass.__dict__) </span><br><span class="line"><span class="built_in">print</span>(XClass.mro())</span><br><span class="line"> </span><br><span class="line">XClass().show()</span><br></pre></td></tr></table></figure>
+
+<p>可以借助type构造任何类，用代码生成代码，这就是元编程。</p>
+<h4 id="构建元类"><a href="#构建元类" class="headerlink" title="构建元类"></a>构建元类</h4><p>一个类可以继承自type类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ModelMeta</span>(<span class="params"><span class="built_in">type</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__new__</span>(<span class="params">cls, *args</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(cls)</span><br><span class="line">        <span class="built_in">print</span>(*args)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>().__new__(cls, *args)</span><br></pre></td></tr></table></figure>
+
+<p>继承自type，ModelMeta就是元类，它可以创建出其他类。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ModelMeta</span>(<span class="params"><span class="built_in">type</span></span>):</span>  <span class="comment"># 继承自type</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__new__</span>(<span class="params">cls, name, bases, attrs: <span class="built_in">dict</span></span>):</span></span><br><span class="line">        <span class="built_in">print</span>(cls)</span><br><span class="line">        <span class="built_in">print</span>(name)</span><br><span class="line">        <span class="built_in">print</span>(bases)</span><br><span class="line">        <span class="built_in">print</span>(attrs)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;--------&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>().__new__(cls, name, bases, attrs)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 第一种 使用metaclass关键字参数指定元类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>(<span class="params">metaclass=ModelMeta</span>):</span></span><br><span class="line">    <span class="built_in">id</span> = <span class="number">100</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.x = <span class="number">2000</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 第二种 B继承自A后，依然是从ModelMeta的类型</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>(<span class="params">A</span>):</span>  <span class="comment"># 继承</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 第三种 元类就可以使用下面的方式创建新的类</span></span><br><span class="line">C = ModelMeta(<span class="string">&#x27;Class&#x27;</span>, (), &#123;<span class="string">&#x27;y&#x27;</span>: <span class="number">200</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(A))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(B))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(C))</span><br></pre></td></tr></table></figure>
+
+<p>从运行结果还可以分析出<code> __new__(cls, *args)</code> 的参数结构<br>中间是一个元组 <code>(&#39;A&#39;, (), &#123;&#39;__init__&#39;: &lt;function A.__init__ at 0x0000000000B6E598&gt;, &#39;__module__&#39;:&#39;__main__&#39;, &#39;__qualname__&#39;: &#39;A&#39;, &#39;id&#39;: 100&#125;)</code><br>对应<code> (name, bases, dict)</code></p>
+<p>从运行结果可以看出，只要元类是ModelMeta，创建类对象时，就会调用ModelMeta的<code>__new__</code>方法 </p>
+<h3 id="元类的应用"><a href="#元类的应用" class="headerlink" title="元类的应用"></a>元类的应用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Field</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, fieldname=<span class="literal">None</span>, pk=<span class="literal">False</span>, nullable=<span class="literal">False</span></span>):</span></span><br><span class="line">        self.fieldname = fieldname</span><br><span class="line">        self.pk = pk</span><br><span class="line">        self.nullable = nullable</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&lt;Field &#123;&#125;&gt;&quot;</span>.<span class="built_in">format</span>(self.fieldname)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ModelMeta</span>(<span class="params"><span class="built_in">type</span></span>):</span>  <span class="comment"># 继承自type</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__new__</span>(<span class="params">cls, name, bases, attrs: <span class="built_in">dict</span></span>):</span></span><br><span class="line">        <span class="built_in">print</span>(cls)</span><br><span class="line">        <span class="built_in">print</span>(name)</span><br><span class="line">        <span class="built_in">print</span>(bases)</span><br><span class="line">        <span class="built_in">print</span>(attrs, <span class="string">&#x27;-------------&#x27;</span>)</span><br><span class="line">        <span class="comment">#    使用元类动态注入表名</span></span><br><span class="line">        tblname = <span class="string">&#x27;__tablename__&#x27;</span></span><br><span class="line">        <span class="keyword">if</span> tblname <span class="keyword">not</span> <span class="keyword">in</span> attrs.keys():</span><br><span class="line">            attrs[tblname] = name</span><br><span class="line"></span><br><span class="line">        primarykeys = []</span><br><span class="line">        <span class="keyword">for</span> k, v <span class="keyword">in</span> attrs.items():</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">isinstance</span>(v, Field):</span><br><span class="line">                <span class="built_in">print</span>(k)</span><br><span class="line">                <span class="built_in">print</span>(v)</span><br><span class="line">                <span class="built_in">print</span>(v.fieldname)</span><br><span class="line">                <span class="keyword">if</span> v.fieldname <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                    v.fieldname = k  <span class="comment"># 没有名字则使用属性名</span></span><br><span class="line">                <span class="keyword">if</span> v.pk:</span><br><span class="line">                    primarykeys.append(v)</span><br><span class="line"></span><br><span class="line">        attrs[<span class="string">&#x27;__primarykeys__&#x27;</span>] = primarykeys</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>().__new__(cls, name, bases, attrs)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ModelBase</span>(<span class="params">metaclass=ModelMeta</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params">ModelBase</span>):</span></span><br><span class="line">    <span class="built_in">id</span> = Field(pk=<span class="literal">True</span>, nullable=<span class="literal">False</span>)</span><br><span class="line">    name = Field(<span class="string">&#x27;username&#x27;</span>, nullable=<span class="literal">False</span>)</span><br><span class="line">    age = Field()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;----------------&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(Student.__dict__)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="元编程的总结"><a href="#元编程的总结" class="headerlink" title="元编程的总结"></a>元编程的总结</h3><p>元类是制造类的工厂，是生成类的类。<br>构造好元类，就可以在类定义时，使用关键字参数metaclass指定元类，可以使用最原始的metatype(name,bases, dict)的方式构造一个类。<br>元类的 <code>__new__() </code>方法中，可以获取元类信息、当前类、基类、类属性字典。 </p>
+<p>元编程一般用于框架开发中。 </p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://vampireqian.github.io/2018/01/05/19%E6%8C%89%E4%BD%8D%E4%B8%8E%E3%80%81%E6%88%96%E3%80%81%E9%9D%9E%E3%80%81%E5%BC%82%E6%88%96%E7%9A%84%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="luoqian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="luoqian">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/01/05/19%E6%8C%89%E4%BD%8D%E4%B8%8E%E3%80%81%E6%88%96%E3%80%81%E9%9D%9E%E3%80%81%E5%BC%82%E6%88%96%E7%9A%84%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">按位与、或、非、异或总结</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2018-01-05 20:15:17" itemprop="dateCreated datePublished" datetime="2018-01-05T20:15:17+08:00">2018-01-05</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2018-12-07 21:38:26" itemprop="dateModified" datetime="2018-12-07T21:38:26+08:00">2018-12-07</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9D%82%E9%A1%B9/" itemprop="url" rel="index"><span itemprop="name">杂项</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="位运算符有：-amp-按位与-、-按位或-、-按位异或-、-按位取反-。"><a href="#位运算符有：-amp-按位与-、-按位或-、-按位异或-、-按位取反-。" class="headerlink" title="位运算符有：&amp;(按位与)、|(按位或)、^(按位异或)、~ (按位取反)。"></a><strong>位运算符有：&amp;(按位与)、|(按位或)、^(按位异或)、~ (按位取反)。</strong></h3><h5 id="优先级从高到低，依次为-、-amp-、-、"><a href="#优先级从高到低，依次为-、-amp-、-、" class="headerlink" title="优先级从高到低，依次为~、&amp;、^、|"></a>优先级从高到低，依次为~、&amp;、^、|</h5><h6 id="1-按位与操作-0-amp-0-0-0-amp-1-0-1-amp-0-0-1-amp-1-1"><a href="#1-按位与操作-0-amp-0-0-0-amp-1-0-1-amp-0-0-1-amp-1-1" class="headerlink" title="1. 按位与操作 0&amp;0=0;    0&amp;1=0;    1&amp;0=0;    1&amp;1=1"></a>1. 按位与操作 0&amp;0=0;    0&amp;1=0;    1&amp;0=0;    1&amp;1=1</h6><ul>
+<li>例子：10&amp;9： 0000 1010 &amp; 0000 1001 = 0000 1000 = 8</li>
+</ul>
+<blockquote>
+<p>负数按补码形式参加按位与运算</p>
+</blockquote>
+<ul>
+<li>“与运算”的特殊用途：<ul>
+<li>（1）清零。如果想将一个单元清零，即使其全部二进制位为0，只要与一个各位都为零的数值相与，结果为零。</li>
+<li>（2）取一个数中指定位<br>方法：找一个数，对应X要取的位，该数的对应位为1，其余位为零，此数与X进行“与运算”可以得到X中的指定位。<br>例：设X=10101110，<br>取X的低4位，用 X &amp; 0000 1111 = 0000 1110 即可得到；<br>还可用来取X的2、4、6位。 </li>
+</ul>
+</li>
+</ul>
+<h6 id="2-按位或运算符（-）"><a href="#2-按位或运算符（-）" class="headerlink" title="2. 按位或运算符（|）"></a>2. 按位或运算符（|）</h6><ul>
+<li><p>参加运算的两个对象，按二进制位进行“或”运算。</p>
+</li>
+<li><p>运算规则：0|0=0；   0|1=1；   1|0=1；    1|1=1； </p>
+<ul>
+<li>即 ：参加运算的两个对象只要有一个为1，其值为1。</li>
+</ul>
+</li>
+<li><p>例如:3|5　即 0000 0011 | 0000 0101 = 0000 0111   因此，3|5的值得7。　</p>
+</li>
+</ul>
+<blockquote>
+<p>另，负数按补码形式参加按位或运算。</p>
+</blockquote>
+<ul>
+<li><p>“或运算”特殊作用：</p>
+<ul>
+<li><p>（1）常用来对一个数据的某些位置1。</p>
+<ul>
+<li><p>方法：找到一个数，对应X要置1的位，该数的对应位为1，其余位为零。此数与X相或可使X中的某些位置1。</p>
+</li>
+<li><p>例：将X=10100000的低4位置1 ，用 X | 0000 1111 = 1010 1111即可得到。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h6 id="3-异或运算符（-）"><a href="#3-异或运算符（-）" class="headerlink" title="3. 异或运算符（^）"></a>3. 异或运算符（^）</h6><ul>
+<li><p>参加运算的两个数据，按二进制位进行“异或”运算。 </p>
+</li>
+<li><p>运算规则：0^0=0；   0^1=1；   1^0=1；   1^1=0；</p>
+<ul>
+<li>即：参加运算的两个对象，如果两个相应位为“异”（值不同），则该位结果为1，否则为0。</li>
+</ul>
+</li>
+<li><p>例如：10^-9 即 0000 1010  ^ 1111 0111 = 1111 1101(补码) 原码即为1000 0011 即10^-9 = -3</p>
+</li>
+<li><p>“异或运算”的特殊作用：</p>
+<ul>
+<li><p>（1）使特定位翻转 找一个数，对应X要翻转的各位，该数的对应位为1，其余位为零，此数与X对应位异或即可。</p>
+<ul>
+<li>例：X=10101110，使X低4位翻转，用X ^ 0000 1111 = 1010 0001即可得到。</li>
+</ul>
+</li>
+<li><p>（2）与0相异或，保留原值 ，X ^ 0000 0000 = 1010 1110。</p>
+</li>
+<li><p>交换a和b</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">方法一</th>
+<th align="center">方法二</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1.a=a^b</td>
+<td align="center">1.a= a-b</td>
+</tr>
+<tr>
+<td align="center">2.b=b^a</td>
+<td align="center">2.b= a+b</td>
+</tr>
+<tr>
+<td align="center">3.a=a^b</td>
+<td align="center">3.a= b-a</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h6 id="4-取反运算符（-）"><a href="#4-取反运算符（-）" class="headerlink" title="4. 取反运算符（~）"></a>4. 取反运算符（~）</h6><ul>
+<li><p>参加运算的一个数据，按二进制位进行“取反”运算。</p>
+</li>
+<li><p>运算规则：~1=0；   ~0=1；</p>
+<ul>
+<li>即：对一个二进制数按位取反，即将0变1，1变0。</li>
+</ul>
+</li>
+<li><p>使一个数的最低位为零，可以表示为：a&amp;~1。</p>
+</li>
+<li><p><del>1的值为1111111111111110，再按“与”运算，最低位一定为0。因为“</del>”运算符的优先级比算术运算符、关系运算符、逻辑运算符和其他运算符都高。</p>
+</li>
+</ul>
+<h6 id="5-左移运算符（-lt-lt-）"><a href="#5-左移运算符（-lt-lt-）" class="headerlink" title="5. 左移运算符（&lt;&lt;）"></a>5. 左移运算符（&lt;&lt;）</h6><ul>
+<li><p>将一个运算对象的各二进制位全部左移若干位（左边的二进制位丢弃，右边补0）。</p>
+</li>
+<li><p>例：a = a &lt;&lt; 2 将a的二进制位左移2位，右补0，</p>
+</li>
+<li><p>左移1位后a = a * 2; </p>
+</li>
+<li><p>若左移时舍弃的高位不包含1，则每左移一位，相当于该数乘以2。</p>
+</li>
+</ul>
+<h6 id="6-右移运算符（-gt-gt-）"><a href="#6-右移运算符（-gt-gt-）" class="headerlink" title="6. 右移运算符（&gt;&gt;）"></a>6. 右移运算符（&gt;&gt;）</h6><ul>
+<li><p>将一个数的各二进制位全部右移若干位，正数左补0，负数左补1，右边丢弃。</p>
+</li>
+<li><p>操作数每右移一位，相当于该数除以2。</p>
+</li>
+<li><p>例如：a = a &gt;&gt; 2 将a的二进制位右移2位，</p>
+</li>
+<li><p>左补0 or 补1 得看被移数是正还是负。</p>
+</li>
+<li><p>&gt;&gt; 运算符把 expression1 的所有位向右移 expression2 指定的位数。expression1 的符号位被用来填充右移后左边空出来的位。向右移出的位被丢弃。</p>
+</li>
+<li><p>例如，下面的代码被求值后，temp 的值是 -4：</p>
+<p>  var temp = -14 &gt;&gt; 2</p>
+<p>  -14 （即二进制的 11110010）右移两位等于 -4 （即二进制的 11111100）。</p>
+</li>
+<li><p>无符号右移运算符（&gt;&gt;&gt;）</p>
+</li>
+<li><p>&gt;&gt;&gt; 运算符把 expression1 的各个位向右移 expression2 指定的位数。右移后左边空出的位用零来填充。移出右边的位被丢弃。</p>
+</li>
+</ul>
+<h6 id="7-复合赋值运算符"><a href="#7-复合赋值运算符" class="headerlink" title="7. 复合赋值运算符"></a>7. 复合赋值运算符</h6><ul>
+<li>位运算符与赋值运算符结合，组成新的复合赋值运算符，它们是：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">位运算符</th>
+<th>例子</th>
+<th>相当于</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&amp;=</td>
+<td>例：a &amp;= b</td>
+<td>相当于a=a &amp; b</td>
+</tr>
+<tr>
+<td align="center">|=</td>
+<td>例：a |= b</td>
+<td>相当于a=a | b</td>
+</tr>
+<tr>
+<td align="center">&gt;&gt;=</td>
+<td>例：a &gt;&gt;= b</td>
+<td>相当于a=a &gt;&gt; b</td>
+</tr>
+<tr>
+<td align="center">&lt;&lt;=</td>
+<td>例：a &lt;&lt;= b</td>
+<td>相当于a=a &lt;&lt; b</td>
+</tr>
+<tr>
+<td align="center">^=</td>
+<td>例：a ^= b</td>
+<td>相当于a=a ^ b</td>
+</tr>
+</tbody></table>
+<ul>
+<li>运算规则：和前面讲的复合赋值运算符的运算规则相似。</li>
+</ul>
+<p>不同长度的数据进行位运算</p>
+<p>如果两个不同长度的数据进行位运算时，系统会将二者按右端对齐，然后进行位运算。</p>
+<p>以“与”运算为例说明如下：我们知道在C语言中long型占4个字节，int型占2个字节，如果一个long型数据与一个int型数据进行“与”运算，右端对齐后，左边不足的位依下面三种情况补足，</p>
+<p>（1）如果整型数据为正数，左边补16个0。<br>（2）如果整型数据为负数，左边补16个1。</p>
+<p>（3）如果整形数据为无符号数，左边也补16个0。</p>
+<p>如：long a=123;int b=1;计算a &amp; b。<br>a 0000 0000 0111 1011 &amp;<br>b 0000 0000 0000 0001<br>= 0000 0000 0000 0001<br>如：long a=123;int b=-1;计算a &amp; b。<br>a 0000 0000 0111 1011 &amp;<br>b 1111 1111 1111 1111<br>= 0000 0000 0111 1011<br>如：long a=123;unsigned int b=1;计算a &amp; b。<br>a 0000 0000 0111 1011<br>b 0000 0000 0000 0001<br>= 0000 0000 0000 0001</p>
+<h6 id="8-原码、反码、补码，负数表示法"><a href="#8-原码、反码、补码，负数表示法" class="headerlink" title="8. 原码、反码、补码，负数表示法"></a>8. 原码、反码、补码，负数表示法</h6><ul>
+<li>原码:5 =&gt; 0b101，1 =&gt; 0b1 ，-1 =&gt; -0b1， bin(-1)</li>
+<li>反码:<ul>
+<li>正数的反码与原码相同；负数的反码符号位不变其余按位取反</li>
+</ul>
+</li>
+<li>补码:<ul>
+<li>正数的补码与原码相同；负数的补码符号位不变其余按位取反后+1 </li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://vampireqian.github.io/2017/12/16/18%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E6%AD%A5%E9%AA%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="luoqian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="luoqian">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/12/16/18%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E6%AD%A5%E9%AA%A4/" class="post-title-link" itemprop="url">python-日志分析步骤</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2017-12-16 00:00:00" itemprop="dateCreated datePublished" datetime="2017-12-16T00:00:00+08:00">2017-12-16</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2018-12-11 21:03:36" itemprop="dateModified" datetime="2018-12-11T21:03:36+08:00">2018-12-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="日志分析"><a href="#日志分析" class="headerlink" title="日志分析"></a>日志分析</h4><h5 id="一般采集流程"><a href="#一般采集流程" class="headerlink" title="一般采集流程"></a>一般采集流程</h5><p>日志产出 -&gt; 采集（Logstash、Flume、Scribe） -&gt; 存储 -&gt; 分析 -&gt; 存储（数据库、NoSQL） -&gt; 可视化</p>
+<h5 id="开源实时日志分析ELK平台"><a href="#开源实时日志分析ELK平台" class="headerlink" title="开源实时日志分析ELK平台"></a>开源实时日志分析ELK平台</h5><p>Logstash收集日志，并存放到ElasticSearch集群中，Kibana则从ES集群中查询数据生成图表，返回浏览器端</p>
+<h4 id="数据提取"><a href="#数据提取" class="headerlink" title="数据提取"></a>数据提取</h4><h5 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h5><h6 id="非结构化数据"><a href="#非结构化数据" class="headerlink" title="非结构化数据"></a>非结构化数据</h6><p>一眼看不出结构的数据。（二进制的，无法用文本理解）</p>
+<h6 id="半结构化数据"><a href="#半结构化数据" class="headerlink" title="半结构化数据"></a>半结构化数据</h6><p>日志是半结构化数据，是有组织的，有格式的数据。可以分割成行和列，就可以当做表理解和处理了，当然也可以分析里面的数据。</p>
+<h6 id="结构化数据"><a href="#结构化数据" class="headerlink" title="结构化数据"></a>结构化数据</h6><p>数据库内的数据（能够像是行和列一样很好的组织起来）</p>
+<h5 id="文本分析"><a href="#文本分析" class="headerlink" title="文本分析"></a>文本分析</h5><p>日志是文本文件，需要依赖文件IO、字符串操作、正则表达式等技术。<br>通过这些技术就能够把日志中需要的数据提取出来。4</p>
+<p>这是最常见的日志，nginx、tomcat等WEB Server都会产生这样的日志。 这里面每一段有效的数据对后期的分析都是必须的。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">183</span><span class="variable">.60</span><span class="variable">.212</span><span class="variable">.153</span> - - [<span class="number">19</span>/Feb/<span class="number">2013</span>:<span class="number">10</span>:<span class="number">23</span>:<span class="number">29</span> +<span class="number">0800</span>] <span class="string">&quot;GET /o2o/media.html?menu=3 HTTP/1.1&quot;</span> <span class="number">200</span> <span class="number">16691</span> </span><br><span class="line"><span class="string">&quot;-&quot;</span> <span class="string">&quot;Mozilla/5.0 (compatible; EasouSpider; +http://www.easou.com/search/spider.html)&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>思路：如果用空格切割，数据并没有按照业务分割好，比如时间就被分开了，URL相关的也被分开了，User Agent的空格最多，被分割了。 所以，定义的时候不选用这种在filed中出现的字符就可以省很多事，例如使用’\x01’、‘\0x02’这个不可见的ASCII。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> field <span class="keyword">in</span> line.split(<span class="string">&quot;\x02&quot;</span>):</span><br><span class="line">    <span class="built_in">print</span>(field)</span><br></pre></td></tr></table></figure>
+
+<p>类型转换</p>
+<p>fields中的数据是有类型的，例如时间、状态码等。对不同的field要做不同的类型转换，甚至是自定义的转换</p>
+<p>时间转换<br>19/Feb/2013:10:23:29 +0800 对应格式是<br>%d/%b/%Y:%H:%M:%S %z<br>使用的函数是datetime类的strptime方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">convert_time</span>(<span class="params">timestr</span>):</span></span><br><span class="line">    <span class="keyword">return</span> datetime.datetime.strptime(timestr, <span class="string">&#x27;%d/%b/%Y:%H:%M:%S %z&#x27;</span>)</span><br><span class="line"><span class="comment">#lambda timestr: datetime.datetime.strptime(timestr, &#x27;%d/%b/%Y:%H:%M:%S %z&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>请求信息的解析 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#GET /o2o/media.html?menu=3 HTTP/1.1 </span></span><br><span class="line"><span class="comment">#method url protocol  三部分都非常重要</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_request</span>(<span class="params">request:<span class="built_in">str</span></span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">dict</span>(<span class="built_in">zip</span>([<span class="string">&#x27;method&#x27;</span>,<span class="string">&#x27;url&#x27;</span>,<span class="string">&#x27;protocol&#x27;</span>],request.split()))</span><br><span class="line"></span><br><span class="line"><span class="comment">#lambda request: dict(zip([&#x27;method&#x27;,&#x27;url&#x27;,&#x27;protocol&#x27;],request.split()))</span></span><br></pre></td></tr></table></figure>
+
+<p>映射<br>对每一个字段命名，然后与值和类型转换的方法对应。解析每一行是有顺序的</p>
+<p>映射<br>对每一个字段命名，然后与值和类型转换的方法对应。解析每一行是有顺序的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">line = <span class="string">&#x27;&#x27;&#x27;183.60.212.153 - - [19/Feb/2013:10:23:29 +0800] \</span></span><br><span class="line"><span class="string">&quot;GET /o2o/media.html?menu=3 HTTP/1.1&quot; 200 16691 &quot;-&quot; \</span></span><br><span class="line"><span class="string">&quot;Mozilla/5.0 (compatible; EasouSpider; +http://www.easou.com/search/spider.html)&quot;&#x27;&#x27;&#x27;</span></span><br><span class="line"> </span><br><span class="line">CHARS = <span class="built_in">set</span>(<span class="string">&#x27; \&#x27;&quot;[]&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(CHARS)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">makekey</span>(<span class="params">line:<span class="built_in">str</span></span>):</span></span><br><span class="line">    start = <span class="number">0</span></span><br><span class="line">    flag = <span class="literal">False</span></span><br><span class="line">    stopchar = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(line): <span class="comment"># [a]</span></span><br><span class="line">        <span class="keyword">if</span> c <span class="keyword">in</span> CHARS:</span><br><span class="line">            <span class="keyword">if</span> c == <span class="string">&#x27;[&#x27;</span>:</span><br><span class="line">                flag = <span class="literal">True</span></span><br><span class="line">                start = i + <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> c == <span class="string">&#x27;]&#x27;</span>:</span><br><span class="line">                flag = <span class="literal">False</span></span><br><span class="line">            <span class="keyword">if</span> c == <span class="string">&#x27;&quot;&#x27;</span>:</span><br><span class="line">                flag = <span class="keyword">not</span> flag</span><br><span class="line">                <span class="keyword">if</span> flag:</span><br><span class="line">                    start = i + <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> flag:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> start == i:</span><br><span class="line">                start = i + <span class="number">1</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">yield</span> line[start:i]</span><br><span class="line">            start = i + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> start &lt; <span class="built_in">len</span>(line):</span><br><span class="line">            <span class="keyword">yield</span> line[start:]</span><br><span class="line">names = (<span class="string">&#x27;remote&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;datetime&#x27;</span>, <span class="string">&#x27;request&#x27;</span>, <span class="string">&#x27;status&#x27;</span>, <span class="string">&#x27;length&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;useragent&#x27;</span>)</span><br><span class="line">ops = (<span class="literal">None</span>, <span class="literal">None</span>, <span class="literal">None</span>, <span class="keyword">lambda</span> timestr: datetime.datetime.strptime(timestr, <span class="string">&#x27;%d/%b/%Y:%H:%M:%S </span></span><br><span class="line"><span class="string">       lambda request: dict(zip([&#x27;</span>method<span class="string">&#x27;, &#x27;</span>url<span class="string">&#x27;, &#x27;</span>protocol<span class="string">&#x27;], request.split())),</span></span><br><span class="line"><span class="string">       int, int, None, None</span></span><br><span class="line"><span class="string">def extract(line:str):</span></span><br><span class="line"><span class="string">    return dict(map(lambda item: (item[0], item[2](item[1]) if item[2] is not None else </span></span><br><span class="line"><span class="string">item[1]),zip(names, makekey(line), ops)))</span></span><br><span class="line"><span class="string">print(extract(line))</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<p>正则表达式的提取</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">line = <span class="string">&#x27;&#x27;&#x27;183.60.212.153 - - [19/Feb/2013:10:23:29 +0800] \</span></span><br><span class="line"><span class="string">&quot;GET /o2o/media.html?menu=3 HTTP/1.1&quot; 200 16691 &quot;-&quot; \</span></span><br><span class="line"><span class="string">&quot;Mozilla/5.0 (compatible; EasouSpider; +http://www.easou.com/search/spider.html)&quot;&#x27;&#x27;&#x27;</span></span><br><span class="line"> </span><br><span class="line">ops = &#123;</span><br><span class="line">    <span class="string">&#x27;datetime&#x27;</span>: <span class="keyword">lambda</span> timestr: datetime.datetime.strptime(timestr, <span class="string">&#x27;%d/%b/%Y:%H:%M:%S %z&#x27;</span>),</span><br><span class="line">    <span class="string">&#x27;status&#x27;</span>: <span class="built_in">int</span>,</span><br><span class="line">    <span class="string">&#x27;length&#x27;</span>: <span class="built_in">int</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">pattern = <span class="string">&#x27;&#x27;&#x27;(?P&lt;remote&gt;[\d.]&#123;7,&#125;) - - \[(?P&lt;datetime&gt;[/\w +:]+)\] \</span></span><br><span class="line"><span class="string">&quot;(?P&lt;method&gt;\w+) (?P&lt;url&gt;\S+) (?P&lt;protocol&gt;[\w/\d.]+)&quot; \</span></span><br><span class="line"><span class="string">(?P&lt;status&gt;\d+) (?P&lt;length&gt;\d+) .+ &quot;(?P&lt;useragent&gt;.+)&quot;&#x27;&#x27;&#x27;</span></span><br><span class="line"> </span><br><span class="line">regex = re.<span class="built_in">compile</span>(pattern)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">extract</span>(<span class="params">line:<span class="built_in">str</span></span>) -&gt; <span class="built_in">dict</span>:</span></span><br><span class="line">    matcher = regex.match(line)</span><br><span class="line">    <span class="keyword">return</span> &#123;k:ops.get(k, <span class="keyword">lambda</span> x:x)(v) <span class="keyword">for</span> k,v <span class="keyword">in</span> matcher.groupdict().items()&#125;</span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span>(extract(line))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>异常处理<br>日志中不免会出现一些不匹配的行，需要处理。 </p>
+<p>这里使用re.match方法，有可能匹配不上。所以要增加一个判断<br>采用抛出异常的方式，让调用者获得异常并自行处理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">extract</span>(<span class="params">logline:<span class="built_in">str</span></span>) -&gt; <span class="built_in">dict</span>:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;返回字段的字典，如果返回None说明匹配失败&quot;&quot;&quot;</span></span><br><span class="line">    matcher = regex.match(line)</span><br><span class="line">    <span class="keyword">if</span> matcher:</span><br><span class="line">        <span class="keyword">return</span> &#123;k:ops.get(k, <span class="keyword">lambda</span> x:x)(v) <span class="keyword">for</span> k,v <span class="keyword">in</span> matcher.groupdict().items()&#125;</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span> <span class="comment"># 或输出日志记录</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>数据载入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load</span>(<span class="params">path</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;装载日志文件&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(path) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">            fields = extract(line)</span><br><span class="line">            <span class="keyword">if</span> fields:</span><br><span class="line">                <span class="keyword">yield</span> fields</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">continue</span> <span class="comment"># TODO 解析失败就抛弃，或者打印日志</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://vampireqian.github.io/2017/11/09/17%E5%B9%B6%E5%8F%91%E5%92%8C%E7%BA%BF%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="luoqian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="luoqian">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/11/09/17%E5%B9%B6%E5%8F%91%E5%92%8C%E7%BA%BF%E7%A8%8B/" class="post-title-link" itemprop="url">python-并发和线程</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2017-11-09 00:00:00" itemprop="dateCreated datePublished" datetime="2017-11-09T00:00:00+08:00">2017-11-09</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2018-12-11 21:37:22" itemprop="dateModified" datetime="2018-12-11T21:37:22+08:00">2018-12-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h2><h3 id="并发和并行的区别"><a href="#并发和并行的区别" class="headerlink" title="并发和并行的区别"></a>并发和并行的区别</h3><p>并行、parallel</p>
+<p>​    同时做某些事情，可以互不干扰的同一时刻做几件事</p>
+<p>并发、concurrency</p>
+<p>​    一个时段内有事情要处理。</p>
+<hr>
+<h3 id="并发的解决"><a href="#并发的解决" class="headerlink" title="并发的解决"></a>并发的解决</h3><h5 id="1、队列、缓冲区"><a href="#1、队列、缓冲区" class="headerlink" title="1、队列、缓冲区"></a>1、队列、缓冲区</h5><p>使用队列，先进先出，解决了资源使用的问题。排成的<strong>队列</strong>，其实就是一个缓冲地带，就是<strong>缓冲区</strong>。（队列的作用：解耦，缓冲）</p>
+<h5 id="2、争抢"><a href="#2、争抢" class="headerlink" title="2、争抢"></a>2、争抢</h5><p>通过争抢，当一个抢到时就会触发一种类似<strong>锁机制</strong>，抢到资源就上锁，排他性的锁。这也是一种高并发解决方案，但是这样就有可能会有些会很长时间都抢不到。</p>
+<h5 id="3、预处理"><a href="#3、预处理" class="headerlink" title="3、预处理"></a>3、预处理</h5><p>一种提前加载用户需要的数据的思路，预处理思想，缓存常用。（要考虑到冷、热数据的问题，经常访问的数据可以先预加载）</p>
+<h5 id="4、并行"><a href="#4、并行" class="headerlink" title="4、并行"></a>4、并行</h5><p>一般日常可以通过购买服务器，或多开进程、线程实现并行处理，来解决并发问题。注意：这些都是<strong>水平拓展</strong>的思想。</p>
+<p>注：<br>如果线程在单CPU上处理，就不是并行了。<br>但是多数服务器都是多CPU的，服务的部署往往是多机的、分布式的，这都是并行处理。</p>
+<h5 id="5、提速"><a href="#5、提速" class="headerlink" title="5、提速"></a>5、提速</h5><p>提高单个CPU性能，或单个服务器安装更多的CPU。<br>这是一种<strong>垂直扩展</strong>思想。</p>
+<h5 id="6、消息中间件"><a href="#6、消息中间件" class="headerlink" title="6、消息中间件"></a>6、消息中间件</h5><p>一般就是在程序之前实现的技术。</p>
+<p>常见的消息中间件有RabbitMQ、ActiveMQ（Apache）、RocketMQ（阿里Apache）、kafka（Apache）等</p>
+<p>总结：一般来说不同的并发场景使用不同的策略，而策略可能是多种方式的优化组合。</p>
+<hr>
+<h2 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h2><p>在实现了线程的操作系统中，<strong>线程</strong>是操作系统能够进行<strong>运算调度</strong>的最小单位。它被包含在进程之中，是进程中的实际运作单位。一个程序的执行实例就是一个进程。<br><strong>进程</strong>（Process）是计算机中的程序关于某数据集合上的一次运行活动，是系统进行<strong>资源分配和调度</strong>的基本单位，是操作系统结构的基础。</p>
+<p>进程和程序的关系<br>程序是源代码编译后的文件，而这些文件存放在磁盘上。当程序被操作系统加载到内存中，就是进程，进程中存放着指令和数据（资源），它也是线程的容器。</p>
+<p>Linux进程有父进程、子进程，Windows的进程是平等关系。</p>
+<p>线程，有时被称为轻量级进程(Lightweight Process，LWP），是程序执行流的最小单元。<br>一个标准的线程由线程ID，当前指令指针(PC），寄存器集合和堆栈组成。<br>在许多系统中，创建一个线程比创建一个进程快10-100倍。</p>
+<p>进程、线程的理解<br>现代操作系统提出进程的概念，每一个进程都认为自己独占所有的计算机硬件资源。<br>进程就是独立的王国，进程间不可以随便的共享数据。<br>线程就是省份，同一个进程内的线程可以共享进程的资源，每一个线程拥有自己独立的<strong>堆栈</strong>。</p>
+<h3 id="线程的状态"><a href="#线程的状态" class="headerlink" title="线程的状态"></a>线程的状态</h3><table>
+<thead>
+<tr>
+<th>状态</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>就绪(Ready)</td>
+<td>线程能够运行，但在等待被调度。可能线程刚刚创建启动，或刚刚从阻塞中恢复，或者被其他线程抢占</td>
+</tr>
+<tr>
+<td>运行(Running)</td>
+<td>线程正在运行</td>
+</tr>
+<tr>
+<td>阻塞(Blocked)</td>
+<td>线程等待外部事件发生而无法运行，如I/O操作</td>
+</tr>
+<tr>
+<td>终止(Terminated)</td>
+<td>线程完成，或退出，或被取消</td>
+</tr>
+</tbody></table>
+<h3 id="Python中的进程和线程"><a href="#Python中的进程和线程" class="headerlink" title="Python中的进程和线程"></a>Python中的进程和线程</h3><hr>
+<p>进程会启动一个解释器进程，线程共享一个解释器进程</p>
+<h3 id="Python的线程开发"><a href="#Python的线程开发" class="headerlink" title="Python的线程开发"></a>Python的线程开发</h3><hr>
+<p>Python的线程开发使用标准库threading</p>
+<h3 id="Thread类"><a href="#Thread类" class="headerlink" title="Thread类"></a>Thread类</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#签名</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, group=<span class="literal">None</span>, target=<span class="literal">None</span>, name=<span class="literal">None</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">                 args=(<span class="params"></span>), kwargs=<span class="literal">None</span>, *, daemon=<span class="literal">None</span></span>):</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>target</td>
+<td>线程调用的对象，就是目标函数</td>
+</tr>
+<tr>
+<td>name</td>
+<td>为线程起的名字</td>
+</tr>
+<tr>
+<td>args</td>
+<td>为目标函数传递实参，元组</td>
+</tr>
+<tr>
+<td>kwargs</td>
+<td>为目标函数关键字传参，字典</td>
+</tr>
+</tbody></table>
+<h4 id="线程启动"><a href="#线程启动" class="headerlink" title="线程启动"></a>线程启动</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 最简单的线程程序</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">worker</span>():</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;I&#x27;m working&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Fineshed&#x27;</span>)</span><br><span class="line"> </span><br><span class="line">t = threading.Thread(target=worker, name=<span class="string">&#x27;worker&#x27;</span>) <span class="comment"># 线程对象</span></span><br><span class="line">t.start() <span class="comment">#  启动</span></span><br></pre></td></tr></table></figure>
+
+<p>通过threading.Thread创建一个线程对象，target是目标函数，name可以指定名称。<br>但是线程没有启动，需要调用start方法。<br>线程之所以执行函数，是因为线程中就是执行代码的，而最简单的封装就是函数，所以其实还是函数调用，当函数执行完，线程就退出，当主线程结束后，程序也就执行完毕。</p>
+<h4 id="线程退出"><a href="#线程退出" class="headerlink" title="线程退出"></a>线程退出</h4><p>Python没有提供线程退出的方法，线程在下面情况时退出。</p>
+<p>1、线程函数内语句执行完毕<br>2、线程函数中抛出未处理的异常</p>
+<p>Python的线程没有优先级，没有线程组的概念，也不能被销毁、停止、挂起、那也没有恢复、中断了。</p>
+<h4 id="threading的属性和方法"><a href="#threading的属性和方法" class="headerlink" title="threading的属性和方法"></a>threading的属性和方法</h4><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>current_thread()</td>
+<td>返回当前线程对象</td>
+</tr>
+<tr>
+<td>main_thread()</td>
+<td>返回主线程对象</td>
+</tr>
+<tr>
+<td>active_count()</td>
+<td>当前处于alive状态的线程个数</td>
+</tr>
+<tr>
+<td>enumerate()</td>
+<td>返回所有活着的线程的列表，不包括已经终止的线程和未开始的线程</td>
+</tr>
+<tr>
+<td>get_ident()</td>
+<td>返回当前线程的ID,非0整数</td>
+</tr>
+</tbody></table>
+<p>active_count、enumerate方法返回的值还包括主线程。</p>
+<h4 id="Thread实例的属性和方法"><a href="#Thread实例的属性和方法" class="headerlink" title="Thread实例的属性和方法"></a>Thread实例的属性和方法</h4><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>name</td>
+<td>只是一个名字，只是一个标识，名称可以重名。getName(),setName()，获取设置这个名词</td>
+</tr>
+<tr>
+<td>ident</td>
+<td>线程ID，它是非0整数。线程启动后才会有ID，否则为None。线程退出，此ID依旧可以访问。此ID可以重复使用</td>
+</tr>
+<tr>
+<td>is_alive()</td>
+<td>返回线程是否活着</td>
+</tr>
+</tbody></table>
+<p>注意：线程的name这是一个名称，可以重复；ID必须唯一，但可以在线程退出后再利用。</p>
+<h4 id="start方法和run方法"><a href="#start方法和run方法" class="headerlink" title="start方法和run方法"></a>start方法和run方法</h4><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>start()</td>
+<td>启动线程。每一个线程必须且只能执行该方法一次</td>
+</tr>
+<tr>
+<td>run()</td>
+<td>运行线程函数</td>
+</tr>
+</tbody></table>
+<p>虽然说，start()方法会调用run()方法，而run()方法可以运行函数。<br>但是在使用start()方法启动线程，是启动了一个新的线程，而使用run方法只是在主线程中调用了一个普通的函数而已，并没有启动新的线程。</p>
+<hr>
+<h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><p>一个进程中如果有多个线程，就是多线程，实现一种并发。</p>
+<p>当使用start方法启动线程后，进程内有多个活动的线程并行的工作，就是多线程。</p>
+<p>一个进程中至少有一个线程，并作为程序的入口，这个线程就是主线程。一个进程至少有一个主线程。<br>其他线程称为工作线程。</p>
+<hr>
+<h3 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h3><p>线程安全，就是线程执行一段代码，不会产生不确定的结果，那这段代码就是线程安全的。</p>
+<p>当在线程中使用print函数的时候，可以让它不打印换行，这样就可以避免print函数线程不安全；还可以使用标准库中的logging模块，日志处理模块，线程安全的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">worker</span>():</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">20</span>):</span><br><span class="line">        logging.warning(<span class="string">&quot;&#123;&#125; is running&quot;</span>.<span class="built_in">format</span>(threading.current_thread().name))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">5</span>):</span><br><span class="line">    name = <span class="string">&quot;worker-&#123;&#125;&quot;</span>.<span class="built_in">format</span>(x)</span><br><span class="line">    t = threading.Thread(target=worker, name=name)</span><br><span class="line">    t.start()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="daemon线程和non-daemon线程"><a href="#daemon线程和non-daemon线程" class="headerlink" title="daemon线程和non-daemon线程"></a>daemon线程和non-daemon线程</h3><p>进程靠线程执行代码，至少有一个主线程，其它线程是工作线程。</p>
+<p>主线程是第一个启动的线程。</p>
+<p>父线程：如果线程A中启动了一个线程B，A就是B的父线程。</p>
+<p>子线程：B就是A的子线程。</p>
+<p>python中，构造线程的时候，可以设置daemon属性，这个属性必须在start方法前设置好。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 源码Thread的__init__方法中</span></span><br><span class="line"><span class="keyword">if</span> daemon <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">	self._daemonic = daemon <span class="comment"># 用户设定bool值</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	self._daemonic = current_thread().daemon</span><br><span class="line">self._ident = <span class="literal">None</span></span><br></pre></td></tr></table></figure>
+
+<p>线程daemon属性，如果设定就是用户的设置，否则就取当前线程的daemon值。<br>主线程是non-daemon线程，即daemon = False。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>daemon属性</td>
+<td>表示线程是否是daemon线程，这个值必须在start()之前设置，否则引发RuntimeError异常</td>
+</tr>
+<tr>
+<td>isDaemon()</td>
+<td>是否是daemon线程</td>
+</tr>
+<tr>
+<td>setDaemon</td>
+<td>设置为daemon线程，必须在start方法之前设置</td>
+</tr>
+</tbody></table>
+<p>总结：线程具有daemon属性，可以显示设置为True或False，也可以不设置，则取默认值None<br>如果不设置daemon，就取当前线程的daemon来设置它。</p>
+<p>主线程是non-daemon线程，即daemon = False。<br>从主线程创建的所有线程的不设置daemon属性，则默认都是daemon = False，也就是non-daemon线程。</p>
+<p>Python程序在没有活着的non-daemon线程运行时退出，也就是剩下的只能是daemon线程，主线程才能退出，否则主线程就只能等待。</p>
+<p>如果有non-daemon线程的时候，主线程退出时，也不会杀掉所有daemon线程，直到所有non-daemon线程全部结束，如果还有daemon线程，主线程需要退出，会结束所有daemon线程，退出。</p>
+<hr>
+<h3 id="join方法"><a href="#join方法" class="headerlink" title="join方法"></a>join方法</h3><p>join(timeout=None)，是线程的标准方法之一。<br>一个线程中调用另一个线程的join方法，调用者将被阻塞，直到被调用线程终止。<br>一个线程可以被join多次。<br>timeout参数指定调用者等待多久，没有设置超时，就一直等到被调用线程结束。<br>一个线程调用谁的join方法，就是join谁，就要等谁。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        <span class="built_in">print</span>(i)</span><br><span class="line">        time.sleep(<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line">t1 = threading.Thread(target=foo, args=(<span class="number">10</span>,), daemon=<span class="literal">True</span>)</span><br><span class="line">t1.start()</span><br><span class="line">t1.join()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Main Thread Exiting&quot;</span>)					</span><br></pre></td></tr></table></figure>
+
+<p>使用了join方法后，daemon线程执行完了，主线程才退出。</p>
+<hr>
+<h3 id="daemon线程的应用场景"><a href="#daemon线程的应用场景" class="headerlink" title="daemon线程的应用场景"></a>daemon线程的应用场景</h3><p>这个概念唯一的作用就是，当你把一个线程设置为 daemon，它会随主线程的退出而退出。</p>
+<p>主要应用场景有：</p>
+<p>1、后台任务。如发送心跳包、监控，这种场景最多。</p>
+<p>2、主线程工作才有用的线程。如主线程中维护这公共的资源，主线程已经清理了，准备退出，而工作线程使用这些资源工作也没有意义了，一起退出最合适。</p>
+<p>3、随时可以被终止的线程</p>
+<p>如果主线程退出，想所有其它工作线程一起退出，就使用daemon=True来创建工作线程。</p>
+<p>比如，开启一个线程定时判断WEB服务是否正常工作，主线程退出，工作线程也没有必须存在了，应该随着主线程退出一起退出。这种daemon线程一旦创建，就可以忘记它了，只用关心主线程什么时候退出就行了。<br>daemon线程，简化了程序员手动关闭线程的工作。</p>
+<p>如果在non-daemon线程A中，对另一个daemon线程B使用了join方法，这个线程B设置成daemon就没有什么意义了，因为non-daemon线程A总是要等待B。</p>
+<p>如果在一个daemon线程C中，对另一个daemon线程D使用了join方法，只能说明C要等待D，主线程退出，C和D不管是否结束，也不管它们谁等谁，都要被杀掉。</p>
+<hr>
+<h3 id="threading-local类"><a href="#threading-local类" class="headerlink" title="threading.local类"></a>threading.local类</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="comment"># 局部变量实现</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">worker</span>():</span></span><br><span class="line">    x = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):</span><br><span class="line">    	time.sleep(<span class="number">0.0001</span>)</span><br><span class="line">   		x += <span class="number">1</span></span><br><span class="line">	<span class="built_in">print</span>(threading.current_thread(), x)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">	threading.Thread(target=worker).start()</span><br></pre></td></tr></table></figure>
+
+<p>当想保证线程安全，可以使用局部变量来进行运算，避免错误。</p>
+<p>当然如果想使用全局变量，那就可以使用threading下的local类，将这个类实例化得到一个全局变量，但是不同的线程使用这个对象存储的数据，其他线程看不见。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">global_date = threading.local()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">worker</span>():</span></span><br><span class="line">    global_date.x = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):</span><br><span class="line">        time.sleep(<span class="number">0.001</span>)</span><br><span class="line">        global_date.x += <span class="number">1</span></span><br><span class="line">    <span class="built_in">print</span>(threading.current_thread(), global_date.x)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">    threading.Thread(target=worker).start()</span><br><span class="line">    </span><br><span class="line"><span class="comment">#&lt;Thread(Thread-3, started 3648)&gt; 100</span></span><br><span class="line"><span class="comment">#&lt;Thread(Thread-4, started 9404)&gt; 100</span></span><br><span class="line"><span class="comment">#&lt;Thread(Thread-1, started 7472)&gt; 100</span></span><br><span class="line"><span class="comment">#&lt;Thread(Thread-5, started 10876)&gt; 100</span></span><br><span class="line"><span class="comment">#&lt;Thread(Thread-2, started 12424)&gt; 100</span></span><br></pre></td></tr></table></figure>
+<p>threading.local类构建了一个大字典，存放所有线程相关的字典，定义如下：<br>{ id(thread) -&gt;  (ref(thread), thread-local dict)  }<br>每一线程实例的id为key，元组为value。value中两部分为线程对象引用，每个线程自己的字典。</p>
+<blockquote>
+<p>本质<br>运行时，threading.local实例处在不同的线程中，就从大字典中找到当前线程相关键值对中的字典，覆盖threading.local实例的 __dict__ 。<br>这样就可以在不同的线程中，安全地使用线程独有的数据，做到了线程间数据隔离，如同本地变量一样安全</p>
+</blockquote>
+<h3 id="定时器Timer-延时执行"><a href="#定时器Timer-延时执行" class="headerlink" title="定时器Timer/延时执行"></a>定时器Timer/延时执行</h3><hr>
+<p>threading.Timer继承自Thread，这个类用来定义延迟多久后执行一个函数。</p>
+<p>class.threading.Timer(interval, function, args=None, kwargs=None)<br>start方法执行之后，Timer对象会处于等待状态，等待了interval秒之后，然后开始执行function函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">FORMAT = <span class="string">&quot;%(asctime)s %(threadName)s %(thread)d  %(message)s&quot;</span></span><br><span class="line">logging.basicConfig(level=logging.INFO, <span class="built_in">format</span>=FORMAT)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">worker</span>():</span></span><br><span class="line">    logging.info(<span class="string">&quot;in worker&quot;</span>)</span><br><span class="line">    time.sleep(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">t = threading.Timer(<span class="number">4</span>, worker)</span><br><span class="line">t.setName(<span class="string">&quot;timer&quot;</span>)</span><br><span class="line"></span><br><span class="line">t.start()</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="built_in">print</span>(threading.<span class="built_in">enumerate</span>())</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(threading.<span class="built_in">enumerate</span>()) == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line"><span class="comment">#打印</span></span><br><span class="line">[&lt;_MainThread(MainThread, started <span class="number">10416</span>)&gt;, &lt;Timer(timer, started <span class="number">2768</span>)&gt;]</span><br><span class="line">[&lt;_MainThread(MainThread, started <span class="number">10416</span>)&gt;, &lt;Timer(timer, started <span class="number">2768</span>)&gt;]</span><br><span class="line">[&lt;_MainThread(MainThread, started <span class="number">10416</span>)&gt;, &lt;Timer(timer, started <span class="number">2768</span>)&gt;]</span><br><span class="line">[&lt;_MainThread(MainThread, started <span class="number">10416</span>)&gt;, &lt;Timer(timer, started <span class="number">2768</span>)&gt;]</span><br><span class="line"><span class="number">2018</span>-<span class="number">10</span>-<span class="number">12</span> <span class="number">16</span>:<span class="number">24</span>:<span class="number">44</span>,066 timer <span class="number">2768</span>  <span class="keyword">in</span> worker</span><br><span class="line">[&lt;_MainThread(MainThread, started <span class="number">10416</span>)&gt;, &lt;Timer(timer, started <span class="number">2768</span>)&gt;]</span><br><span class="line">[&lt;_MainThread(MainThread, started <span class="number">10416</span>)&gt;, &lt;Timer(timer, started <span class="number">2768</span>)&gt;]</span><br></pre></td></tr></table></figure>
+
+<p>Timer提供了cancel方法，用来取消一个未执行的函数，如果上面例子中worker函数已经开始执行，cancel就没有任何效果了。</p>
+<p>总结<br>Timer是线程Thread的子类，就是线程类，具有线程的能力和特征。<br>它的实例是能够延时执行目标函数的线程，在真正执行目标函数之前，都可以cancel它。<br>cancel方法本质使用Event类实现。这并不是说，线程提供了取消的方法。</p>
+<h3 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h3><p>概念：线程同步，线程间协同，通过某种技术，让一个线程访问某些数据时，其他线程不能访问这些数据，直到该线程完成对数据的操作。</p>
+<p>不同操作系统实现技术有所不同，有临界区（Critical Section）、互斥量（Mutex）、信号量（Semaphore）、事件Event等</p>
+<h4 id="Event事件"><a href="#Event事件" class="headerlink" title="Event事件"></a>Event事件</h4><hr>
+<p>Event事件，是线程间通信机制中最简单的实现，使用一个内部的标记flag，通过flag的True或False的变化来进行操作。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>set()</td>
+<td>标记设置为True</td>
+</tr>
+<tr>
+<td>clear()</td>
+<td>标记设置为False</td>
+</tr>
+<tr>
+<td>is_set()</td>
+<td>标记是否为True</td>
+</tr>
+<tr>
+<td>wait(timeout=None)</td>
+<td>设置等待标记为True的时长，None为无限等待。等到返回True，未等到超时了返回False</td>
+</tr>
+</tbody></table>
+<p>需求：</p>
+<p>老板雇佣了一个工人，让他生产杯子，老板一直等着这个工人，直到生产了10个杯子。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Event, Thread</span><br><span class="line"></span><br><span class="line">FORMAT = <span class="string">&quot;%(asctime)s %(threadName)s %(thread)s %(message)s&quot;</span></span><br><span class="line">logging.basicConfig(<span class="built_in">format</span>=FORMAT, level=logging.INFO)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">boss</span>(<span class="params">event: Event</span>):</span></span><br><span class="line">    logging.info(<span class="string">&quot;I&#x27;m boss, waitting for U.&quot;</span>)</span><br><span class="line">    event.wait()  <span class="comment">#等待</span></span><br><span class="line">    logging.info(<span class="string">&quot;Good Job.&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">worker</span>(<span class="params">event: Event, count=<span class="number">10</span></span>):</span></span><br><span class="line">    logging.info(<span class="string">&quot;i&#x27;m working for U.&quot;</span>)</span><br><span class="line">    cups = []</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        logging.info(<span class="string">&quot;make 1&quot;</span>)</span><br><span class="line">        time.sleep(<span class="number">0.5</span>)</span><br><span class="line">        cups.append(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(cups) &gt;= count:</span><br><span class="line">            event.<span class="built_in">set</span>()   <span class="comment">#通知</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    logging.info(<span class="string">&quot;I&#x27;m finish my job, cups = &#123;&#125;&quot;</span>.<span class="built_in">format</span>(cups))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">event = Event()</span><br><span class="line">t1 = Thread(target=boss, name=<span class="string">&quot;bose&quot;</span>, args=(event,)).start()</span><br><span class="line">t2 = Thread(target=worker, name=<span class="string">&quot;worker&quot;</span>, args=(event,)).start()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>总结<br>使用同一个Event对象的标记flag。<br>谁wait就是等到flag变为True，或等到超时返回False。不限制等待的个数。</p>
+<p>wait的使用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Event, Thread</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logging.basicConfig(level=logging.INFO)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">do</span>(<span class="params">event:Event, interval:<span class="built_in">int</span></span>):</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> event.wait(interval): <span class="comment"># 条件中使用，返回True或者False</span></span><br><span class="line">        logging.info(<span class="string">&#x27;do sth.&#x27;</span>)</span><br><span class="line"></span><br><span class="line">e = Event()</span><br><span class="line">Thread(target=do, args=(e, <span class="number">3</span>)).start()</span><br><span class="line"></span><br><span class="line">e.wait(<span class="number">10</span>) <span class="comment"># 也可以使用time.sleep(10)</span></span><br><span class="line">e.<span class="built_in">set</span>()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;main exit&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line"></span><br><span class="line">INFO:root:do sth.</span><br><span class="line">INFO:root:do sth.</span><br><span class="line">INFO:root:do sth.</span><br><span class="line">main exit</span><br><span class="line"></span><br><span class="line">Process finished <span class="keyword">with</span> exit code <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>Event的wait优于time.sleep，它会更快的切换到其它线程，提高并发效率。</p>
+<hr>
+<h4 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h4><p>锁，凡是存在共享资源争抢的地方都可以使用锁，从而保证只有一个使用者可以使用这个资源。</p>
+<p>锁，一旦线程获得锁，其它试图获取锁的线程将被阻塞</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>acquire(blocking=True,timeout=-1)</td>
+<td>默认阻塞，阻塞可以设置超时时间。非阻塞时，timeout禁止设置。成功获取锁，返回True，否则返回False</td>
+</tr>
+<tr>
+<td>release()</td>
+<td>释放锁。可以从任何线程调用释放。已上锁的锁，会被重置为unlocked,未上锁的锁上调用，抛RuntimeError异常。</td>
+</tr>
+</tbody></table>
+<h4 id="加锁和解锁"><a href="#加锁和解锁" class="headerlink" title="加锁和解锁"></a>加锁和解锁</h4><hr>
+<p>一般来说，加锁就需要解锁，但是加锁后解锁前，还要有一些代码执行，就有可能抛异常，一旦出现异常，锁是无法释放，但是当前线程可能因为这个异常被终止了，这就产生了死锁。</p>
+<p>加锁、解锁常用语句：<br>1、使用try…finally语句保证锁的释放</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:            </span><br><span class="line">    self.lock.acquire()            </span><br><span class="line"><span class="keyword">finally</span>:            </span><br><span class="line">    self.lock.release()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2、with上下文管理，锁对象支持上下文管理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">self.__lock = threading.Lock() </span><br><span class="line"><span class="keyword">with</span> self.__lock:</span><br><span class="line">     ******</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<h4 id="锁的应用场景"><a href="#锁的应用场景" class="headerlink" title="锁的应用场景"></a>锁的应用场景</h4><hr>
+<p>锁适用于访问和修改同一个共享资源的时候，即读写同一个资源的时候。</p>
+<p>如果全部都是读取同一个共享资源需要锁吗？<br>不需要。因为这时可以认为共享资源是不可变的，每一次读取它都是一样的值，所以不用加锁</p>
+<p>使用锁的注意事项：</p>
+<ul>
+<li>少用锁，必要时用锁。使用了锁，多线程访问被锁的资源时，就成了串行，要么排队执行，要么争抢执行<ul>
+<li>举例，高速公路上车并行跑，可是到了省界只开放了一个收费口，过了这个口，车辆依然可以在多车道上一起跑。过收费口的时候，如果排队一辆辆过，加不加锁一样效率相当，但是一旦出现争抢，就必须加锁,一辆辆过。</li>
+</ul>
+</li>
+<li>加锁时间越短越好，不需要就立即释放锁</li>
+<li>一定要避免死锁</li>
+</ul>
+<h4 id="可重入锁RLOCK"><a href="#可重入锁RLOCK" class="headerlink" title="可重入锁RLOCK"></a>可重入锁RLOCK</h4><hr>
+<p>可重入锁，是<strong>线程相关</strong>的锁。<br>线程A获得可重复锁，并可以在同一线程中多次成功获取，<strong>不会阻塞</strong>。最后要在线程A中做和acquire次数相同的release。release多了会报错。有个count在计数。属主owner会记录当前是谁在使用锁。</p>
+<p>当锁未释放完，其他线程获得锁就会阻塞，直到当前持有锁的线程释放完锁。</p>
+<h4 id="Condition"><a href="#Condition" class="headerlink" title="Condition"></a>Condition</h4><hr>
+<p>构造方法Condition(lock=None)，可以传入一个Lock或Rlock对象，默认是Rlock。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>acquire(*args)</td>
+<td>获取锁</td>
+</tr>
+<tr>
+<td>wait(self,timeout = None)</td>
+<td>等待或超时</td>
+</tr>
+<tr>
+<td>notify（n =1）</td>
+<td>唤醒至多指定指定个数的等待的线程，没有等待的线程就没有任何操作</td>
+</tr>
+<tr>
+<td>notify_all()</td>
+<td>唤醒所有等待的线程</td>
+</tr>
+</tbody></table>
+<p>Condition用于生产者、消费者模型，为了解决生产者消费者速度匹配的问题。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="الصفحة التالية"></i></a>
+  </nav>
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">luoqian</span>
+</div>
+  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

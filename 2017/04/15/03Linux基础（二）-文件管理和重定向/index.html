@@ -1,37 +1,682 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vampireqian.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"بحث...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Linux基础-文件管理和重定向1. 每一个分区都是一个独立存在的文件系统2. 目录：路径映射符3. 文件文件有两种数据  元数据：描述数据的数据属性 metadata 数据：data  FHS：文件系统层级结构标准 4. Linux下的文件类型 -：普通文件 d：目录文件 b：块设备 c：字符设备 l：符号链接文件 p：管道文件pip，FIFO（first in，first out） s：套接字">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux基础-文件管理和重定向">
+<meta property="og:url" content="https://vampireqian.github.io/2017/04/15/03Linux%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%8C%EF%BC%89-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91/index.html">
+<meta property="og:site_name" content="luoqian">
+<meta property="og:description" content="Linux基础-文件管理和重定向1. 每一个分区都是一个独立存在的文件系统2. 目录：路径映射符3. 文件文件有两种数据  元数据：描述数据的数据属性 metadata 数据：data  FHS：文件系统层级结构标准 4. Linux下的文件类型 -：普通文件 d：目录文件 b：块设备 c：字符设备 l：符号链接文件 p：管道文件pip，FIFO（first in，first out） s：套接字">
+<meta property="og:locale">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/11830691-b45e402408acf428.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/11830691-056ec985b755059a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/11830691-1a24908fb5a0b703.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2017-04-15T07:18:00.000Z">
+<meta property="article:modified_time" content="2018-12-07T07:34:20.000Z">
+<meta property="article:author" content="luoqian">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/11830691-b45e402408acf428.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+<link rel="canonical" href="https://vampireqian.github.io/2017/04/15/03Linux%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%8C%EF%BC%89-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh","comments":true,"permalink":"https://vampireqian.github.io/2017/04/15/03Linux%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%8C%EF%BC%89-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91/","path":"2017/04/15/03Linux基础（二）-文件管理和重定向/","title":"Linux基础-文件管理和重定向"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Linux基础-文件管理和重定向 | luoqian</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="تشغيل شريط التصفح" role="button">
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">luoqian</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          المحتويات
+        </li>
+        <li class="sidebar-nav-overview">
+          عام
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux%E5%9F%BA%E7%A1%80-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">1.</span> <span class="nav-text">Linux基础-文件管理和重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E6%AF%8F%E4%B8%80%E4%B8%AA%E5%88%86%E5%8C%BA%E9%83%BD%E6%98%AF%E4%B8%80%E4%B8%AA%E7%8B%AC%E7%AB%8B%E5%AD%98%E5%9C%A8%E7%9A%84%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.0.0.0.1.</span> <span class="nav-text">1. 每一个分区都是一个独立存在的文件系统</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E7%9B%AE%E5%BD%95%EF%BC%9A%E8%B7%AF%E5%BE%84%E6%98%A0%E5%B0%84%E7%AC%A6"><span class="nav-number">1.0.0.0.2.</span> <span class="nav-text">2. 目录：路径映射符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E6%96%87%E4%BB%B6"><span class="nav-number">1.0.0.0.3.</span> <span class="nav-text">3. 文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-Linux%E4%B8%8B%E7%9A%84%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.0.0.0.4.</span> <span class="nav-text">4. Linux下的文件类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-%E6%98%BE%E7%A4%BA%E5%BD%93%E5%89%8D%E8%B7%AF%E5%BE%84"><span class="nav-number">1.0.0.0.5.</span> <span class="nav-text">5. 显示当前路径</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E5%92%8C%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="nav-number">1.0.0.0.6.</span> <span class="nav-text">6. 绝对路径和相对路径</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-cd%E5%91%BD%E4%BB%A4"><span class="nav-number">1.0.0.0.7.</span> <span class="nav-text">7. cd命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-%E6%98%BE%E7%A4%BA%E7%9B%AE%E5%BD%95"><span class="nav-number">1.0.0.0.8.</span> <span class="nav-text">8. 显示目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E7%8A%B6%E6%80%81-%E6%98%BE%E7%A4%BA%E5%BD%93%E5%89%8D%E6%96%87%E4%BB%B6%E7%9A%84%E6%97%B6%E9%97%B4%E6%88%B3"><span class="nav-number">1.0.0.0.9.</span> <span class="nav-text">9. 查看文件状态:显示当前文件的时间戳</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10-%E6%96%87%E4%BB%B6%E9%80%9A%E9%85%8D%E7%AC%A6%EF%BC%88%E5%AF%B9%E6%96%87%E4%BB%B6%E5%90%8D%E5%81%9A%E9%80%9A%E9%85%8D%EF%BC%89-glob%E3%80%81globing%E3%80%81wildcard"><span class="nav-number">1.0.0.0.10.</span> <span class="nav-text">10. 文件通配符（对文件名做通配）(glob、globing、wildcard)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#11-touch%E5%91%BD%E4%BB%A4%EF%BC%9A"><span class="nav-number">1.0.0.0.11.</span> <span class="nav-text">11. touch命令：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#12-%E5%A4%8D%E5%88%B6%EF%BC%9A%E6%89%80%E8%B0%93%E7%9A%84%E5%A4%8D%E5%88%B6%E5%B0%B1%E6%98%AF%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E7%A9%BA%E6%96%87%E4%BB%B6%EF%BC%8C%E7%84%B6%E5%90%8E%E5%9C%A8%E5%B0%86%E6%BA%90%E6%96%87%E4%BB%B6%E7%9A%84%E6%95%B0-%E6%8D%AE%E6%B5%81%E8%AF%BB%E5%87%BA%E6%9D%A5%EF%BC%8C%E7%84%B6%E5%90%8E%E5%86%99%E8%BF%9B%E5%8E%BB%E3%80%82"><span class="nav-number">1.0.0.0.12.</span> <span class="nav-text">12. 复制：所谓的复制就是创建一个新的空文件，然后在将源文件的数  据流读出来，然后写进去。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#13-%E7%A7%BB%E5%8A%A8%E5%92%8C%E9%87%8D%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6"><span class="nav-number">1.0.0.0.13.</span> <span class="nav-text">13. 移动和重命名文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#14-%E5%88%A0%E9%99%A4"><span class="nav-number">1.0.0.0.14.</span> <span class="nav-text">14. 删除</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#15-%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C"><span class="nav-number">1.0.0.0.15.</span> <span class="nav-text">15. 目录操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#16-%E7%B4%A2%E5%BC%95%E8%8A%82%E7%82%B9"><span class="nav-number">1.0.0.0.16.</span> <span class="nav-text">16. 索引节点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#17-%E7%A1%AC%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BD%AF%E9%93%BE%E6%8E%A5"><span class="nav-number">1.0.0.0.17.</span> <span class="nav-text">17. 硬链接和软链接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#18-%E7%A1%AE%E5%AE%9A%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="nav-number">1.0.0.0.18.</span> <span class="nav-text">18. 确定文件内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#19-%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA"><span class="nav-number">1.0.0.0.19.</span> <span class="nav-text">19. 标准输入与输出</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#20-%E6%8A%8A%E8%BE%93%E5%87%BA%E5%92%8C%E9%94%99%E8%AF%AF%E9%87%8D%E6%96%B0%E5%AE%9A%E5%90%91%E5%88%B0%E6%96%87%E4%BB%B6"><span class="nav-number">1.0.0.0.20.</span> <span class="nav-text">20. 把输出和错误重新定向到文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#21-tr%E5%91%BD%E4%BB%A4"><span class="nav-number">1.0.0.0.21.</span> <span class="nav-text">21. tr命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#22-%E7%AE%A1%E9%81%93"><span class="nav-number">1.0.0.0.22.</span> <span class="nav-text">22. 管道</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#23-tee%E5%91%BD%E4%BB%A4%EF%BC%8C%E4%B8%80%E8%B7%AF%E8%BE%93%E5%85%A5%E4%B8%A4%E8%B7%AF%E8%BE%93%E5%87%BA"><span class="nav-number">1.0.0.0.23.</span> <span class="nav-text">23. tee命令，一路输入两路输出</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#24-selinux%EF%BC%9A%E5%AE%89%E5%85%A8Linux%E7%AD%96%E7%95%A5"><span class="nav-number">1.0.0.0.24.</span> <span class="nav-text">24. selinux：安全Linux策略</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#25-%E5%8E%86%E5%8F%B2%E5%91%BD%E4%BB%A4%EF%BC%9Ahistory%E7%9A%84%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%EF%BC%9A"><span class="nav-number">1.0.0.0.25.</span> <span class="nav-text">25. 历史命令：history的环境变量配置：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#26-%E6%9D%83%E9%99%90"><span class="nav-number">1.0.0.0.26.</span> <span class="nav-text">26.权限</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">luoqian</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">المقالات</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">التصنيفات</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">الوسوم</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh">
+    <link itemprop="mainEntityOfPage" href="https://vampireqian.github.io/2017/04/15/03Linux%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%8C%EF%BC%89-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="luoqian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="luoqian">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux基础-文件管理和重定向
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2017-04-15 15:18:00" itemprop="dateCreated datePublished" datetime="2017-04-15T15:18:00+08:00">2017-04-15</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2018-12-07 15:34:20" itemprop="dateModified" datetime="2018-12-07T15:34:20+08:00">2018-12-07</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Linux基础-文件管理和重定向"><a href="#Linux基础-文件管理和重定向" class="headerlink" title="Linux基础-文件管理和重定向"></a>Linux基础-文件管理和重定向</h1><h5 id="1-每一个分区都是一个独立存在的文件系统"><a href="#1-每一个分区都是一个独立存在的文件系统" class="headerlink" title="1. 每一个分区都是一个独立存在的文件系统"></a>1. 每一个分区都是一个独立存在的文件系统</h5><h5 id="2-目录：路径映射符"><a href="#2-目录：路径映射符" class="headerlink" title="2. 目录：路径映射符"></a>2. 目录：路径映射符</h5><h5 id="3-文件"><a href="#3-文件" class="headerlink" title="3. 文件"></a>3. 文件</h5><p>文件有两种数据</p>
+<ul>
+<li>元数据：描述数据的数据属性 metadata</li>
+<li>数据：data</li>
+</ul>
+<p>FHS：文件系统层级结构标准</p>
+<h5 id="4-Linux下的文件类型"><a href="#4-Linux下的文件类型" class="headerlink" title="4. Linux下的文件类型"></a>4. Linux下的文件类型</h5><ul>
+<li>-：普通文件</li>
+<li>d：目录文件</li>
+<li>b：块设备</li>
+<li>c：字符设备</li>
+<li>l：符号链接文件</li>
+<li>p：管道文件pip，FIFO（first in，first out）</li>
+<li>s：套接字文件：服务加IP端口，作为一个服务的入口。socket</li>
+</ul>
+<h5 id="5-显示当前路径"><a href="#5-显示当前路径" class="headerlink" title="5. 显示当前路径"></a>5. 显示当前路径</h5><ul>
+<li>每个shell和系统进程都有一个当前的工作目录 </li>
+<li>CWD:current work directory</li>
+<li>显示当前shell CWD的绝对路径</li>
+<li>pwd: printing working directory<ul>
+<li>-P 显示真实物理路径</li>
+<li>-L 显示链接路径（默认）</li>
+</ul>
+</li>
+</ul>
+<h5 id="6-绝对路径和相对路径"><a href="#6-绝对路径和相对路径" class="headerlink" title="6. 绝对路径和相对路径"></a>6. 绝对路径和相对路径</h5><p><strong>绝对路径:</strong></p>
+<ul>
+<li>以正斜杠开始</li>
+<li>完整的文件的位置路径</li>
+<li>可用于任何想指定一个文件名的时候</li>
+</ul>
+<p><strong>相对路径名:</strong></p>
+<ul>
+<li>不以斜线开始</li>
+<li>指定相对于当前工作目录或某目录的位置</li>
+<li>可以作为一个简短的形式指定一个文件名</li>
+</ul>
+<p><strong>注：</strong></p>
+<ul>
+<li>基名:basename</li>
+<li>目录名:dirname</li>
+</ul>
+<h5 id="7-cd命令"><a href="#7-cd命令" class="headerlink" title="7. cd命令"></a>7. cd命令</h5><p><strong>cd  改变目录</strong></p>
+<ul>
+<li>使用绝对或相对路径：<ul>
+<li>cd /home/wang/       </li>
+<li>cd home/wang</li>
+</ul>
+</li>
+<li>切换至父目录 ：cd ..</li>
+<li>切换至当前用户主目录： cd</li>
+<li>切换至以前的工作目录： cd -</li>
+<li>选项：-P </li>
+<li>相关的环境变量：<ul>
+<li>显示环境变量：printenv<ul>
+<li>PWD：当前目录路径 </li>
+<li>OLDPWD：上一次目录路径</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>~ ：当前用户家目录</li>
+<li>~luo ：用户luo家目录</li>
+<li>~+ ：当前工作目录</li>
+<li>~- ：前一个工作目录</li>
+</ul>
+<h5 id="8-显示目录"><a href="#8-显示目录" class="headerlink" title="8. 显示目录"></a>8. 显示目录</h5><ul>
+<li>列出当前目录的内容或指定目录(显示的数据都是元数据)</li>
+<li>用法：ls [options][files_or_dirs]</li>
+<li>示例:<ul>
+<li>ls -a ：包含隐藏文件</li>
+<li>ls -l ：显示额外的信息</li>
+<li>ls -R ：目录递归显示</li>
+<li>ls -ld ： 目录和符号链接信息</li>
+<li>ls -1 ：文件分行显示</li>
+<li>ls –S ：按从大到小排序</li>
+<li>ls –t ： 按mtime排序</li>
+<li>ls –u ：配合-t选项，显示并按atime从新到旧排序</li>
+<li>ls –U : 按目录存放顺序显示</li>
+<li>ls –X : 按文件后缀排序</li>
+</ul>
+</li>
+</ul>
+<h5 id="9-查看文件状态-显示当前文件的时间戳"><a href="#9-查看文件状态-显示当前文件的时间戳" class="headerlink" title="9. 查看文件状态:显示当前文件的时间戳"></a>9. 查看文件状态:显示当前文件的时间戳</h5><p> <strong>命令：stat</strong></p>
+<ul>
+<li>文件：metadata, data</li>
+<li>三个时间戳：<ul>
+<li>access time：访问时间，atime，读取文件内容</li>
+<li>modify time: 修改时间, mtime，改变文件内容（数据）</li>
+<li>change time: 改变时间, ctime，元数据发生改变</li>
+</ul>
+</li>
+</ul>
+<p><strong>注意：<br>元数据发生变化，数据不一定变化<br>数据发生变化，元数据一定变化</strong></p>
+<h5 id="10-文件通配符（对文件名做通配）-glob、globing、wildcard"><a href="#10-文件通配符（对文件名做通配）-glob、globing、wildcard" class="headerlink" title="10. 文件通配符（对文件名做通配）(glob、globing、wildcard)"></a>10. 文件通配符（对文件名做通配）(glob、globing、wildcard)</h5><ul>
+<li>* ：匹配零个或多个字符</li>
+<li>? ：匹配任何单个字符</li>
+<li>[0-9] : 匹配数字范围</li>
+<li>[a-z] ：字母</li>
+<li>[A-Z] ：字母</li>
+<li>[wang] : 匹配列表中的任何的一个字符</li>
+<li>[^wang] : 匹配列表中的所有字符以外的字符</li>
+<li>预定义的字符类：（帮助：man 7 glob）<ul>
+<li>[:digit:]：任意数字，相当于0-9</li>
+<li>[:lower:]：任意小写字母</li>
+<li>[:upper:]：任意大写字母</li>
+<li>[:alpha:]：任意大小写字母</li>
+<li>[:alnum:]：任意数字或字母</li>
+<li>[:blank:]：水平空白字符</li>
+<li>[:space:]：水平或垂直空白字符</li>
+<li>[:punct:]：标点符号</li>
+<li>[:print:]：可打印字符 </li>
+<li>[:cntrl:]：控制（非打印）字符 </li>
+<li>[:graph:]：图形字符 </li>
+<li>[:xdigit:]：十六进制字符</li>
+</ul>
+</li>
+</ul>
+<h5 id="11-touch命令："><a href="#11-touch命令：" class="headerlink" title="11. touch命令："></a>11. touch命令：</h5><p><code>touch [OPTION]... FILE...</code></p>
+<ul>
+<li>-a   仅改变 atime和ctime</li>
+<li>-m  仅改变 mtime和ctime</li>
+<li>-t  [[CC]YY]MMDDhhmm[.ss]<br>指定atime和mtime的时间戳</li>
+<li>-c  如果文件不存在，则不予创建<blockquote>
+<p>例如：<code>touch -m -t 201806300000.00 /etc/passwd</code></p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# stat /etc/passwd</span><br><span class="line">File: `/etc/passwd&#x27;</span><br><span class="line">Size: 1677      	Blocks: 8          IO Block: 4096           regular file</span><br><span class="line">Device: 803h/2051d	Inode: 787752      Links: 1</span><br><span class="line">Access: (0644/-rw-r--r--)  Uid: (   0/   root)  Gid: (0/  root)</span><br><span class="line">Access: 2017-04-10 18:57:44.311586312 +0800</span><br><span class="line">Modify: 2017-04-10 18:48:32.693647980 +0800</span><br><span class="line">Change: 2017-04-10 18:48:32.693647980 +0800</span><br><span class="line">[root@localhost ~]# touch -m -t 201703300000.00 /etc/passwd</span><br><span class="line">[root@localhost ~]# stat /etc/passwd</span><br><span class="line">File: `/etc/passwd&#x27;</span><br><span class="line">Size: 1677      	Blocks: 8          IO Block: 4096   regular file</span><br><span class="line">Device: 803h/2051d	Inode: 787752      Links: 1</span><br><span class="line">Access: (0644/-rw-r--r--)  Uid: (  0/  root) Gid: ( 0/    root)</span><br><span class="line">Access: 2017-04-10 18:57:44.311586312 +0800</span><br><span class="line">Modify: 2017-03-30 00:00:00.000000000 +0800</span><br><span class="line">Change: 2017-04-10 14:13:22.439425983 +0800</span><br></pre></td></tr></table></figure>
+
+<h5 id="12-复制：所谓的复制就是创建一个新的空文件，然后在将源文件的数-据流读出来，然后写进去。"><a href="#12-复制：所谓的复制就是创建一个新的空文件，然后在将源文件的数-据流读出来，然后写进去。" class="headerlink" title="12. 复制：所谓的复制就是创建一个新的空文件，然后在将源文件的数  据流读出来，然后写进去。"></a>12. 复制：所谓的复制就是创建一个新的空文件，然后在将源文件的数  据流读出来，然后写进去。</h5><p>cp默认不复制目录下的内容，选项：-r：递归复制</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.cp [OPTION]... [-T] SOURCE DEST</span><br><span class="line">2.cp [OPTION]... SOURCE... DIRECTORY</span><br><span class="line">3.cp [OPTION]... -t DIRECTORY SOURCE...（2.3等同）</span><br><span class="line">4.cp SRC DEST</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>SRC是文件：</p>
+<ul>
+<li>如果目标不存在：新建DEST，并将SRC中内容填充至DEST中</li>
+<li>如果目标存在：<ul>
+<li>如果DEST是文件：将SRC中的内容覆盖至DEST中。<br>  ​    基于安全，建议为cp命令使用-i选项。</li>
+<li>如果DEST是目录：在DEST下新建与原文件同名的文件，并    将SRC中内容填充至新文件中。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>cp SRC… DEST</p>
+<ul>
+<li>SRC…：多个文件<ul>
+<li>DEST必须存在，且为目录，其它情形均会出错；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>cp SRC DEST</p>
+<ul>
+<li>SRC是目录：此时使用选项：-r<ul>
+<li>如果DEST不存在：则创建指定目录，复制SRC目录中所有文件  至DEST中；</li>
+<li>如果DEST存在：<ul>
+<li>如果DEST是文件：报错</li>
+<li>如果DEST是目录</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>cp的常用选项</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">-i：覆盖前提示	 –n:不覆盖，注意两者顺序</span><br><span class="line">-r, -R: 递归复制目录及内部的所有内容</span><br><span class="line">-a: 归档，相当于-dR --preserv=all</span><br><span class="line">-d：--no-dereference --preserv=links 不复制件，只  复制 链接名</span><br><span class="line">--preserv[=ATTR_LIST]  （元数据信息）</span><br><span class="line">    mode: 权限</span><br><span class="line">    ownership: 属主、属组</span><br><span class="line">    timestamp: （时间戳（atime、mtime不变）（cti会变））</span><br><span class="line">    links：链接属性</span><br><span class="line">    xattr：拓展属性</span><br><span class="line">    context：保持selinux的安全属性 </span><br><span class="line">    all：以上所有</span><br><span class="line">-p: 等同--preserv=mode,ownership,timestamp</span><br><span class="line">-v: --verbose 显示提示信息</span><br><span class="line">-f: --force 强制</span><br><span class="line">-u:--update 只复制源比目标更新文件或目标不存在的文件</span><br><span class="line">--backup=numbered 目标存在，覆盖前先备份加数字后缀</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>cp命令中：具体的流程是：</p>
+<p>分配一个空闲的inode号，在inode表中生成新条目，在目录中创建一个目录项，将名称inode编号关联<br>拷贝数据生成新的文件。</p>
+<h5 id="13-移动和重命名文件"><a href="#13-移动和重命名文件" class="headerlink" title="13. 移动和重命名文件"></a>13. 移动和重命名文件</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mv [OPTION]... [-T] SOURCE DEST</span><br><span class="line">mv [OPTION]... SOURCE... DIRECTORY</span><br><span class="line">mv [OPTION]... -t DIRECTORY SOURCE...</span><br></pre></td></tr></table></figure>
+<pre><code>常用选项： 
+-i: 交互式
+-f: 强制
+</code></pre>
+<p>mv操作时，具体的流程是：</p>
+<p>如果mv命令的目标和源在相同的文件系统，作为mv 命令<br>用新的文件名创建对应新的目录项，删除旧目录条目对应的旧的文件名，不影响inode（除时间戳）或磁盘上的数据位置：没有数据被移动！</p>
+<p>如果目标和源在一个不同的文件系统， mv相当于cp和rm。</p>
+<h5 id="14-删除"><a href="#14-删除" class="headerlink" title="14. 删除"></a>14. 删除</h5><p><code>rm [OPTION]... FILE...</code></p>
+<p>常用选项：</p>
+<ul>
+<li>-i: 交互式</li>
+<li>-f: 强制删除</li>
+<li>-r: 递归</li>
+<li>–no-preserve-root : 强制删除/目录，忽略root<br>示例：<br>  rm -rf    /</li>
+</ul>
+<p>rm操作时候，具体的逻辑是：</p>
+<ul>
+<li>链接数递减，从而释放的inode号可以被重用</li>
+<li>把数据块放在空闲列表中</li>
+<li>删除目录项</li>
+<li>数据实际上不会马上被删除，但当另一个文件使用数据块时将被覆盖。</li>
+</ul>
+<h5 id="15-目录操作"><a href="#15-目录操作" class="headerlink" title="15. 目录操作"></a>15. 目录操作</h5><p>tree 显示目录树</p>
+<ul>
+<li>-d: 只显示类型为目录</li>
+<li>-L level：指定显示的层级数目</li>
+<li>-P ：pattern 只显示由指定pattern匹配到的路径<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# tree -P *Base* /etc/yum.repos.d/</span><br><span class="line">/etc/yum.repos.d/</span><br><span class="line">└── CentOS-Base.repo</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>mkdir 创建目录</p>
+<ul>
+<li>-p: 存在时不报错，且可自动创建所需的各目录</li>
+<li>-v: 显示详细信息</li>
+<li>-m MODE: 创建目录时直接指定权限<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# mkdir -p -v -m 777 /tmp/c</span><br><span class="line">mkdir: created directory `/tmp/c&#x27;</span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>rmdir 删除空目录</p>
+<ul>
+<li>-p: 递归删除父空目录</li>
+<li>-v: 显示详细信息</li>
+<li>rm -r 递归删除目录树<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# mkdir -p -v /tmp/x/y/z</span><br><span class="line">mkdir: created directory `/tmp/x&#x27;</span><br><span class="line">mkdir: created directory `/tmp/x/y&#x27;</span><br><span class="line">mkdir: created directory `/tmp/x/y/z&#x27;</span><br><span class="line">[root@localhost ~]# rmdir -p -v /tmp/x/y/z</span><br><span class="line">rmdir: removing directory, `/tmp/x/y/z&#x27;</span><br><span class="line">rmdir: removing directory, `/tmp/x/y&#x27;</span><br><span class="line">rmdir: removing directory, `/tmp/x&#x27;</span><br><span class="line">rmdir: removing directory, `/tmp&#x27;</span><br><span class="line">rmdir: failed to remove directory `/tmp&#x27;: Directory not     empty</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="16-索引节点"><a href="#16-索引节点" class="headerlink" title="16. 索引节点"></a>16. 索引节点</h5><p>inode（index node）表中包含文件系统所有文件列表<br>一个节点 （索引节点）是在一个表项(inode table)，包含有关文件的信息（ 元数据 包括：</p>
+<ul>
+<li>文件类型，权限，UID，GID</li>
+<li>链接数（指向这个文件名路径名称个数）</li>
+<li>该文件的大小和不同的时间戳</li>
+<li>指向磁盘上文件的数据块指针</li>
+<li>有关文件的其他数据</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/11830691-b45e402408acf428.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="inode结构表"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/11830691-056ec985b755059a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="inode存值形式"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/11830691-1a24908fb5a0b703.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="根据inode找文件步骤"></p>
+<p>文件引用一个是 inode号</p>
+<p>人是通过文件名来引用一个文件</p>
+<p>一个目录是目录下的文件名和文件inode号之间的映射</p>
+<h5 id="17-硬链接和软链接"><a href="#17-硬链接和软链接" class="headerlink" title="17. 硬链接和软链接"></a>17. 硬链接和软链接</h5><p>详细说明[<a target="_blank" rel="noopener" href="https://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/inde.html#listing1">https://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/inde.html#listing1</a>(<a target="_blank" rel="noopener" href="https://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/inde.html#listing1">https://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/inde.html#listing1</a> “转载自IBM博客”)<br>​<br> <strong>1. 硬链接</strong></p>
+<ul>
+<li>创建硬链接会增加额外的记录项以引用文件</li>
+<li>对应于同一文件系统上一个物理文件</li>
+<li><strong>每个目录引用相同的inode号</strong></li>
+<li>创建时链接数递增</li>
+<li>删除文件时：<ul>
+<li>rm命令递减计数的链接</li>
+<li>文件要存在，至少有一个链接数</li>
+<li>当链接数为零时，该文件被删除</li>
+</ul>
+</li>
+<li>不能跨越驱动器或分区</li>
+<li>语法: <code>ln filename  [linkname ]</code><blockquote>
+<p>注意： 目录不能使用硬链接</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>2. 软链接</strong></p>
+<ul>
+<li>一个符号链接指向另一个文件</li>
+<li>ls - l的 显示链接的名称和引用的文件</li>
+<li>一个符号链接的内容是它引用文件的名称</li>
+<li>可以对目录进行</li>
+<li>可以跨分区</li>
+<li><strong>指向的是另一个文件的路径；其大小为指向的路径字符串的长度；不增  - 加或减目标文件inode的引用计数；</strong></li>
+<li>语法：<code>ln -s  filename  ​​[linkname]</code><blockquote>
+<p>注意:加粗部分为硬链接和软链接的核心区别。</p>
+</blockquote>
+</li>
+</ul>
+<h5 id="18-确定文件内容"><a href="#18-确定文件内容" class="headerlink" title="18. 确定文件内容"></a>18. 确定文件内容</h5><p>文件可以包含多种类型的数据<br>检查文件的类型，然后确定适当的打开命令或应用程序使用<br>​<br>语法：<code>file [options] &lt;filename&gt;...</code><br>​<br>常用选项:</p>
+<ul>
+<li>-b 列出文件辨识结果时，不显示文件名称</li>
+<li>-f filelist 列出文件filelist中文件名的文件类型</li>
+<li>-F 使用指定分隔符号替换输出文件名后默认的”:”分隔符</li>
+<li>-L 查看对应软链接对应文件的文件类型</li>
+<li>–help 显示命令在线帮助</li>
+</ul>
+<h5 id="19-标准输入与输出"><a href="#19-标准输入与输出" class="headerlink" title="19. 标准输入与输出"></a>19. 标准输入与输出</h5><ul>
+<li><p>程序：指令+数据</p>
+<ul>
+<li>读入数据：Input</li>
+<li>输出数据：Output</li>
+</ul>
+</li>
+<li><p>打开的文件都有一个fd: file descriptor (文件描述符)</p>
+</li>
+<li><p>Linux给程序提供三种I/O设备</p>
+<ul>
+<li>标准输入（STDIN）－0　默认接受来自键盘的输入</li>
+<li>标准输出（STDOUT）－1　默认输出到终端窗口</li>
+<li>标准错误（STDERR）－2　默认输出到终端窗口</li>
+</ul>
+</li>
+<li><p>I/O重定向：改变默认位置</p>
+</li>
+<li><p>输入重定向：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat &gt; /tmp/luoq.txt &lt;&lt;EOF</span><br><span class="line">&gt; woshishui</span><br><span class="line">&gt; EOF</span><br><span class="line">[root@localhost ~]# cat /tmp/luoq.txt</span><br><span class="line">woshishui</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="20-把输出和错误重新定向到文件"><a href="#20-把输出和错误重新定向到文件" class="headerlink" title="20. 把输出和错误重新定向到文件"></a>20. 把输出和错误重新定向到文件</h5><ul>
+<li>STDOUT和STDERR可以被重定向到文件</li>
+<li>命令　操作符号　文件名</li>
+<li>支持的操作符号包括：<ul>
+<li>&gt; 　把STDOUT重定向到文件</li>
+<li>2&gt;　把STDERR重定向到文件</li>
+<li>&amp;&gt;　把所有输出重定向到文件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# touch /tmp/error.txt;cat /tmp/luo.txt1 2&gt;/tmp/error.txt</span><br><span class="line">[root@localhost ~]# cat /tmp/error.txt</span><br><span class="line">cat: /tmp/luo.txt1: No such file or directory</span><br><span class="line">[root@localhost ~]# </span><br><span class="line">[root@localhost ~]# cat /tmp/luoq.txt &amp;&gt; /tmp/error.txt</span><br><span class="line">[root@localhost ~]# cat /tmp/error.txt</span><br><span class="line">woshishui</span><br><span class="line">[root@localhost ~]# cat /tmp/luoq.txt11 &amp;&gt;  /tmp/error.txt</span><br><span class="line">[root@localhost ~]# cat /tmp/error.txt</span><br><span class="line">cat: /tmp/luoq.txt11: No such file or directory</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>&gt; 文件内容会被覆盖<ul>
+<li>set –C  禁止将内容覆盖已有文件,但可追加</li>
+<li>&gt;| file 强制覆盖</li>
+<li>set +C  允许覆盖</li>
+</ul>
+</li>
+<li>&gt;&gt;  原有内容基础上，追加内容</li>
+<li>2&gt;    覆盖重定向错误输出数据流</li>
+<li>2&gt;&gt;     追加重定向错误输出数据流</li>
+<li>标准输出和错误输出各自定向至不同位置 <code>COMMAND &gt; /path/to/file.out 2&gt;/path/to/error.out</code></li>
+<li>合并标准输出和错误输出为同一个数据流进行重定向<ul>
+<li>&amp;&gt;   覆盖重定向</li>
+<li>&amp;&gt;&gt;  追加重定向</li>
+<li>COMMAND &gt; /path/to/file.out 2&gt;&amp;1 （顺序很重要）</li>
+<li>COMMAND &gt;&gt; /path/to/file.out 2&gt;&amp;1</li>
+<li> ()：合并多个程序的STDOUT</li>
+<li><pre><code>( cal 2007 ; cal 2008 ) &gt; all.
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="21-tr命令"><a href="#21-tr命令" class="headerlink" title="21. tr命令"></a>21. tr命令</h5><p><strong>tr  转换和删除字符</strong><br>​    </p>
+<ul>
+<li>语法:<code>tr [OPTION]... SET1 [SET2]</code></li>
+<li>选项：<ul>
+<li>-c –C –complement：取字符集的补集</li>
+<li>-d –delete：删除所有属于第一字符集的字符 </li>
+<li>-s –squeeze-repeats：把连续重复的字符以单独一个字符表示</li>
+<li>-t –truncate-set1：将第一个字符集对应字符转化为第二字符集对应的字符</li>
+<li>[:alnum:]：字母和数字 [:alpha:]：字母 [:cntrl:]：控制（非打印）字符 [:digit:]：数字 [:graph:]：图形字符 [:lower:]：小写字母 [:print:]：可打印字符 [:punct:]：标点符号 [:space:]：空白字符 [:upper:]：大写字母 [:xdigit:]：十六进制字符<blockquote>
+<p>例如：<code>tr ‘a-z’   ‘A-Z’&lt; /etc/issue</code></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="22-管道"><a href="#22-管道" class="headerlink" title="22. 管道"></a>22. 管道</h5><ul>
+<li><p>管道（使用符号“|”表示）用来连接命令</p>
+</li>
+<li><p>命令1 | 命令2 | 命令3 | …</p>
+<ul>
+<li>将命令1的STDOUT发送给命令2的STDIN，命令2的STDOUT送到命令3的STDIN</li>
+<li>STDERR默认不能通过管道转发，可利用2&gt;&amp;1 或 |&amp; 实现</li>
+<li>最后一个命令会在当前shell进程的子shell进程中执行来</li>
+<li>组合多种工具的功能</li>
+<li>ls  | tr ‘a-z’ ‘A-Z’</li>
+</ul>
+</li>
+<li><p>有些命令不支持管道传输过来的数据，可以加上 - 执行</p>
+</li>
+</ul>
+<h5 id="23-tee命令，一路输入两路输出"><a href="#23-tee命令，一路输入两路输出" class="headerlink" title="23. tee命令，一路输入两路输出"></a>23. tee命令，一路输入两路输出</h5><ul>
+<li>命令1 | tee　[-a ] 文件名 | 命令2 <ul>
+<li>把命令1的STDOUT保存在文件中，做为命令2的输入</li>
+<li>-a 追加</li>
+</ul>
+</li>
+<li>使用：<ul>
+<li>保存不同阶段的输出</li>
+<li>复杂管道的故障排除</li>
+<li>同时查看和记录输出<blockquote>
+<p>例如：<code>[root@localhost ~]# cat /etc/passwd | tr -d &#39;abc&#39; | tr &#39;d-z&#39; &#39;D-Z&#39; | tee /tmp/luo.txt</code></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="24-selinux：安全Linux策略"><a href="#24-selinux：安全Linux策略" class="headerlink" title="24. selinux：安全Linux策略"></a>24. selinux：安全Linux策略</h5><ul>
+<li>配置文件在/etc/selinux/config ：</li>
+<li>查看状态的命令：getenforce  <ul>
+<li>三种状态：<ul>
+<li>enforcing：强制：违反规则不能运行</li>
+<li>permissive许可：可以允许运行，但是会记录，用来后期的审计</li>
+<li>disabled：禁用：关闭selinux</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="25-历史命令：history的环境变量配置："><a href="#25-历史命令：history的环境变量配置：" class="headerlink" title="25. 历史命令：history的环境变量配置："></a>25. 历史命令：history的环境变量配置：</h5><p><strong>HISTCONTROL</strong></p>
+<ul>
+<li>-ignoredups（忽略重复）</li>
+<li>-ignorespace（忽略空格）    </li>
+<li>-ignoreboth（忽略所有)</li>
+</ul>
+<h5 id="26-权限"><a href="#26-权限" class="headerlink" title="26.权限"></a>26.权限</h5><p>认证；授权：审计 Authentication；Authorization；Adition</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/03/29/02umask%E6%80%BB%E7%BB%93/" rel="prev" title="umask总结">
+                  <i class="fa fa-chevron-left"></i> umask总结
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/06/30/04python%E5%9F%BA%E7%A1%80/" rel="next" title="python基础">
+                  python基础 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">luoqian</span>
+</div>
+  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

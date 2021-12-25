@@ -1,37 +1,458 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vampireqian.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"بحث...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="函数 1. 函数的定义 由若干语句组成的语句块、函数名称、参数列表构成，它是组织代码的最小单元。 完成一定的功能。 函数也是对象，python把函数的默认值放在了属性中，这个属性就伴随着这个函数对象的整个生命周期。 2.  函数的作用  结构化编程是对代码的最基本的封装，一般按照功能组织一段代码。 封装的目的是为了复用，减少冗余代码。 代码更加简洁美观，可读易懂。  3. 函数的分类： 内建函数；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python-函数、高阶函数、装饰器、参数注解">
+<meta property="og:url" content="https://vampireqian.github.io/2017/08/21/08python%E5%87%BD%E6%95%B0%E3%80%81%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E3%80%81%E8%A3%85%E9%A5%B0%E5%99%A8%E3%80%81%E5%8F%82%E6%95%B0%E6%B3%A8%E8%A7%A3%E3%80%81%E7%BC%93%E5%AD%98/index.html">
+<meta property="og:site_name" content="luoqian">
+<meta property="og:description" content="函数 1. 函数的定义 由若干语句组成的语句块、函数名称、参数列表构成，它是组织代码的最小单元。 完成一定的功能。 函数也是对象，python把函数的默认值放在了属性中，这个属性就伴随着这个函数对象的整个生命周期。 2.  函数的作用  结构化编程是对代码的最基本的封装，一般按照功能组织一段代码。 封装的目的是为了复用，减少冗余代码。 代码更加简洁美观，可读易懂。  3. 函数的分类： 内建函数；">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-08-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2018-12-07T08:31:12.000Z">
+<meta property="article:author" content="luoqian">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://vampireqian.github.io/2017/08/21/08python%E5%87%BD%E6%95%B0%E3%80%81%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E3%80%81%E8%A3%85%E9%A5%B0%E5%99%A8%E3%80%81%E5%8F%82%E6%95%B0%E6%B3%A8%E8%A7%A3%E3%80%81%E7%BC%93%E5%AD%98/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh","comments":true,"permalink":"https://vampireqian.github.io/2017/08/21/08python%E5%87%BD%E6%95%B0%E3%80%81%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E3%80%81%E8%A3%85%E9%A5%B0%E5%99%A8%E3%80%81%E5%8F%82%E6%95%B0%E6%B3%A8%E8%A7%A3%E3%80%81%E7%BC%93%E5%AD%98/","path":"2017/08/21/08python函数、高阶函数、装饰器、参数注解、缓存/","title":"python-函数、高阶函数、装饰器、参数注解"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>python-函数、高阶函数、装饰器、参数注解 | luoqian</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="تشغيل شريط التصفح" role="button">
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">luoqian</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          المحتويات
+        </li>
+        <li class="sidebar-nav-overview">
+          عام
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">1. 函数的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">2.  函数的作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E7%B1%BB%EF%BC%9A"><span class="nav-number">1.3.</span> <span class="nav-text">3. 函数的分类：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E3%80%81%E8%B0%83%E7%94%A8"><span class="nav-number">1.4.</span> <span class="nav-text">4. 函数的定义、调用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.4.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%B0%83%E7%94%A8"><span class="nav-number">1.4.2.</span> <span class="nav-text">调用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%BD%A2%E5%8F%82%E5%92%8C%E4%BC%A0%E9%80%92%E5%AE%9E%E5%8F%82%E6%97%B6%E5%80%99%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.4.3.</span> <span class="nav-text">定义形参和传递实参时候的注意事项</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E5%87%BD%E6%95%B0%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">1.5.</span> <span class="nav-text">5.函数的返回值</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%B5%8C%E5%A5%97"><span class="nav-number">1.5.1.</span> <span class="nav-text">函数的嵌套</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.6.</span> <span class="nav-text">6. 作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E5%80%BC%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.6.1.</span> <span class="nav-text">默认值的作用域</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8Fglobal"><span class="nav-number">1.6.2.</span> <span class="nav-text">全局变量global</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#nonlocal%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">1.6.3.</span> <span class="nav-text">nonlocal关键字</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-%E9%97%AD%E5%8C%85"><span class="nav-number">1.7.</span> <span class="nav-text">7.闭包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-%E5%8F%98%E9%87%8F%E5%90%8D%E8%A7%A3%E6%9E%90%E5%8E%9F%E5%88%99LEGB"><span class="nav-number">1.8.</span> <span class="nav-text">8.变量名解析原则LEGB</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-%E5%87%BD%E6%95%B0%E7%9A%84%E9%94%80%E6%AF%81"><span class="nav-number">1.9.</span> <span class="nav-text">9.函数的销毁</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%87%BD%E6%95%B0%E9%94%80%E6%AF%81"><span class="nav-number">1.9.1.</span> <span class="nav-text">全局函数销毁</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E5%87%BD%E6%95%B0%E9%94%80%E6%AF%81"><span class="nav-number">1.9.2.</span> <span class="nav-text">局部函数销毁</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0"><span class="nav-number">1.10.</span> <span class="nav-text">10.递归函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="nav-number">1.11.</span> <span class="nav-text">11.匿名函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0"><span class="nav-number">1.12.</span> <span class="nav-text">12.高阶函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="nav-number">1.13.</span> <span class="nav-text">13.装饰器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-%E5%8F%82%E6%95%B0%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.14.</span> <span class="nav-text">14.参数注解</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">luoqian</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">المقالات</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">التصنيفات</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">الوسوم</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh">
+    <link itemprop="mainEntityOfPage" href="https://vampireqian.github.io/2017/08/21/08python%E5%87%BD%E6%95%B0%E3%80%81%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E3%80%81%E8%A3%85%E9%A5%B0%E5%99%A8%E3%80%81%E5%8F%82%E6%95%B0%E6%B3%A8%E8%A7%A3%E3%80%81%E7%BC%93%E5%AD%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="luoqian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="luoqian">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python-函数、高阶函数、装饰器、参数注解
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2017-08-21 00:00:00" itemprop="dateCreated datePublished" datetime="2017-08-21T00:00:00+08:00">2017-08-21</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2018-12-07 16:31:12" itemprop="dateModified" datetime="2018-12-07T16:31:12+08:00">2018-12-07</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><hr>
+<h4 id="1-函数的定义"><a href="#1-函数的定义" class="headerlink" title="1. 函数的定义"></a>1. 函数的定义</h4><hr>
+<p>由若干语句组成的语句块、函数名称、参数列表构成，它是组织代码的最小单元。</p>
+<p>完成一定的功能。</p>
+<p>函数也是对象，python把函数的默认值放在了属性中，这个属性就伴随着这个函数对象的整个生命周期。</p>
+<h4 id="2-函数的作用"><a href="#2-函数的作用" class="headerlink" title="2.  函数的作用"></a>2.  函数的作用</h4><hr>
+<ul>
+<li>结构化编程是对代码的最基本的<font color = red >封装</font>，一般按照功能组织一段代码。</li>
+<li>封装的目的是为了<font color = red >复用</font>，减少冗余代码。</li>
+<li>代码更加简洁美观，可读易懂。</li>
+</ul>
+<h4 id="3-函数的分类："><a href="#3-函数的分类：" class="headerlink" title="3. 函数的分类："></a>3. 函数的分类：</h4><hr>
+<p>内建函数；库函数；自建函数</p>
+<h4 id="4-函数的定义、调用"><a href="#4-函数的定义、调用" class="headerlink" title="4. 函数的定义、调用"></a>4. 函数的定义、调用</h4><h5 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h5><hr>
+<p>def语句定义函数</p>
+<p>def 函数名（参数列表）：</p>
+<pre><code>函数体（代码块）
+
+[return 返回值]
+</code></pre>
+<p>定义中的参数列表成为形式参数，只是一种符号表达，简称<strong>形参</strong>。</p>
+<p>定义需要在调用前，否则会抛出NameError异常。</p>
+<h5 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h5><hr>
+<p>函数定义，只是声明了一个函数，它不会被指执行，需要调用。</p>
+<p>调用的方式，就是函数名加上小括号，括号内写上参数。</p>
+<p>调用时写的参数时实际参数，是实实在在传入的值，简称<strong>实参</strong></p>
+<p>传参时位置参数要放在关键字参数前面。</p>
+<p>参数传递：不可变类型，传递副本给函数，函数内操作不影响原始值</p>
+<pre><code> 可变类型，传递的是地址引用，函数内操作可能影响原始值
+</code></pre>
+<h5 id="定义形参和传递实参时候的注意事项"><a href="#定义形参和传递实参时候的注意事项" class="headerlink" title="定义形参和传递实参时候的注意事项"></a>定义形参和传递实参时候的注意事项</h5><hr>
+<ol>
+<li>参数调用时传入的参数要和定义的个数相匹配，可变参数例外</li>
+<li>定义时，缺省参数要放在非缺省参数前。</li>
+<li>定义时加* ：可变位置参数：可以收集位置参数传入的所有参数，收集多个实参为一个tuple。可变位置参数不能用关键字传参。</li>
+<li>形参加**：可变关键字参数，只能用关键字传参。可变关键字参数，收集的实参名称和值组成一个字典，所以可修改。</li>
+<li>函数名也是标识符，返回值也是值，函数是可调用的对象，callable(函数名)  -&gt; True。</li>
+<li>混合使用参数的时候，可变参数要放到参数列表的最后，普通参数要放到参数列表的最前面，可变位置参数发要放在可变关键字参数的前面。</li>
+<li>keyword-only参数：如果在一个可变位置参数后面，出现了普通参数，此时这个普通参数已经变成了一个keyword-only参数</li>
+<li>参数列表参数一般顺序是，普通参数、缺省参数、可变位置参数、keyword-only参数（可带缺省值）、可变关键字参数。</li>
+<li>参数解构：<ul>
+<li>给函数提供实参的时候，可以在集合类型前使用*或者**，把集合类型的结构解开，提取出所有元素作为函数的实参。</li>
+<li>非字典类型使用*解构成位置参数</li>
+<li>字典类型使用**解构成关键字参数</li>
+<li>提取出来的元素数目要和参数的要求匹配，也要和参数的类型匹配。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h4 id="5-函数的返回值"><a href="#5-函数的返回值" class="headerlink" title="5.函数的返回值"></a>5.函数的返回值</h4><p>python函数使用return语句返回“返回值”。</p>
+<p>所有函数都有返回值。如果没有return语句，隐式调用return None。</p>
+<p>return语句并不一定是函数的语句块的最后一条语句</p>
+<p>return语句只能执行一次，执行完，函数结束，当前return后面的语句就不会再运行了。所以函数一次只能返回一个值，不能返回多个值，但是可以返回容器，容器里面包含多个值。（return [1,3,5]是指明返回一个列表，是一个列表对象；return 1,3,5看似返回多个值，隐式的被python封装成一个元组）</p>
+<p>作用：结束函数调用、返回值。</p>
+<h5 id="函数的嵌套"><a href="#函数的嵌套" class="headerlink" title="函数的嵌套"></a>函数的嵌套</h5><hr>
+<p>函数有可见范围。这就是<strong>作用域</strong>的概念</p>
+<p>外层变量作用域在内层作用域可见</p>
+<p>内部函数不能在外部直接使用，会抛NameError异常，因为它不可见。</p>
+<h4 id="6-作用域"><a href="#6-作用域" class="headerlink" title="6. 作用域"></a>6. 作用域</h4><hr>
+<p>一个标识符的可见范围，这就是标识符的作用域。一般常说的是变量的作用域。</p>
+<p>全局作用域：在整个函数运行环境中都可见。</p>
+<p>局部作用域：在函数、类内部可见；局部变量的使用范围不能超过其所在的局部作用域。</p>
+<p>例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">5</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>():</span></span><br><span class="line">    a += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">foo()</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">UnboundLocalError                         Traceback (most recent call last)</span><br><span class="line">UnboundLocalError: local variable <span class="string">&#x27;a&#x27;</span> referenced before assignment</span><br></pre></td></tr></table></figure>
+
+<p>报错原因：</p>
+<pre><code>a += 1其实就是a = a + 1,a = 5是全局的变量，虽然能在内部函数foo中可见，但是在foo函数内部出现了 a = ，出现等号就是即赋值即重新定义，那么=的右边作为赋值的内容 ：a+1,但在函数中，此时的a已经算是重新定义了一个局部变量，而不是用外面的全局变量，但是此时a还没有完成赋值就被拿来进行加1操作，所以才会报错。
+</code></pre>
+<p> 解决办法：</p>
+<pre><code>在这条语句前增加x=0之类的赋值语句，或者使用global 告诉内部作用域，去全局作用域查找变量定义
+</code></pre>
+<h5 id="默认值的作用域"><a href="#默认值的作用域" class="headerlink" title="默认值的作用域"></a>默认值的作用域</h5><hr>
+<p>函数名.__defaults__属性：使用元组来保存所有位置参数默认值，它不会因为在函数体中使用了它而发生了变化。</p>
+<p>函数名.__kwdefaults__属性：使用字典保存所有keyword-only参数的默认值。</p>
+<p>使用可变类型（引用参数）作为默认值，就有可能修改这个默认值。</p>
+<p>使用按需修改,例子。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">xyz=[], u=<span class="string">&#x27;abc&#x27;</span>, z=<span class="number">123</span></span>):</span></span><br><span class="line">    xyz = xyz[:] <span class="comment"># 影子拷贝</span></span><br><span class="line">    xyz.append(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(xyz)</span><br><span class="line"></span><br><span class="line">foo()</span><br><span class="line"><span class="built_in">print</span>(foo.__defaults__)</span><br><span class="line">foo([<span class="number">10</span>])</span><br><span class="line"><span class="built_in">print</span>(foo.__defaults__)</span><br><span class="line">foo([<span class="number">10</span>,<span class="number">5</span>])</span><br><span class="line"><span class="built_in">print</span>(foo.__defaults__)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 函数体内，不改变默认值</span></span><br><span class="line"><span class="comment"># 使用影子拷贝创建一个新的对象，永远不能改变传入的参数</span></span><br><span class="line"><span class="comment"># xyz都是传入参数或者默认参数的副本，如果就想修改原参数，无能为力</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">xyz=<span class="literal">None</span>, u=<span class="string">&#x27;abc&#x27;</span>, z=<span class="number">123</span></span>):</span></span><br><span class="line">    <span class="keyword">if</span> xyz <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">    	xyz = []</span><br><span class="line">    xyz.append(<span class="number">1</span>) </span><br><span class="line">    <span class="built_in">print</span>(xyz)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用不可变类型默认值</span></span><br><span class="line"><span class="comment"># 如果使用缺省值None就创建一个列表</span></span><br><span class="line"><span class="comment"># 如果传入一个列表，就修改这个列表</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="全局变量global"><a href="#全局变量global" class="headerlink" title="全局变量global"></a>全局变量global</h5><p>使用global关键字的变量，将函数内的定义的局部变量声明成全局变量。</p>
+<p> 如果函数需要使用外部全局变量，请使用函数的形参传参解决。</p>
+<p>尽量不使用</p>
+<h5 id="nonlocal关键字"><a href="#nonlocal关键字" class="headerlink" title="nonlocal关键字"></a>nonlocal关键字</h5><p>nonlocal将变量标记为不再本地作用域定义，而在<font color =red>上一级的某一级</font>局部作用域中定义，但不能是全局作用域中定义。</p>
+<h4 id="7-闭包"><a href="#7-闭包" class="headerlink" title="7.闭包"></a>7.<font color = blue>闭包</font></h4><p>自由变量：未在本地作用域中定义的变量，例如定义在内层函数外的外层函数的作用域中的变量</p>
+<p><font color = red >闭包</font>：是一概念，是嵌套函数中，指的是在内层函数中引用到外层函数的自由变量，就形成了闭包。</p>
+<h4 id="8-变量名解析原则LEGB"><a href="#8-变量名解析原则LEGB" class="headerlink" title="8.变量名解析原则LEGB"></a>8.变量名解析原则LEGB</h4><ul>
+<li><p>Local，本地作用域、局部作用域的local命名空间。函数调用时创建，调用结束消亡。</p>
+</li>
+<li><p>Enclosing，Python2.2时引入了嵌套函数，实现了闭包，这个就是嵌套函数的外部函数的命名空间。</p>
+</li>
+<li><p>Global，全局作用域，即一个模块的命名空间。模块被import时创建，解释器退出时消亡。</p>
+</li>
+<li><p>Build-in，内置模块的命名空间，生命周期从python解释器启动时创建到解释器退出时消亡。例如 print(open)，print和open都是内置的变量。</p>
+</li>
+</ul>
+<p>函数变量作用域：级别：Built_in(内建)  &gt; Global(全局) &gt;   Enclosing（封装）&gt; local(本地)</p>
+<h4 id="9-函数的销毁"><a href="#9-函数的销毁" class="headerlink" title="9.函数的销毁"></a>9.函数的销毁</h4><h5 id="全局函数销毁"><a href="#全局函数销毁" class="headerlink" title="全局函数销毁"></a>全局函数销毁</h5><ol>
+<li>重新定义同名函数</li>
+<li>del 语句删除函数对象名称，函数对象的引用计数减1</li>
+<li>程序结束时</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">xyz=[], u=<span class="string">&#x27;abc&#x27;</span>, z=<span class="number">123</span></span>):</span></span><br><span class="line">    xyz.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> xyz</span><br><span class="line"><span class="built_in">print</span>(foo(), <span class="built_in">id</span>(foo), foo.__defaults__)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">xyz=[], u=<span class="string">&#x27;abc&#x27;</span>, z=<span class="number">123</span></span>):</span></span><br><span class="line">    xyz.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> xyz</span><br><span class="line"><span class="built_in">print</span>(foo(), <span class="built_in">id</span>(foo), foo.__defaults__)</span><br><span class="line"><span class="keyword">del</span> foo</span><br><span class="line"><span class="built_in">print</span>(foo(), <span class="built_in">id</span>(foo), foo.__defaults__)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h5 id="局部函数销毁"><a href="#局部函数销毁" class="headerlink" title="局部函数销毁"></a>局部函数销毁</h5><ol>
+<li>重新在上级作用域定义同名函数</li>
+<li>del 语句删除函数名称，函数对象的引用计数减1</li>
+<li>上级作用域销毁时</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">xyz=[], u=<span class="string">&#x27;abc&#x27;</span>, z=<span class="number">123</span></span>):</span></span><br><span class="line">    xyz.append(<span class="number">1</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span>(<span class="params">a=<span class="number">10</span></span>):</span></span><br><span class="line">    	<span class="keyword">pass</span></span><br><span class="line">    <span class="built_in">print</span>(inner)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span>(<span class="params">a=<span class="number">100</span></span>):</span></span><br><span class="line">        <span class="built_in">print</span>(xyz)</span><br><span class="line">    <span class="built_in">print</span>(inner)</span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line">bar = foo()</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(foo),<span class="built_in">id</span>(bar), foo.__defaults__, bar.__defaults__)</span><br><span class="line"><span class="keyword">del</span> bar</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(foo),<span class="built_in">id</span>(bar), foo.__defaults__, bar.__defaults__)</span><br></pre></td></tr></table></figure>
+<h4 id="10-递归函数"><a href="#10-递归函数" class="headerlink" title="10.递归函数"></a>10.递归函数</h4><p>函数是需要压栈的，栈和线程相关。</p>
+<h4 id="11-匿名函数"><a href="#11-匿名函数" class="headerlink" title="11.匿名函数"></a>11.匿名函数</h4><p>没有名字的函数，python借助lamdba表达式构建匿名函数。</p>
+<p>参数列表不需要小括号。</p>
+<p>冒号是用来区分参数列表和表达式的。</p>
+<p>不需要return，表达式的值，就是匿名函数返回值。</p>
+<p>lambda表达式（匿名函数）只能写在一行上，被成为单行函数。</p>
+<p>用途：在高阶函数传参时，使用lambda表达式，往往能简化代码</p>
+<p>格式：lambda 参数列表：表达式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lambda</span> x :  x**<span class="number">2</span></span><br><span class="line"></span><br><span class="line">(<span class="keyword">lambda</span> x :  x**<span class="number">2</span>) ()  <span class="comment">#调用</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="12-高阶函数"><a href="#12-高阶函数" class="headerlink" title="12.高阶函数"></a>12.高阶函数</h4><p>FIrst Class Object</p>
+<p>函数也是对象，可调用对象</p>
+<p>函数可以作为普通变量、参数、返回值等等。</p>
+<p>高阶函数，至少满足下面的一个条件的函数。</p>
+<p>接收一个或者多个函数作为参数，或者函数的输出是一个函数。</p>
+<h4 id="13-装饰器"><a href="#13-装饰器" class="headerlink" title="13.装饰器"></a>13.装饰器</h4><p>装饰器本质上是一个 Python 函数或类。</p>
+<p>它可以让其他函数或类在不需要做任何代码修改的前提下增加额外功能，装饰器的返回值也是一个函数/类对象。它经常用于有切面需求的场景，比如：插入日志、性能测试、事务处理、缓存、权限校验等场景，装饰器是解决这类问题的绝佳设计。有了装饰器，我们就可以抽离出大量与函数功能本身无关的雷同代码到装饰器中并继续重用。概括的讲，装饰器的作用就是为已经存在的对象添加额外的功能。 </p>
+<p>多装饰器的函数执行顺序，由底向上</p>
+<h4 id="14-参数注解"><a href="#14-参数注解" class="headerlink" title="14.参数注解"></a>14.参数注解</h4><p>文档注解：函数内的最前面，使用三个双引号</p>
+<p>函数注解：</p>
+<ul>
+<li>python3.5引入</li>
+<li>对函数的参数进行类型注解</li>
+<li>对函数的返回值进行类型注解</li>
+<li>只对函数参数做一个辅助的说明，并不对函数参数进行类型检查</li>
+<li>提供给第三方工具，做代码分析，发现隐藏的bug</li>
+<li>函数注解的信息，保存在__annotations__属性中</li>
+</ul>
+<p>变量注解：python3.6引入</p>
+<p><strong>函数参数类型检查</strong></p>
+<p>思路：</p>
+<ul>
+<li>函数参数的检查，一定是在函数外</li>
+<li>函数应该作为参数，传入到检查函数中</li>
+<li>检查函数拿到函数传入的实际参数，与形参声明对比</li>
+<li>__annotations__属性是一个字典，其中包括返回值类型的声明，加入要位置参数的判断，无法和字典中的声明对应，使用inspect模块</li>
+</ul>
+<p>inspect模块：提取获取对象信息的函数，可以检查函数和类、类型检查</p>
+<ul>
+<li>inspect.isfunction(add) ,  是否是函数</li>
+<li>inspect.ismethod(add) ,  是否是类的方法</li>
+<li>inspect.isgenerator(add) , 是否是生成器对象</li>
+<li>inspect.isgeneratorfunction(add) ,  是否是生成器函数</li>
+<li>inspect.isclass(add) ， 是否是类</li>
+<li>inspect.ismodule(inspect)  , 是否是模块</li>
+<li>inspect.isbuiltin(print) ,  是否是内建对象</li>
+</ul>
+<p>signature(callable)，获取签名（函数签名包含了一个函数的信息，包括函数名，它的参数类型，它的所在的类和名称空间及其他信息）</p>
+<p>Parameter对象</p>
+<p>保存在元组中</p>
+<p>输入属性：inspect.signature.parameters.annotation/name/kind/default</p>
+<p>返回属性：inspect.signature.return_annotation</p>
+<p>当不知道该方法下面有多少属性的时候，可以先用type查看该它的类型，然后通过导入模块，使用参数注解的方式来查看。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/08/15/07python%E6%A0%87%E5%87%86%E5%BA%93%E3%80%81%E8%A7%A3%E6%9E%90%E5%BC%8F%E3%80%81%E7%94%9F%E6%88%90%E5%99%A8/" rel="prev" title="python-标准库、解析式、生成器">
+                  <i class="fa fa-chevron-left"></i> python-标准库、解析式、生成器
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/09/10/10python%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E3%80%81%E8%B7%AF%E5%BE%84%E5%A4%84%E7%90%86%E3%80%81%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="next" title="python-文件处理、路径处理、序列化和反序列化">
+                  python-文件处理、路径处理、序列化和反序列化 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">luoqian</span>
+</div>
+  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

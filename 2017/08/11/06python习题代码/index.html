@@ -1,37 +1,505 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vampireqian.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"بحث...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="打印图形打印锥形12345678910111213141516#给定一个数字和一个符号，打出锥形import mathl &#x3D; input().split()n  &#x3D; math.floor(math.sqrt((int(l[0])+1)&#x2F;2))for i in range(-n,n+1):    if i &lt; 0 :        x &#x3D; -i        print(&quot; &amp;quo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python练习">
+<meta property="og:url" content="https://vampireqian.github.io/2017/08/11/06python%E4%B9%A0%E9%A2%98%E4%BB%A3%E7%A0%81/index.html">
+<meta property="og:site_name" content="luoqian">
+<meta property="og:description" content="打印图形打印锥形12345678910111213141516#给定一个数字和一个符号，打出锥形import mathl &#x3D; input().split()n  &#x3D; math.floor(math.sqrt((int(l[0])+1)&#x2F;2))for i in range(-n,n+1):    if i &lt; 0 :        x &#x3D; -i        print(&quot; &amp;quo">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-08-11T01:00:00.000Z">
+<meta property="article:modified_time" content="2018-12-07T07:48:08.000Z">
+<meta property="article:author" content="luoqian">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://vampireqian.github.io/2017/08/11/06python%E4%B9%A0%E9%A2%98%E4%BB%A3%E7%A0%81/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh","comments":true,"permalink":"https://vampireqian.github.io/2017/08/11/06python%E4%B9%A0%E9%A2%98%E4%BB%A3%E7%A0%81/","path":"2017/08/11/06python习题代码/","title":"python练习"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>python练习 | luoqian</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="تشغيل شريط التصفح" role="button">
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">luoqian</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          المحتويات
+        </li>
+        <li class="sidebar-nav-overview">
+          عام
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E5%8D%B0%E5%9B%BE%E5%BD%A2"><span class="nav-number">1.</span> <span class="nav-text">打印图形</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%93%E5%8D%B0%E9%94%A5%E5%BD%A2"><span class="nav-number">1.1.</span> <span class="nav-text">打印锥形</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%93%E5%8D%B0%E8%8F%B1%E5%BD%A2"><span class="nav-number">1.2.</span> <span class="nav-text">打印菱形</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%93%E5%8D%B0%E9%97%AA%E7%94%B5"><span class="nav-number">1.3.</span> <span class="nav-text">打印闪电</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%93%E5%8D%B0%E6%AD%A3%E6%96%B9%E5%BD%A2"><span class="nav-number">1.4.</span> <span class="nav-text">打印正方形</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E4%B8%AA%E6%95%B0%E6%8E%92%E5%BA%8F"><span class="nav-number">2.</span> <span class="nav-text">三个数排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%92%E6%B3%A1%E6%B3%95%E6%8E%92%E5%BA%8F%EF%BC%88%E9%87%8D%E8%A6%81%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">冒泡法排序（重要）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E6%B3%95%E6%9F%A5%E6%89%BE"><span class="nav-number">3.1.</span> <span class="nav-text">二分法查找</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%99%E5%AE%9A%E4%B8%80%E4%B8%AA%E6%95%B0%EF%BC%8C%E8%BE%93%E5%85%A5%E4%B8%BA%E5%87%A0%E4%BD%8D%E6%95%B0%EF%BC%8C%E5%B9%B6%E4%BE%9D%E6%AC%A1%E8%BE%93%E5%87%BA"><span class="nav-number">4.</span> <span class="nav-text">给定一个数，输入为几位数，并依次输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E5%9D%87%E5%80%BC"><span class="nav-number">5.</span> <span class="nav-text">求均值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E5%8D%B0%E4%B9%98%E6%B3%95%E8%A1%A8"><span class="nav-number">6.</span> <span class="nav-text">打印乘法表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%93%E5%8D%B0%E5%80%92%E4%B9%98%E6%B3%95%E8%A1%A8"><span class="nav-number">6.1.</span> <span class="nav-text">打印倒乘法表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%93%E5%8D%B0%E6%AD%A3%E4%B9%98%E6%B3%95%E8%A1%A8"><span class="nav-number">6.2.</span> <span class="nav-text">打印正乘法表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E5%88%B0%E4%BA%94%E9%98%B6%E4%B9%98%E4%B9%8B%E5%92%8C"><span class="nav-number">7.</span> <span class="nav-text">一到五阶乘之和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97"><span class="nav-number">8.</span> <span class="nav-text">斐波那契数列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%93%E5%8D%B0100%E4%BB%A5%E5%86%85%E7%9A%84%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97"><span class="nav-number">8.1.</span> <span class="nav-text">打印100以内的斐波那契数列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%82%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97%E7%AC%AC101%E9%A1%B9"><span class="nav-number">8.2.</span> <span class="nav-text">求斐波那契数列第101项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E7%B4%A0%E6%95%B0"><span class="nav-number">9.</span> <span class="nav-text">求素数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%BB%E5%B8%B8%E6%B3%95"><span class="nav-number">9.1.</span> <span class="nav-text">寻常法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E7%B4%A0%E6%95%B0%E5%88%97%E8%A1%A8%EF%BC%8C%E7%A9%BA%E9%97%B4%E6%8D%A2%E6%97%B6%E9%97%B4"><span class="nav-number">9.2.</span> <span class="nav-text">利用素数列表，空间换时间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%AD%AA%E7%94%9F%E7%B4%A0%E6%95%B0"><span class="nav-number">9.3.</span> <span class="nav-text">利用孪生素数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%83%E5%BC%8F%E7%AD%9B%E7%B4%A0%E6%95%B0"><span class="nav-number">9.4.</span> <span class="nav-text">埃式筛素数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92"><span class="nav-number">10.</span> <span class="nav-text">杨辉三角</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92%EF%BC%8C%E6%99%AE%E9%80%9A%E6%B3%95"><span class="nav-number">10.1.</span> <span class="nav-text">计算杨辉三角，普通法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92-%E8%A1%A50%E6%B3%95"><span class="nav-number">10.2.</span> <span class="nav-text">计算杨辉三角 补0法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92%EF%BC%8C%E5%AF%B9%E7%A7%B0%E6%B3%95"><span class="nav-number">10.3.</span> <span class="nav-text">杨辉三角，对称法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92%EF%BC%8C%E5%8D%95%E5%88%97%E8%A1%A8%E6%96%B9%E6%B3%95"><span class="nav-number">10.4.</span> <span class="nav-text">杨辉三角，单列表方法</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">luoqian</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">المقالات</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">التصنيفات</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">الوسوم</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh">
+    <link itemprop="mainEntityOfPage" href="https://vampireqian.github.io/2017/08/11/06python%E4%B9%A0%E9%A2%98%E4%BB%A3%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="luoqian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="luoqian">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python练习
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2017-08-11 09:00:00" itemprop="dateCreated datePublished" datetime="2017-08-11T09:00:00+08:00">2017-08-11</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2018-12-07 15:48:08" itemprop="dateModified" datetime="2018-12-07T15:48:08+08:00">2018-12-07</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="打印图形"><a href="#打印图形" class="headerlink" title="打印图形"></a>打印图形</h3><h4 id="打印锥形"><a href="#打印锥形" class="headerlink" title="打印锥形"></a>打印锥形</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#给定一个数字和一个符号，打出锥形</span></span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line">l = <span class="built_in">input</span>().split()</span><br><span class="line">n  = math.floor(math.sqrt((<span class="built_in">int</span>(l[<span class="number">0</span>])+<span class="number">1</span>)/<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(-n,n+<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">if</span> i &lt; <span class="number">0</span> :</span><br><span class="line">        x = -i</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot; &quot;</span>*(n-x)+l[<span class="number">1</span>]*(<span class="number">2</span>*x-<span class="number">1</span>))</span><br><span class="line">    <span class="keyword">elif</span> i&gt;<span class="number">1</span>:</span><br><span class="line">        x = i</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot; &quot;</span>*(n-x)+l[<span class="number">1</span>]*(<span class="number">2</span>*x-<span class="number">1</span>))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(end=<span class="string">&quot;&quot;</span>)</span><br><span class="line">z = n**<span class="number">2</span>*<span class="number">2</span>-<span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">int</span>(l[<span class="number">0</span>])-z)</span><br></pre></td></tr></table></figure>
+<pre><code>31 *
+*******
+ *****
+  ***
+   *
+  ***
+ *****
+*******
+0
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#坐标法打印锥形</span></span><br><span class="line">n = <span class="number">7</span></span><br><span class="line">e = <span class="number">7</span>//<span class="number">2</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(-e,e+<span class="number">1</span>):</span><br><span class="line">    x = -i <span class="keyword">if</span> i &lt; <span class="number">0</span> <span class="keyword">else</span> i</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot; &quot;</span>*(e-x)+ <span class="string">&quot;*&quot;</span> * (<span class="number">2</span>*x+<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>*******
+ *****
+  ***
+   *
+  ***
+ *****
+*******
+</code></pre>
+<h4 id="打印菱形"><a href="#打印菱形" class="headerlink" title="打印菱形"></a>打印菱形</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#打印菱形</span></span><br><span class="line">n = <span class="number">7</span></span><br><span class="line">e = -(n//<span class="number">2</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(e,n+e):</span><br><span class="line">    <span class="keyword">if</span> i&lt;=<span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot; &quot;</span>*<span class="built_in">abs</span>(i)+<span class="string">&quot;*&quot;</span>*(n+<span class="number">2</span>*i))</span><br><span class="line">    <span class="keyword">else</span> :</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot; &quot;</span>*i+<span class="string">&quot;*&quot;</span>*(n-<span class="number">2</span>*i))</span><br></pre></td></tr></table></figure>
+
+<pre><code>   *
+  ***
+ *****
+*******
+ *****
+  ***
+   *
+</code></pre>
+<h4 id="打印闪电"><a href="#打印闪电" class="headerlink" title="打印闪电"></a>打印闪电</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#打印闪电</span></span><br><span class="line">n = <span class="number">7</span></span><br><span class="line">e = n//<span class="number">2</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(-e,e+<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">if</span> i&lt;<span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot; &quot;</span>*<span class="built_in">abs</span>(i)+ <span class="string">&quot;*&quot;</span> * (e+i+<span class="number">1</span>))</span><br><span class="line">    <span class="keyword">elif</span> i == <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;*&quot;</span>*n)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot; &quot;</span>*<span class="number">3</span>+<span class="string">&quot;*&quot;</span>*(e-i+<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>   *
+  **
+ ***
+*******
+   ***
+   **
+   *
+</code></pre>
+<h4 id="打印正方形"><a href="#打印正方形" class="headerlink" title="打印正方形"></a>打印正方形</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#打印一个边长为n的正方形</span></span><br><span class="line">var =  <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;&gt;&gt;&quot;</span>))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(var):</span><br><span class="line">    <span class="keyword">if</span> i ==<span class="number">0</span> <span class="keyword">or</span> i == var-<span class="number">1</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;*&quot;</span>*var)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;*&quot;</span> + <span class="string">&quot; &quot;</span>*(var-<span class="number">2</span>) + <span class="string">&quot;*&quot;</span>)</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<pre><code>&gt;&gt;4
+****
+*  *
+*  *
+****
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="number">4</span></span><br><span class="line"><span class="keyword">for</span> i  <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    <span class="keyword">if</span> i % (n-<span class="number">1</span>)==<span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;*&quot;</span>*n)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;*&quot;</span>+<span class="string">&quot; &quot;</span>*(n-<span class="number">2</span>)+<span class="string">&quot;*&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>****
+*  *
+*  *
+****
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#打印一个边长为n的正方形</span></span><br><span class="line">n =  <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;&gt;&gt;&quot;</span>))</span><br><span class="line">e = -(n//<span class="number">2</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(e,n+e):</span><br><span class="line">    <span class="keyword">if</span> i == e <span class="keyword">or</span> i == n+e-<span class="number">1</span>:</span><br><span class="line">        <span class="built_in">print</span> (<span class="string">&quot;*&quot;</span>*n)</span><br><span class="line">    <span class="keyword">else</span> :</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;*&quot;</span>+<span class="string">&quot; &quot;</span>*(n-<span class="number">2</span>)+<span class="string">&quot;*&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>&gt;&gt;6
+******
+*    *
+*    *
+*    *
+*    *
+******
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#统计你输入的每个数字有多少个，按照升序输出</span></span><br><span class="line">l = <span class="built_in">input</span>().split()</span><br><span class="line">l = <span class="built_in">int</span>(l[<span class="number">0</span>])</span><br><span class="line">num = <span class="built_in">list</span>()</span><br><span class="line">num1 = [<span class="number">0</span>]*<span class="number">10</span></span><br><span class="line"><span class="keyword">while</span> l&gt;<span class="number">0</span>:</span><br><span class="line">    x = l % <span class="number">10</span></span><br><span class="line">    num1[x] += <span class="number">1</span></span><br><span class="line">    num.append(x)</span><br><span class="line">    l //=<span class="number">10</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    <span class="keyword">if</span> num1[i] !=<span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;&#123;&#125;:&#123;&#125;&quot;</span>.<span class="built_in">format</span>(i,num1[i]))</span><br></pre></td></tr></table></figure>
+
+<pre><code>1231013
+0:1
+1:3
+2:1
+3:2
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#读数字</span></span><br><span class="line">zz = <span class="built_in">input</span>().split()</span><br><span class="line">a = <span class="built_in">int</span>(zz[<span class="number">0</span>])</span><br><span class="line">l = [<span class="string">&#x27;ling&#x27;</span>,<span class="string">&#x27;yi&#x27;</span>,<span class="string">&#x27;er&#x27;</span>,<span class="string">&#x27;san&#x27;</span>,<span class="string">&#x27;si&#x27;</span>,<span class="string">&#x27;wu&#x27;</span>,<span class="string">&#x27;liu&#x27;</span>,<span class="string">&#x27;qi&#x27;</span>,<span class="string">&#x27;ba&#x27;</span>,<span class="string">&#x27;jiu&#x27;</span>,<span class="string">&#x27;fu&#x27;</span>]</span><br><span class="line">i = <span class="number">0</span></span><br><span class="line">li =<span class="built_in">list</span>()</span><br><span class="line">x = a</span><br><span class="line">y = <span class="built_in">abs</span>(a)</span><br><span class="line"><span class="keyword">while</span> <span class="built_in">abs</span>(x)&gt;<span class="number">0</span>:</span><br><span class="line">    x = <span class="built_in">abs</span>(x)//<span class="number">10</span></span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i):</span><br><span class="line">    m = <span class="number">10</span>**(i-<span class="number">1</span>)</span><br><span class="line">    y = y// m</span><br><span class="line">    li.append(y)</span><br><span class="line">    i -= <span class="number">1</span></span><br><span class="line">    y = <span class="built_in">abs</span>(a) % m</span><br><span class="line"></span><br><span class="line">length = <span class="built_in">len</span>(li)</span><br><span class="line"><span class="keyword">if</span> a&gt;<span class="number">0</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> li:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">int</span>(i)&lt;length:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;&#123;&#125;&quot;</span>.<span class="built_in">format</span>(<span class="built_in">str</span>(l[i])),end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;&#123;&#125;&quot;</span>.<span class="built_in">format</span>(<span class="built_in">str</span>(l[i])),end=<span class="string">&quot;&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">str</span>(l[<span class="number">10</span>]),end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> li:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">int</span>(i)&lt;length:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;&#123;&#125;&quot;</span>.<span class="built_in">format</span>(<span class="built_in">str</span>(l[i])),end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;&#123;&#125;&quot;</span>.<span class="built_in">format</span>(<span class="built_in">str</span>(l[i])),end=<span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>-123
+fu yi er san
+</code></pre>
+<h3 id="三个数排序"><a href="#三个数排序" class="headerlink" title="三个数排序"></a>三个数排序</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#只用判断，三个数排序</span></span><br><span class="line">l = <span class="built_in">list</span>()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">    l.append(<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;&gt;&gt;&quot;</span>)))</span><br><span class="line"><span class="keyword">if</span> l[<span class="number">0</span>] &gt; l[<span class="number">1</span>]:</span><br><span class="line">    <span class="keyword">if</span> l[<span class="number">0</span>] &gt; l[<span class="number">2</span>]:</span><br><span class="line">        <span class="keyword">if</span> l[<span class="number">1</span>]&gt;l[<span class="number">2</span>]:</span><br><span class="line">            <span class="built_in">print</span>(l[<span class="number">0</span>],l[<span class="number">1</span>],l[<span class="number">2</span>])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(l[<span class="number">0</span>],l[<span class="number">2</span>],l[<span class="number">1</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(l[<span class="number">2</span>],l[<span class="number">1</span>],l[<span class="number">0</span>])</span><br><span class="line"><span class="keyword">else</span> :</span><br><span class="line">    <span class="keyword">if</span> l[<span class="number">0</span>] &gt; l[<span class="number">2</span>]:</span><br><span class="line">        <span class="built_in">print</span>(l[<span class="number">1</span>],l[<span class="number">0</span>],l[<span class="number">2</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span>  l[<span class="number">1</span>]&lt;l[<span class="number">2</span>]:</span><br><span class="line">            <span class="built_in">print</span>(l[<span class="number">2</span>],l[<span class="number">1</span>],l[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(l[<span class="number">1</span>],l[<span class="number">2</span>],l[<span class="number">0</span>])</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<pre><code>&gt;&gt;1
+&gt;&gt;3
+&gt;&gt;2
+3 2 1
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用max函数，三个数排序</span></span><br><span class="line">l = <span class="built_in">list</span>()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">    l.append(<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;&gt;&gt;&quot;</span>)))</span><br><span class="line"><span class="keyword">while</span> l:</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(l) == <span class="number">1</span>:</span><br><span class="line">        <span class="built_in">print</span>(l[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    m = <span class="built_in">max</span>(l)</span><br><span class="line">    <span class="built_in">print</span>(m)</span><br><span class="line">    l.remove(<span class="built_in">max</span>(l))    </span><br></pre></td></tr></table></figure>
+
+<pre><code>&gt;&gt;2
+&gt;&gt;3
+&gt;&gt;1
+3
+2
+1
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用sort（）函数，三个数排序</span></span><br><span class="line">l = <span class="built_in">list</span>()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">    l.append(<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;&gt;&gt;&quot;</span>)))</span><br><span class="line">l.sort()</span><br><span class="line">l</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;&gt;1
+&gt;&gt;4
+&gt;&gt;2
+
+[1, 2, 4]
+</code></pre>
+<h3 id="冒泡法排序（重要）"><a href="#冒泡法排序（重要）" class="headerlink" title="冒泡法排序（重要）"></a>冒泡法排序（重要）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#优化后的冒泡法（重要）</span></span><br><span class="line"><span class="comment">#l=[1,9,8,5,6,7,4,3,2]</span></span><br><span class="line">l=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">8</span>]</span><br><span class="line">length = <span class="built_in">len</span>(num)</span><br><span class="line">count = <span class="number">0</span></span><br><span class="line">count_swap = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(length):</span><br><span class="line">    flag = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(length-i-<span class="number">1</span>):</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> l[j] &gt; l[j+<span class="number">1</span>]:</span><br><span class="line">            tmp = l[j]</span><br><span class="line">            l[j] = l[j+<span class="number">1</span>]</span><br><span class="line">            l[j+<span class="number">1</span>] = tmp</span><br><span class="line">            flag = <span class="literal">True</span></span><br><span class="line">            count_swap += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> flag:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="built_in">print</span>(l,count,count_swap)</span><br><span class="line">            </span><br></pre></td></tr></table></figure>
+
+<pre><code>[1, 2, 3, 4, 5, 6, 7, 8, 9] 15 1
+</code></pre>
+<ul>
+<li>优化点：可以设定一个标记判断此轮是否有数据交换发生，如果没有发生交换，可以结束排序，如果发生交换，则进行下一轮</li>
+<li>最差的排序情况是，初始顺序和目标顺序完全相反，遍历次数1，…,n-1之和n*（n-）/2</li>
+<li>最好的排序情况是，初始顺序与目标顺序完全相同，遍历次数n-1</li>
+<li>时间复杂度O（n^2）</li>
+</ul>
+<h4 id="二分法查找"><a href="#二分法查找" class="headerlink" title="二分法查找"></a>二分法查找</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#二分法查找</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">banery_serch</span>(<span class="params"><span class="built_in">list</span>,item</span>):</span></span><br><span class="line">    low = <span class="number">0</span></span><br><span class="line">    high = <span class="built_in">len</span>(<span class="built_in">list</span>)-<span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> low &lt;= high:</span><br><span class="line">        mid = (low+high)//<span class="number">2</span></span><br><span class="line">        giss = <span class="built_in">list</span>[mid]</span><br><span class="line">        <span class="keyword">if</span> item == mid:</span><br><span class="line">            <span class="built_in">print</span>(Ture)</span><br><span class="line">        <span class="keyword">elif</span> item &gt; mid:</span><br><span class="line">            high = mid - <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            low = mid +<span class="number">1</span></span><br><span class="line">my_list = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">6</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">9</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="给定一个数，输入为几位数，并依次输出"><a href="#给定一个数，输入为几位数，并依次输出" class="headerlink" title="给定一个数，输入为几位数，并依次输出"></a>给定一个数，输入为几位数，并依次输出</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">#给定一个数，输入为几位数</span></span><br><span class="line">num = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;&gt;&gt;&quot;</span>))</span><br><span class="line">i = <span class="number">0</span></span><br><span class="line">flag = <span class="literal">False</span></span><br><span class="line"><span class="keyword">while</span> num &gt; <span class="number">0</span>:</span><br><span class="line">    a = num%<span class="number">10</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;a&quot;</span>,a,end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">    num = num//<span class="number">10</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">#给定一个数字判断有几位</span></span><br><span class="line">num = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;&gt;&gt;&quot;</span>))</span><br><span class="line">i = <span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> num &gt;= <span class="number">10</span>:</span><br><span class="line">    num = num/<span class="number">10</span></span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;i&quot;</span>,i)</span><br></pre></td></tr></table></figure>
+
+<pre><code>&gt;&gt;1234
+a 4 a 3 a 2 a 1 
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">#给定一个数，并依此输出\n</span></span><br><span class="line">x = <span class="string">&#x27;02300&#x27;</span></span><br><span class="line">x = <span class="built_in">int</span>(x)</span><br><span class="line">n = <span class="number">5</span></span><br><span class="line">w = <span class="number">10000</span></span><br><span class="line">flag = <span class="literal">False</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    y = x // w</span><br><span class="line">    <span class="keyword">if</span> flag <span class="keyword">or</span> y:</span><br><span class="line">        flag = <span class="literal">True</span>    </span><br><span class="line">        <span class="built_in">print</span>(y,end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">    x = x % w</span><br><span class="line">    w = w //<span class="number">10</span></span><br></pre></td></tr></table></figure>
+<pre><code>2 3 0 0 
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">c = <span class="built_in">int</span>(<span class="string">&#x27;00211&#x27;</span>)</span><br><span class="line">w = <span class="number">10000</span></span><br><span class="line">length = <span class="number">5</span></span><br><span class="line">flag = <span class="literal">False</span></span><br><span class="line"><span class="keyword">while</span> w:</span><br><span class="line">    t = c //w</span><br><span class="line">    <span class="keyword">if</span> flag:</span><br><span class="line">        <span class="built_in">print</span>(t,end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> t:</span><br><span class="line">            <span class="built_in">print</span>(t,end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">            flag =<span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            length -=<span class="number">1</span></span><br><span class="line">    c %= w</span><br><span class="line">    w //=<span class="number">10</span></span><br></pre></td></tr></table></figure>
+<pre><code>2 1 1 
+</code></pre>
+<h3 id="求均值"><a href="#求均值" class="headerlink" title="求均值"></a>求均值</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;&gt;&gt;&quot;</span>)) </span><br><span class="line">l = <span class="built_in">list</span>() </span><br><span class="line">num = <span class="number">0</span> </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(a): </span><br><span class="line">    x = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;&gt;&gt;&#x27;</span>)) </span><br><span class="line">    <span class="keyword">if</span> x == <span class="literal">None</span>: </span><br><span class="line">        <span class="keyword">break</span> </span><br><span class="line">    <span class="keyword">else</span>: </span><br><span class="line">        l.append(x) </span><br><span class="line">        num = num+l[i] </span><br><span class="line">        <span class="built_in">print</span>(num/<span class="built_in">len</span>(l))</span><br></pre></td></tr></table></figure>
+
+<pre><code>&gt;&gt;3
+&gt;&gt;1
+1.0
+&gt;&gt;3
+2.0
+&gt;&gt;4
+2.6666666666666665
+</code></pre>
+<h3 id="打印乘法表"><a href="#打印乘法表" class="headerlink" title="打印乘法表"></a>打印乘法表</h3><h4 id="打印倒乘法表"><a href="#打印倒乘法表" class="headerlink" title="打印倒乘法表"></a>打印倒乘法表</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#打印倒乘法表</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">10</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;\t&quot;</span>*(i-<span class="number">1</span>),end=<span class="string">&quot;&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i,<span class="number">10</span>):</span><br><span class="line">        <span class="built_in">print</span> (<span class="string">&quot;&#123;&#125;x&#123;&#125;=&#123;:&lt;&#123;&#125;&#125;&quot;</span>.<span class="built_in">format</span>(i,j,i*j,<span class="number">2</span> <span class="keyword">if</span> j&lt;<span class="number">2</span> <span class="keyword">else</span> <span class="number">3</span>),end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>()</span><br></pre></td></tr></table></figure>
+
+<pre><code>1x1=1  1x2=2   1x3=3   1x4=4   1x5=5   1x6=6   1x7=7   1x8=8   1x9=9   
+       2x2=4   2x3=6   2x4=8   2x5=10  2x6=12  2x7=14  2x8=16  2x9=18  
+               3x3=9   3x4=12  3x5=15  3x6=18  3x7=21  3x8=24  3x9=27  
+                       4x4=16  4x5=20  4x6=24  4x7=28  4x8=32  4x9=36  
+                               5x5=25  5x6=30  5x7=35  5x8=40  5x9=45  
+                                       6x6=36  6x7=42  6x8=48  6x9=54  
+                                               7x7=49  7x8=56  7x9=63  
+                                                       8x8=64  8x9=72  
+                                                               9x9=81  
+</code></pre>
+<h4 id="打印正乘法表"><a href="#打印正乘法表" class="headerlink" title="打印正乘法表"></a>打印正乘法表</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#打印九九乘法表：</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">10</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,i+<span class="number">1</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;&#123;&#125;x&#123;&#125;=&#123;&#125;\t&quot;</span>.<span class="built_in">format</span>(j,i,i*j),end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>()</span><br></pre></td></tr></table></figure>
+
+<pre><code>1x1=1     
+1x2=2     2x2=4     
+1x3=3     2x3=6     3x3=9     
+1x4=4     2x4=8     3x4=12     4x4=16     
+1x5=5     2x5=10     3x5=15     4x5=20     5x5=25     
+1x6=6     2x6=12     3x6=18     4x6=24     5x6=30     6x6=36     
+1x7=7     2x7=14     3x7=21     4x7=28     5x7=35     6x7=42     7x7=49     
+1x8=8     2x8=16     3x8=24     4x8=32     5x8=40     6x8=48     7x8=56     8x8=64     
+1x9=9     2x9=18     3x9=27     4x9=36     5x9=45     6x9=54     7x9=63     8x9=72     9x9=81     
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#打印九九乘法表：</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">10</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,i+<span class="number">1</span>):</span><br><span class="line">        <span class="built_in">print</span>(j,<span class="string">&quot;x&quot;</span>,i,<span class="string">&quot;=&quot;</span>,j*i,<span class="string">&quot; &quot;</span>,end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>()</span><br></pre></td></tr></table></figure>
+
+<pre><code>1 x 1 = 1   
+1 x 2 = 2   2 x 2 = 4   
+1 x 3 = 3   2 x 3 = 6   3 x 3 = 9   
+1 x 4 = 4   2 x 4 = 8   3 x 4 = 12   4 x 4 = 16   
+1 x 5 = 5   2 x 5 = 10   3 x 5 = 15   4 x 5 = 20   5 x 5 = 25   
+1 x 6 = 6   2 x 6 = 12   3 x 6 = 18   4 x 6 = 24   5 x 6 = 30   6 x 6 = 36   
+1 x 7 = 7   2 x 7 = 14   3 x 7 = 21   4 x 7 = 28   5 x 7 = 35   6 x 7 = 42   7 x 7 = 49   
+1 x 8 = 8   2 x 8 = 16   3 x 8 = 24   4 x 8 = 32   5 x 8 = 40   6 x 8 = 48   7 x 8 = 56   8 x 8 = 64   
+1 x 9 = 9   2 x 9 = 18   3 x 9 = 27   4 x 9 = 36   5 x 9 = 45   6 x 9 = 54   7 x 9 = 63   8 x 9 = 72   9 x 9 = 81   
+</code></pre>
+<p>​      </p>
+<h3 id="一到五阶乘之和"><a href="#一到五阶乘之和" class="headerlink" title="一到五阶乘之和"></a>一到五阶乘之和</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#一到五阶乘之和</span></span><br><span class="line">a= <span class="number">1</span></span><br><span class="line"><span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">6</span>):</span><br><span class="line">    a *= i</span><br><span class="line">    <span class="built_in">sum</span> += a</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;sum =&quot;</span>,<span class="built_in">sum</span> )</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#100内的所有奇数之和</span></span><br><span class="line">a = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span> (<span class="number">1</span>,<span class="number">100</span>,<span class="number">2</span>):</span><br><span class="line">    a = a+i</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;a=&quot;</span>,a)</span><br></pre></td></tr></table></figure>
+
+<pre><code>a= 2500
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#100内的所有奇数之和</span></span><br><span class="line">a = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">100</span>,<span class="number">2</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> i%<span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">        a += i</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;a=&quot;</span>,a)</span><br></pre></td></tr></table></figure>
+
+<h3 id="斐波那契数列"><a href="#斐波那契数列" class="headerlink" title="斐波那契数列"></a>斐波那契数列</h3><h4 id="打印100以内的斐波那契数列"><a href="#打印100以内的斐波那契数列" class="headerlink" title="打印100以内的斐波那契数列"></a>打印100以内的斐波那契数列</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 打印100以内的斐波那契数列</span></span><br><span class="line">i = <span class="number">0</span></span><br><span class="line">j = <span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> i &lt; <span class="number">100</span>:</span><br><span class="line">    <span class="built_in">print</span>(i,end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">    i,j=j,i+j</span><br></pre></td></tr></table></figure>
+
+<pre><code>0 1 1 2 3 5 8 13 21 34 55 89 
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 打印100以内的斐波那契数列</span></span><br><span class="line">i = <span class="number">0</span></span><br><span class="line">j = <span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> i&lt;=<span class="number">100</span>:</span><br><span class="line">    <span class="built_in">print</span> (i,end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">    k = i + j</span><br><span class="line">    i = j</span><br><span class="line">    j = k</span><br></pre></td></tr></table></figure>
+<pre><code>0 1 1 2 3 5 8 13 21 34 55 89 
+</code></pre>
+<h4 id="求斐波那契数列第101项"><a href="#求斐波那契数列第101项" class="headerlink" title="求斐波那契数列第101项"></a>求斐波那契数列第101项</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#求斐波那契数列第101项</span></span><br><span class="line">i = <span class="number">0</span></span><br><span class="line">j = <span class="number">1</span></span><br><span class="line">m = <span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> m&lt;=<span class="number">101</span>:</span><br><span class="line">    i, j = j, i + j</span><br><span class="line">    m += <span class="number">1</span></span><br><span class="line">    </span><br><span class="line"><span class="built_in">print</span>(i) </span><br></pre></td></tr></table></figure>
+<pre><code>573147844013817084101
+</code></pre>
+<h3 id="求素数"><a href="#求素数" class="headerlink" title="求素数"></a>求素数</h3><h4 id="寻常法"><a href="#寻常法" class="headerlink" title="寻常法"></a>寻常法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#求10万内的所有素数</span></span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line">n = <span class="number">100000</span></span><br><span class="line">count = <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>,n,<span class="number">2</span>):</span><br><span class="line">    <span class="keyword">if</span> i &gt; <span class="number">10</span> <span class="keyword">and</span> i % <span class="number">5</span> ==<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">continue</span>  <span class="comment">#所有大于10 的素数中，个位数只有1，3，7，9，所以此处筛出5结尾的</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>,<span class="built_in">int</span>(math.sqrt(i)+<span class="number">1</span>),<span class="number">2</span>):</span><br><span class="line">        <span class="keyword">if</span> i % j ==<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span> (count)</span><br></pre></td></tr></table></figure>
+<pre><code>9592
+</code></pre>
+<h4 id="利用素数列表，空间换时间"><a href="#利用素数列表，空间换时间" class="headerlink" title="利用素数列表，空间换时间"></a>利用素数列表，空间换时间</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#存储质数</span></span><br><span class="line"><span class="comment">#合数一定可以分解为几个质数的乘积，2是质数</span></span><br><span class="line"><span class="comment">#质数一定不能整除1和本身之内的整数</span></span><br><span class="line"><span class="comment">#使用质数来取模比利用基数取模计算次数更少</span></span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line">n = <span class="number">100000</span></span><br><span class="line">count = <span class="number">1</span></span><br><span class="line">primenumber = [<span class="number">2</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>,n,<span class="number">2</span>):</span><br><span class="line">    flag = <span class="literal">False</span></span><br><span class="line">    edge = math.sqrt(i)</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> primenumber:</span><br><span class="line">        <span class="keyword">if</span> i % j == <span class="number">0</span>:</span><br><span class="line">            flag = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> j &gt; edge:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> flag:</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line">        primenumber.append(i)</span><br><span class="line"><span class="built_in">print</span>(count)</span><br></pre></td></tr></table></figure>
+
+<h4 id="利用孪生素数"><a href="#利用孪生素数" class="headerlink" title="利用孪生素数"></a>利用孪生素数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#大于3 的素数只有6N-1和6N+1两种形式，如果6N-1和6N+1都是素数便叫作孪生素数</span></span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line">n = <span class="number">100</span></span><br><span class="line">count = <span class="number">2</span></span><br><span class="line">primenumber = [<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">step = <span class="number">2</span></span><br><span class="line">x = <span class="number">5</span></span><br><span class="line"><span class="keyword">while</span> x &lt; n:</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>,<span class="built_in">int</span>(math.sqrt(x)+<span class="number">1</span>),<span class="number">2</span>):</span><br><span class="line">		<span class="keyword">if</span> x % i == <span class="number">0</span>:</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		count += <span class="number">1</span></span><br><span class="line">		primenumber.append(x)</span><br><span class="line">	x += step</span><br><span class="line">	step = <span class="number">4</span> <span class="keyword">if</span> step == <span class="number">2</span> <span class="keyword">else</span> <span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(count)</span><br><span class="line"><span class="built_in">print</span>(primenumber)</span><br></pre></td></tr></table></figure>
+
+<h4 id="埃式筛素数"><a href="#埃式筛素数" class="headerlink" title="埃式筛素数"></a>埃式筛素数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#埃式筛素数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">eratosthenes</span>(<span class="params">n</span>):</span></span><br><span class="line">    IsPrime = [<span class="literal">True</span>] * (n + <span class="number">1</span>)</span><br><span class="line">    IsPrime[<span class="number">1</span>] = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="built_in">int</span>(n ** <span class="number">0.5</span>) + <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> IsPrime[i]:</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i * <span class="number">2</span>, n + <span class="number">1</span>, i):</span><br><span class="line">                IsPrime[j] = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> &#123;x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n + <span class="number">1</span>) <span class="keyword">if</span> IsPrime[x]&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="built_in">print</span> (eratosthenes(<span class="number">100</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>&#123;2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97&#125;
+</code></pre>
+<h3 id="杨辉三角"><a href="#杨辉三角" class="headerlink" title="杨辉三角"></a>杨辉三角</h3><h4 id="计算杨辉三角，普通法"><a href="#计算杨辉三角，普通法" class="headerlink" title="计算杨辉三角，普通法"></a>计算杨辉三角，普通法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#计算杨辉三角 普通法</span></span><br><span class="line">triangle = [[<span class="number">1</span>],[<span class="number">1</span>,<span class="number">1</span>]]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,<span class="number">6</span>):</span><br><span class="line">    swap = triangle[i-<span class="number">1</span>]</span><br><span class="line">    cul = [<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i-<span class="number">1</span>):</span><br><span class="line">        cul.append(swap[j]+swap[j+<span class="number">1</span>])</span><br><span class="line">    cul.append(<span class="number">1</span>)</span><br><span class="line">    triangle.append(cul)</span><br><span class="line">triangle</span><br></pre></td></tr></table></figure>
+
+<h4 id="计算杨辉三角-补0法"><a href="#计算杨辉三角-补0法" class="headerlink" title="计算杨辉三角 补0法"></a>计算杨辉三角 补0法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#计算杨辉三角 补0法</span></span><br><span class="line">triangle = [[<span class="number">1</span>]]</span><br><span class="line">n = <span class="number">7</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n):</span><br><span class="line">    swap = triangle[i-<span class="number">1</span>]+[<span class="number">0</span>]</span><br><span class="line">    cul = [<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(swap)-<span class="number">1</span>):</span><br><span class="line">        cul.append(swap[j]+swap[j+<span class="number">1</span>])</span><br><span class="line">    triangle.append(cul)</span><br><span class="line"><span class="built_in">print</span>(triangle)</span><br></pre></td></tr></table></figure>
+
+<h4 id="杨辉三角，对称法"><a href="#杨辉三角，对称法" class="headerlink" title="杨辉三角，对称法"></a>杨辉三角，对称法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#杨辉三角，对称法</span></span><br><span class="line">n=<span class="number">6</span></span><br><span class="line">triangle = [[<span class="number">1</span>],[<span class="number">1</span>,<span class="number">1</span>]]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,n):</span><br><span class="line">    tmp = triangle[-<span class="number">1</span>]</span><br><span class="line">    cul = [<span class="number">1</span>] * (i+<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i//<span class="number">2</span>):</span><br><span class="line">        cul[j+<span class="number">1</span>] = tmp[j]+tmp[j+<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">if</span> i != <span class="number">2j</span>:	</span><br><span class="line">            cul[-j-<span class="number">2</span>] = cul[j+<span class="number">1</span>]</span><br><span class="line">    triangle.append(cul)</span><br><span class="line">triangle</span><br></pre></td></tr></table></figure>
+<p>中点的确定<br>[1]<br>[1,1]<br>[1,2,1]<br>[1,3,3,1]<br>[1,4,6,4,1]<br>[1,5,10,10,5,1]<br>把整个杨辉三角看成一个左对齐的二维矩阵。<br>i == 2时，在第3行，中点的列索引j==1<br>i == 3时，在第4行，无中点<br>i == 4时，在第5行，中点的列索引j==2<br>得到以下规律，如果i==2j，则有中点</p>
+<h4 id="杨辉三角，单列表方法"><a href="#杨辉三角，单列表方法" class="headerlink" title="杨辉三角，单列表方法"></a>杨辉三角，单列表方法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#杨辉三角，单列表解决</span></span><br><span class="line">n = <span class="number">6</span></span><br><span class="line">row = [<span class="number">1</span>] * n</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    z = <span class="number">1</span></span><br><span class="line">    offset = n - i</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,i//<span class="number">2</span>+<span class="number">1</span>):</span><br><span class="line">        val = z + row[j]</span><br><span class="line">        z = row[j]</span><br><span class="line">        row[j] = val</span><br><span class="line">        <span class="keyword">if</span> i != <span class="number">2</span>*j:</span><br><span class="line">            row[-j - offset] = val</span><br><span class="line">    <span class="built_in">print</span>(row[:i+<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/07/19/05python%E5%86%85%E7%BD%AE%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/" rel="prev" title="python-内置数据结构">
+                  <i class="fa fa-chevron-left"></i> python-内置数据结构
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/08/15/07python%E6%A0%87%E5%87%86%E5%BA%93%E3%80%81%E8%A7%A3%E6%9E%90%E5%BC%8F%E3%80%81%E7%94%9F%E6%88%90%E5%99%A8/" rel="next" title="python-标准库、解析式、生成器">
+                  python-标准库、解析式、生成器 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">luoqian</span>
+</div>
+  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

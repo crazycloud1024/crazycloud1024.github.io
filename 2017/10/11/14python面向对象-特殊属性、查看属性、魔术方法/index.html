@@ -1,37 +1,596 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vampireqian.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"بحث...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="特殊属性   属性 含义    __name_ 类、函数、方法等的名字   __module_ 类定义所在的模块名   __class_ 对象或者类所属的类   __bases__ 类的基类的元组，顺序为它们在基类列表中出现的顺序   __doc__ 类、函数的文档字符串，如果没有定义则为None   __mro__ 类的mro，class.mro()返回的结果保存在__mro__中   __di">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python面向对象-特殊属性、查看属性、魔术方法">
+<meta property="og:url" content="https://vampireqian.github.io/2017/10/11/14python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7%E3%80%81%E6%9F%A5%E7%9C%8B%E5%B1%9E%E6%80%A7%E3%80%81%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="luoqian">
+<meta property="og:description" content="特殊属性   属性 含义    __name_ 类、函数、方法等的名字   __module_ 类定义所在的模块名   __class_ 对象或者类所属的类   __bases__ 类的基类的元组，顺序为它们在基类列表中出现的顺序   __doc__ 类、函数的文档字符串，如果没有定义则为None   __mro__ 类的mro，class.mro()返回的结果保存在__mro__中   __di">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-10-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2018-12-11T11:04:24.000Z">
+<meta property="article:author" content="luoqian">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://vampireqian.github.io/2017/10/11/14python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7%E3%80%81%E6%9F%A5%E7%9C%8B%E5%B1%9E%E6%80%A7%E3%80%81%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh","comments":true,"permalink":"https://vampireqian.github.io/2017/10/11/14python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7%E3%80%81%E6%9F%A5%E7%9C%8B%E5%B1%9E%E6%80%A7%E3%80%81%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/","path":"2017/10/11/14python面向对象-特殊属性、查看属性、魔术方法/","title":"python面向对象-特殊属性、查看属性、魔术方法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>python面向对象-特殊属性、查看属性、魔术方法 | luoqian</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="تشغيل شريط التصفح" role="button">
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">luoqian</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          المحتويات
+        </li>
+        <li class="sidebar-nav-overview">
+          عام
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">特殊属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%B1%9E%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">查看属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95"><span class="nav-number"></span> <span class="nav-text">魔术方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E5%8C%96"><span class="nav-number">0.1.</span> <span class="nav-text">实例化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hash"><span class="nav-number">0.2.</span> <span class="nav-text">hash</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bool"><span class="nav-number">0.3.</span> <span class="nav-text">bool</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">0.4.</span> <span class="nav-text">可视化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD"><span class="nav-number">1.</span> <span class="nav-text">运算符重载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#functools-total-ordering-%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">@functools.total_ordering 装饰器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E7%9B%B8%E5%85%B3%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">容器相关方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%B0%83%E7%94%A8%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">可调用对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.</span> <span class="nav-text">上下文管理对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%82%E6%95%B0"><span class="nav-number">4.1.</span> <span class="nav-text">方法的参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">4.2.</span> <span class="nav-text">上下文应用场景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#contextlib-contextmanager"><span class="nav-number">4.3.</span> <span class="nav-text">contextlib.contextmanager</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">luoqian</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">المقالات</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">التصنيفات</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">الوسوم</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh">
+    <link itemprop="mainEntityOfPage" href="https://vampireqian.github.io/2017/10/11/14python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7%E3%80%81%E6%9F%A5%E7%9C%8B%E5%B1%9E%E6%80%A7%E3%80%81%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="luoqian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="luoqian">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python面向对象-特殊属性、查看属性、魔术方法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2017-10-11 00:00:00" itemprop="dateCreated datePublished" datetime="2017-10-11T00:00:00+08:00">2017-10-11</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2018-12-11 19:04:24" itemprop="dateModified" datetime="2018-12-11T19:04:24+08:00">2018-12-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="特殊属性"><a href="#特殊属性" class="headerlink" title="特殊属性"></a>特殊属性</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>__name_</code></td>
+<td>类、函数、方法等的名字</td>
+</tr>
+<tr>
+<td><code>__module_</code></td>
+<td>类定义所在的模块名</td>
+</tr>
+<tr>
+<td><code>__class_</code></td>
+<td>对象或者类所属的类</td>
+</tr>
+<tr>
+<td><code>__bases__</code></td>
+<td>类的基类的元组，顺序为它们在基类列表中出现的顺序</td>
+</tr>
+<tr>
+<td><code>__doc__</code></td>
+<td>类、函数的文档字符串，如果没有定义则为None</td>
+</tr>
+<tr>
+<td><code>__mro__</code></td>
+<td>类的mro，class.mro()返回的结果保存在<code>__mro__</code>中</td>
+</tr>
+<tr>
+<td><code>__dict__</code></td>
+<td>类的实例的属性，可写的字典</td>
+</tr>
+</tbody></table>
+<h3 id="查看属性"><a href="#查看属性" class="headerlink" title="查看属性"></a>查看属性</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>__dir__</code></td>
+<td>返回类或者对象的所有成员名称列表。dir()函数就是调用__dir__()。 <br/>使用实例调用时，如果提供__dir__()，则返回其返回值，要求是可迭代对象。 如果没有提供__dir__()，则会从实例和类及祖先类中收集信息（尽可能多的）</td>
+</tr>
+</tbody></table>
+<p>如果dir([obj])参数obj包含方法__dir__()，该方法将被调用。如果参数obj不包含__dir__()，该方法将最大限<br>度地收集属性信息。</p>
+<p>dir(obj)对于不同类型的对象obj具有不同的行为：</p>
+<ol>
+<li><p>如果对象是模块对象，返回的列表包含模块的属性名和变量名。</p>
+</li>
+<li><p>如果对象是类或者类对象，返回的列表包含类的属性名，及它的基类的属性名。</p>
+</li>
+<li><p>如果obj不写，返回列表包含内容不同</p>
+<ul>
+<li>在模块中，返回模块的属性和变量名</li>
+<li>在函数中，返回本地作用域的变量名</li>
+<li>在方法中，返回本地作用域的变量名</li>
+</ul>
+</li>
+</ol>
+<h2 id="魔术方法"><a href="#魔术方法" class="headerlink" title="魔术方法"></a><font color=red>魔术方法</font></h2><hr>
+<p>分类：</p>
+<ul>
+<li>创建、初始化和销毁<ul>
+<li><code>__new__</code>和<code>__init__</code>和<code>__del__</code></li>
+</ul>
+</li>
+<li>hash</li>
+<li>bool</li>
+<li>可视化</li>
+<li>运算符重载</li>
+<li>容器和大小</li>
+<li>可调用对象</li>
+<li>上下文管理</li>
+<li>反射</li>
+<li>描述器</li>
+<li>其他</li>
+</ul>
+<h4 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h4><hr>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>__new__</code></td>
+<td>实例化一个对象<br>该方法需要返回一个值(本类型的实例)，如果该值不是cls的实例，则不会调用<code>__init__</code><br>该方法永远都是静态</td>
+</tr>
+</tbody></table>
+<p>__new__方法很少使用，即使创建了该方法，也会使用return super().__new__(cls)得到实例化对象，或者基类object的__new__方法来创建实例并返回。</p>
+<h4 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h4><hr>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>__hash__</code></td>
+<td>内建函数hash()调用的返回值，返回一个整数。如果定义这个方法该类的实例就可hash。</td>
+</tr>
+<tr>
+<td><code>__eq__</code></td>
+<td>对应==操作符，判断2个对象是否相等，返回bool值</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, age=<span class="number">18</span></span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__hash__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__eq__</span>(<span class="params">self, other</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.name == other.name</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.name</span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">hash</span>(A(<span class="string">&#x27;tom&#x27;</span>)))</span><br><span class="line"><span class="built_in">print</span>((A(<span class="string">&#x27;tom&#x27;</span>), A(<span class="string">&#x27;tom&#x27;</span>)))</span><br><span class="line"><span class="built_in">print</span>([A(<span class="string">&#x27;tom&#x27;</span>), A(<span class="string">&#x27;tom&#x27;</span>)])</span><br><span class="line"><span class="built_in">print</span>(&#123;(<span class="string">&#x27;tom&#x27;</span>,), (<span class="string">&#x27;tom&#x27;</span>,)&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>hash(x) ,x都一样，求得的hash应该是不变的，这是幂等性的缘故，一般来说，x不一样，hash应该不一样。</p>
+<p>不同的hash算法，不同的x求得同样的hash值，这就是hash冲突。</p>
+<hr>
+<p><code>__hash__</code>方法只是返回一个hash值作为set的key，但是去重，还需要<code>__eq__</code>（等效==，就是内容相等）来判断2个对象是否相等，is判断的是内存地址，is相等的话就肯定是同一个元素。<br>hash值相等，只是hash冲突，不能说明两个对象是相等的。<br>因此，一般来说提供<code>__hash__</code>方法是为了作为set或者dict的key，所以去重要同时提供<code>__eq__</code>方法。</p>
+<p>不可hash对象isinstance(p1, collections.Hashable)一定为False。<br>去重需要提供<code>__eq__</code>方法。</p>
+<hr>
+<p>list类实例为什么不可hash </p>
+<p>源码中有一句<code>__hash__</code> = None，也就是如果调用<code>__hash__()</code>相当于None()，一定报错。<br>所有类都继承object，而这个类是具有<code>__hash__()</code>方法的，如果一个类不能被hash，就把<code>__hash__</code>设置为None。</p>
+<h4 id="bool"><a href="#bool" class="headerlink" title="bool"></a>bool</h4><hr>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>__bool__</code></td>
+<td>内建函数bool()，或者对象放在逻辑表达式的位置，调用这个函数返回布尔值。 定义<code>__bool__()</code>，这个函数的返回值必须要是bool类型。没有定义<code>__bool__()</code>，就找<code>__len__()</code>返回长度，非0为真。 如果<code>__len__()</code>也没有定义，那么所有实例都返回真。</td>
+</tr>
+</tbody></table>
+<p>两个对象（类和实例）可以当作True理解。</p>
+<p>等效Fals的本质是：对于四大皆空：空串，空元组。空列表，空字典，先找bool，如果没有bool就看长度，当长度为0就恒为假。</p>
+<h4 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h4><hr>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>__repr__</code></td>
+<td>内建函数repr()对一个对象获取字符串表达。 <br/>调用<code>__repr__</code>方法返回<strong>字符串</strong>表达，如果<code>__repr__</code>也没有定义，就直接返回object的定义，就是显示内存地址信息。</td>
+</tr>
+<tr>
+<td><code>__str__</code></td>
+<td>str()函数、format()函数、print()函数调用，需要返回对象的字符串表达。如果没有定义，就去调用<code>__repr__</code>方法返回<strong>字符串</strong>表达，如果<code>__repr__</code>没有定义，就直接返回对象的内存地址信息。</td>
+</tr>
+<tr>
+<td><code>__bytes__</code></td>
+<td>bytes()函数调用，返回一个对象的bytes表达，即返回bytes对象</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, age=<span class="number">18</span></span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.age = age</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;repr: &#123;&#125;,&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(self.name, self.age)</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;str:  &#123;&#125;,&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(self.name, self.age)</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__bytes__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment">#return &quot;&#123;&#125; is &#123;&#125;&quot;.format(self.name, self.age).encode()</span></span><br><span class="line">        <span class="keyword">import</span> json</span><br><span class="line">        <span class="keyword">return</span> json.dumps(self.__dict__).encode()</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span>(A(<span class="string">&#x27;tom&#x27;</span>)) <span class="comment"># print函数使用__str__</span></span><br><span class="line"><span class="built_in">print</span>([A(<span class="string">&#x27;tom&#x27;</span>)]) <span class="comment"># []使用__str__，但其内部使用__repr__</span></span><br><span class="line"><span class="built_in">print</span>([<span class="built_in">str</span>(A(<span class="string">&#x27;tom&#x27;</span>))]) <span class="comment"># []使用__str__，其中的元素使用str()函数也调用__str__</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">bytes</span>(A(<span class="string">&#x27;tom&#x27;</span>)))</span><br></pre></td></tr></table></figure>
+<p>总结：一般首先找的是repr，当repr没有就找str，都没有就去object中去寻找。bytes方法转成二进制只是一种序列化的表达，和序列化还是有差别的，序列化是一种通用的二进制格式或者通用的中间格式，序列化是一种交互，转化成文本传输的，而这里的转换只是一种表达，给人展示用的。</p>
+<blockquote>
+<p>注意不能通过判断是否带引号来判断输出值的类型，类型判断要使用type或isinstance</p>
+</blockquote>
+<h3 id="运算符重载"><a href="#运算符重载" class="headerlink" title="运算符重载"></a>运算符重载</h3><hr>
+<p>operator模块提供了以下特殊方法，可以将类的实例使用下面的操作符来操作</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>特殊方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&lt;, &lt;=, ==, &gt;, &gt;=, !=</td>
+<td><code>__lt__</code>, <code>__le__</code>, <code>__eq__</code>, <code>__gt__</code>, <code>__ge__</code>, <code>__ne__</code></td>
+<td>比较运算符</td>
+</tr>
+<tr>
+<td>+, -, *, /, %, //,**, divmod</td>
+<td><code>__add__</code>, <code>__sub__</code>, <code>__mul__</code>, <code>__truediv__</code>, <code>__mod__</code>, <code>__floordiv__</code>, <code>__pow__</code>, <code>__divmod__</code></td>
+<td>算数运算符</td>
+</tr>
+<tr>
+<td>+=, -=, *=, /=, %=, //=, **=</td>
+<td><code>__iadd__</code>, <code>__isub__</code>, <code>__imul__</code>, <code>__itruediv__</code>, <code>__imod__, __ifloordiv__</code>,<code> __ipow__</code></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="functools-total-ordering-装饰器"><a href="#functools-total-ordering-装饰器" class="headerlink" title="@functools.total_ordering 装饰器"></a>@functools.total_ordering 装饰器</h4><p>__lt__, __le__, __eq__, __gt__, __ge__是比较大小必须实现的方法，但是全部写完太麻烦，使用<br>@functools.total_ordering 装饰器就可以大大简化代码。</p>
+<p>但是要求__eq__必须实现，其它方法__lt__, __le__, __gt__, __ge__  实现其一。</p>
+<p>但是：</p>
+<p>__eq__等于可以推断不等于<br>__gt__大于可以推断小于<br>__ge__大于等于可以推断小于等于<br>也就是用3个方法，就可以把所有比较解决了，所以total_ordering可以不使用</p>
+<h3 id="容器相关方法"><a href="#容器相关方法" class="headerlink" title="容器相关方法"></a>容器相关方法</h3><hr>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>__len__</code></td>
+<td>内建函数len()，返回对象的长度（&gt;=0的整数），如果把对象当做容器类型看，就如同list或者dict。bool()函数调用的时候，如果没有__bool__()方法，则会看__len__()方法是否存在，存在返回非0为真。</td>
+</tr>
+<tr>
+<td><code>__iter__</code></td>
+<td>迭代容器时，调用，返回一个新的迭代器对象</td>
+</tr>
+<tr>
+<td><code>__contains__</code></td>
+<td>in 成员运算符，没有实现，就调用<code>__iter__</code>方法遍历</td>
+</tr>
+<tr>
+<td><code>__getitem__</code></td>
+<td>实现self[key]访问。序列对象，key接受整数为索引，或者切片。对于set和dict，key为hashable。key不存在引发KeyError异常</td>
+</tr>
+<tr>
+<td><code>__setitem__</code></td>
+<td>和<code>__getitem__</code>的访问类似，是设置值的方法</td>
+</tr>
+<tr>
+<td><code>__missing__</code></td>
+<td>字典或其子类使用<code>__getitem__</code>()调用时，key不存在执行该方法</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>(<span class="params"><span class="built_in">dict</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__missing__</span>(<span class="params">self, key</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Missing key : &#x27;</span>, key)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"> </span><br><span class="line">a = A()</span><br><span class="line"><span class="built_in">print</span>(a[<span class="string">&#x27;k&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+<h3 id="可调用对象"><a href="#可调用对象" class="headerlink" title="可调用对象"></a>可调用对象</h3><hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>():</span></span><br><span class="line">    <span class="built_in">print</span>(foo.__module__, foo.__name__)</span><br><span class="line"> </span><br><span class="line">foo()</span><br><span class="line"><span class="comment"># 等价于</span></span><br><span class="line">foo.__call__()</span><br></pre></td></tr></table></figure>
+
+<p>函数即对象，对象foo加上()，就是调用此函数对象的<code>__call__</code>()方法。</p>
+<p><strong>可调用对象</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>__call__</code></td>
+<td>类中定义一个方法，实例就可以像函数一样调用</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, x, y</span>):</span></span><br><span class="line">        self.x = x</span><br><span class="line">        self.y = y</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span>(<span class="params">self, *args, **kwargs</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&lt;Point &#123;&#125;:&#123;&#125;&gt;&quot;</span>.<span class="built_in">format</span>(self.x, self.y)</span><br><span class="line"> </span><br><span class="line">p = Point(<span class="number">4</span>, <span class="number">5</span>)</span><br><span class="line"><span class="built_in">print</span>(p)</span><br><span class="line"><span class="built_in">print</span>(p())</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Adder</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span>(<span class="params">self, *args</span>):</span></span><br><span class="line">        ret = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> args:</span><br><span class="line">            ret += x</span><br><span class="line">        self.ret = ret</span><br><span class="line">        <span class="keyword">return</span> ret</span><br><span class="line"> </span><br><span class="line">adder = Adder()</span><br><span class="line"><span class="built_in">print</span>(adder(<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>))</span><br><span class="line"><span class="built_in">print</span>(adder.ret)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#&lt;__main__.Point object at 0x000002D5F04C2198&gt;</span></span><br><span class="line"><span class="comment">#&lt;Point 4:5&gt;</span></span><br><span class="line"><span class="comment">#15</span></span><br><span class="line"><span class="comment">#15</span></span><br></pre></td></tr></table></figure>
+
+<p>练习:</p>
+<p>定义一个斐波那契数列的类，方便调用，计算第n项</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fib</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.items = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>]</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span>(<span class="params">self, index</span>):</span></span><br><span class="line">        <span class="keyword">if</span> index &lt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">raise</span> IndexError(<span class="string">&#x27;Wrong Index&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> index &lt; <span class="built_in">len</span>(self.items):</span><br><span class="line">            <span class="keyword">return</span> self.items[index]</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>, index+<span class="number">1</span>):</span><br><span class="line">            self.items.append(self.items[i-<span class="number">1</span>] + self.items[i-<span class="number">2</span>])</span><br><span class="line">        <span class="keyword">return</span> self.items[index]</span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span>(Fib()(<span class="number">100</span>))</span><br></pre></td></tr></table></figure>
+
+<p>上例中，增加迭代的方法、返回容器长度、支持索引的方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fib</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.items = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span>(<span class="params">self, index</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self[index]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">iter</span>(self.items)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(self.items)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span>(<span class="params">self, index</span>):</span></span><br><span class="line">        <span class="keyword">if</span> index &lt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">raise</span> IndexError(<span class="string">&quot;Wrong Index&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> index &lt; <span class="built_in">len</span>(self.items):</span><br><span class="line">            <span class="keyword">return</span> self.items[index]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(self), index + <span class="number">1</span>):</span><br><span class="line">            self.items.append(self.items[i - <span class="number">1</span>] + self.items[i - <span class="number">2</span>])</span><br><span class="line">        <span class="keyword">return</span> self.items[index]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">str</span>(self.items)</span><br><span class="line"></span><br><span class="line">    __repr__ = __str__</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">fib = Fib()</span><br><span class="line"><span class="built_in">print</span>(fib(<span class="number">5</span>), <span class="built_in">len</span>(fib))  <span class="comment"># 全部计算</span></span><br><span class="line"><span class="built_in">print</span>(fib(<span class="number">10</span>), <span class="built_in">len</span>(fib))  <span class="comment"># 部分计算</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;------&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> fib:</span><br><span class="line">    <span class="built_in">print</span>(x, end=<span class="string">&quot; &quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>()</span><br><span class="line"><span class="built_in">print</span>(fib[<span class="number">5</span>], fib[<span class="number">9</span>])  <span class="comment"># 索引访问，不计算</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="上下文管理对象"><a href="#上下文管理对象" class="headerlink" title="上下文管理对象"></a>上下文管理对象</h3><hr>
+<p>当一个对象同时实现了<code>__enter__</code>（）和<code>__exit__</code>（）方法，它就属于上下文管理的对象。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>__enter__</code></td>
+<td>进入与此对象相关的上下文。如果存在该方法，with语法会把该方法的返回值作为绑定到as子句中指定的变量上</td>
+</tr>
+<tr>
+<td><code>__exit__</code></td>
+<td>退出与此对象相关的上下文。</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;init&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__enter__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;enter&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__exit__</span>(<span class="params">self, exc_type, exc_val, exc_tb</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;exit&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> Point() <span class="keyword">as</span> f:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;-&quot;</span> * <span class="number">30</span>)</span><br><span class="line">    <span class="keyword">raise</span> Exception(<span class="string">&#x27;error&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;=====end=======&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>实例化对象的时候，并不会调用enter，进入with语句块调用__enter__方法，然后执行语句体，最后离开with语句块的时候，调用__exit__方法。</p>
+<p>with可以开启一个上下文运行环境，在执行前做一些准备工作，执行后做一些收尾工作。<br>注意，with并不开启一个新的作用域。</p>
+<p>上下文管理很安全，不管是碰到异常都还是会正常执行</p>
+<p><code>__enter__</code>方法返回值就是上下文中使用的对象，with语法会把它的返回值赋给as子句的变量。</p>
+<h4 id="方法的参数"><a href="#方法的参数" class="headerlink" title="方法的参数"></a>方法的参数</h4><hr>
+<p><code>__enter__</code>方法 没有其他参数。<br><code>__exit__</code>方法有3个参数：<br><code>__exit__</code>(self, exc_type, exc_value, traceback)<br>这三个参数都与异常有关。<br>如果该上下文退出时没有异常，这3个参数都为None。<br>如果有异常，参数意义如下<br>exc_type，异常类型<br>exc_value，异常的值<br>traceback，异常的追踪信息<br><code>__exit__</code>方法返回一个等效True的值，则压制异常；否则，继续抛出异常</p>
+<h4 id="上下文应用场景"><a href="#上下文应用场景" class="headerlink" title="上下文应用场景"></a>上下文应用场景</h4><hr>
+<ol>
+<li>增强功能<br> 在代码执行的前后增加代码，以增强其功能。类似装饰器的功能。</li>
+<li>资源管理<br> 打开了资源需要关闭，例如文件对象、网络连接、数据库连接等</li>
+<li>权限验证<br> 在执行代码之前，做权限的验证，在<code>__enter__</code>中处理</li>
+</ol>
+<h4 id="contextlib-contextmanager"><a href="#contextlib-contextmanager" class="headerlink" title="contextlib.contextmanager"></a>contextlib.contextmanager</h4><hr>
+<p>contextlib.contextmanager<br>它是一个装饰器实现上下文管理，装饰一个函数，而不用像类一样实现__enter__和__exit__方法。<br>对下面的函数有要求，必须有yield，也就是这个函数必须返回一个生成器，且只有yield一个值。<br>也就是这个装饰器接收一个生成器对象作为参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> contextlib</span><br><span class="line"></span><br><span class="line"><span class="meta">@contextlib.contextmanager</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sub</span>(<span class="params">x, y</span>):</span>  <span class="comment"># 为生成器函数增加了上下文管理</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;enter&quot;</span>)</span><br><span class="line">    start = datetime.datetime.now()</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">yield</span> x - y  <span class="comment"># yield的值只能有一个，作为__enter__方法的返回值</span></span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        detla = (datetime.datetime.now() - start).total_seconds()</span><br><span class="line">        <span class="built_in">print</span>(detla)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;exit&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sub(<span class="number">6</span>, <span class="number">2</span>) <span class="keyword">as</span> f:</span><br><span class="line">    time.sleep(<span class="number">2</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;------------&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(f)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;~~~~~~~~~~&quot;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">enter</span><br><span class="line">------------</span><br><span class="line"><span class="number">4</span></span><br><span class="line">~~~~~~~~~~</span><br><span class="line"><span class="number">2.000654</span></span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+
+<p>当yield发生处为生成器函数增加了上下文管理。这是为函数增加上下文机制的方式。</p>
+<ul>
+<li>把yield之前的当做__enter__方法执行</li>
+<li>把yield之后的当做__exit__方法执行</li>
+<li>把yield的值作为__enter__的返回值</li>
+</ul>
+<hr>
+<p>总结 :<br>如果业务逻辑简单可以使用函数加contextlib.contextmanager装饰器方式，如果业务复杂，用类的方式加__enter__和__exit__方法方便。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/10/01/13python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/" rel="prev" title="python-面向对象">
+                  <i class="fa fa-chevron-left"></i> python-面向对象
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/10/19/15python%E5%8F%8D%E5%B0%84%E3%80%81%E6%8F%8F%E8%BF%B0%E5%99%A8/" rel="next" title="python-反射、描述器">
+                  python-反射、描述器 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">luoqian</span>
+</div>
+  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

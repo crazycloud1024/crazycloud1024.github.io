@@ -1,37 +1,322 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vampireqian.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"بحث...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="元编程元编程的概念来自LISP和smalltalk。 用来生成代码的程序称为元程序metaprogram，编写这种程序就称为元编程metaprogramming。python主要通过反射来实现元编程。  Python中所有非object类都继承自Object类所有类的类型包括type类都是typetype类继承自object类，object类的类型也是type类  type类type构建类1234">
+<meta property="og:type" content="article">
+<meta property="og:title" content="元编程">
+<meta property="og:url" content="https://vampireqian.github.io/2018/02/10/20%E5%85%83%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:site_name" content="luoqian">
+<meta property="og:description" content="元编程元编程的概念来自LISP和smalltalk。 用来生成代码的程序称为元程序metaprogram，编写这种程序就称为元编程metaprogramming。python主要通过反射来实现元编程。  Python中所有非object类都继承自Object类所有类的类型包括type类都是typetype类继承自object类，object类的类型也是type类  type类type构建类1234">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-02-10T00:00:00.000Z">
+<meta property="article:modified_time" content="2018-12-13T13:16:32.000Z">
+<meta property="article:author" content="luoqian">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://vampireqian.github.io/2018/02/10/20%E5%85%83%E7%BC%96%E7%A8%8B/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh","comments":true,"permalink":"https://vampireqian.github.io/2018/02/10/20%E5%85%83%E7%BC%96%E7%A8%8B/","path":"2018/02/10/20元编程/","title":"元编程"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>元编程 | luoqian</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="تشغيل شريط التصفح" role="button">
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">luoqian</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          المحتويات
+        </li>
+        <li class="sidebar-nav-overview">
+          عام
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%83%E7%BC%96%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">元编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#type%E7%B1%BB"><span class="nav-number">1.1.</span> <span class="nav-text">type类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#type%E6%9E%84%E5%BB%BA%E7%B1%BB"><span class="nav-number">1.1.1.</span> <span class="nav-text">type构建类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E5%85%83%E7%B1%BB"><span class="nav-number">1.1.2.</span> <span class="nav-text">构建元类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%83%E7%B1%BB%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">元类的应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%83%E7%BC%96%E7%A8%8B%E7%9A%84%E6%80%BB%E7%BB%93"><span class="nav-number">1.3.</span> <span class="nav-text">元编程的总结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">luoqian</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">المقالات</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">التصنيفات</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">الوسوم</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh">
+    <link itemprop="mainEntityOfPage" href="https://vampireqian.github.io/2018/02/10/20%E5%85%83%E7%BC%96%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="luoqian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="luoqian">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          元编程
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2018-02-10 08:00:00" itemprop="dateCreated datePublished" datetime="2018-02-10T08:00:00+08:00">2018-02-10</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2018-12-13 21:16:32" itemprop="dateModified" datetime="2018-12-13T21:16:32+08:00">2018-12-13</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="元编程"><a href="#元编程" class="headerlink" title="元编程"></a>元编程</h2><p>元编程的概念来自LISP和smalltalk。</p>
+<p>用来生成代码的程序称为元程序metaprogram，编写这种程序就称为元编程metaprogramming。<br>python主要通过反射来实现元编程。</p>
+<blockquote>
+<p>Python中<br>所有非object类都继承自Object类<br>所有类的类型包括type类都是type<br>type类继承自object类，object类的类型也是type类</p>
+</blockquote>
+<h3 id="type类"><a href="#type类" class="headerlink" title="type类"></a>type类</h3><h4 id="type构建类"><a href="#type构建类" class="headerlink" title="type构建类"></a>type构建类</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">type</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">cls, what, bases=<span class="literal">None</span>, <span class="built_in">dict</span>=<span class="literal">None</span></span>):</span> <span class="comment"># known special case of type.__init__</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        type(object_or_name, bases, dict)</span></span><br><span class="line"><span class="string">        type(object) -&gt; the object&#x27;s type </span></span><br><span class="line"><span class="string">        type(name, bases, dict) -&gt; a new type</span></span><br><span class="line"><span class="string">        # (copied from class doc)</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+<p>构建</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">    self.x = <span class="number">1000</span></span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">return</span> self.__dict__</span><br><span class="line"></span><br><span class="line">XClass = <span class="built_in">type</span>(<span class="string">&#x27;myclass&#x27;</span>, (<span class="built_in">object</span>,), &#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">100</span>, <span class="string">&#x27;b&#x27;</span>: <span class="string">&#x27;string&#x27;</span>, <span class="string">&#x27;show&#x27;</span>:show, <span class="string">&#x27;__init__&#x27;</span>:__init__&#125;) <span class="comment"># 字典是类属性 print(XClass) </span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(XClass) </span><br><span class="line"><span class="built_in">print</span>(XClass.__name__) </span><br><span class="line"><span class="built_in">print</span>(XClass.__dict__) </span><br><span class="line"><span class="built_in">print</span>(XClass.mro())</span><br><span class="line"> </span><br><span class="line">XClass().show()</span><br></pre></td></tr></table></figure>
+
+<p>可以借助type构造任何类，用代码生成代码，这就是元编程。</p>
+<h4 id="构建元类"><a href="#构建元类" class="headerlink" title="构建元类"></a>构建元类</h4><p>一个类可以继承自type类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ModelMeta</span>(<span class="params"><span class="built_in">type</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__new__</span>(<span class="params">cls, *args</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(cls)</span><br><span class="line">        <span class="built_in">print</span>(*args)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>().__new__(cls, *args)</span><br></pre></td></tr></table></figure>
+
+<p>继承自type，ModelMeta就是元类，它可以创建出其他类。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ModelMeta</span>(<span class="params"><span class="built_in">type</span></span>):</span>  <span class="comment"># 继承自type</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__new__</span>(<span class="params">cls, name, bases, attrs: <span class="built_in">dict</span></span>):</span></span><br><span class="line">        <span class="built_in">print</span>(cls)</span><br><span class="line">        <span class="built_in">print</span>(name)</span><br><span class="line">        <span class="built_in">print</span>(bases)</span><br><span class="line">        <span class="built_in">print</span>(attrs)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;--------&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>().__new__(cls, name, bases, attrs)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 第一种 使用metaclass关键字参数指定元类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>(<span class="params">metaclass=ModelMeta</span>):</span></span><br><span class="line">    <span class="built_in">id</span> = <span class="number">100</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.x = <span class="number">2000</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 第二种 B继承自A后，依然是从ModelMeta的类型</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>(<span class="params">A</span>):</span>  <span class="comment"># 继承</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 第三种 元类就可以使用下面的方式创建新的类</span></span><br><span class="line">C = ModelMeta(<span class="string">&#x27;Class&#x27;</span>, (), &#123;<span class="string">&#x27;y&#x27;</span>: <span class="number">200</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(A))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(B))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(C))</span><br></pre></td></tr></table></figure>
+
+<p>从运行结果还可以分析出<code> __new__(cls, *args)</code> 的参数结构<br>中间是一个元组 <code>(&#39;A&#39;, (), &#123;&#39;__init__&#39;: &lt;function A.__init__ at 0x0000000000B6E598&gt;, &#39;__module__&#39;:&#39;__main__&#39;, &#39;__qualname__&#39;: &#39;A&#39;, &#39;id&#39;: 100&#125;)</code><br>对应<code> (name, bases, dict)</code></p>
+<p>从运行结果可以看出，只要元类是ModelMeta，创建类对象时，就会调用ModelMeta的<code>__new__</code>方法 </p>
+<h3 id="元类的应用"><a href="#元类的应用" class="headerlink" title="元类的应用"></a>元类的应用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Field</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, fieldname=<span class="literal">None</span>, pk=<span class="literal">False</span>, nullable=<span class="literal">False</span></span>):</span></span><br><span class="line">        self.fieldname = fieldname</span><br><span class="line">        self.pk = pk</span><br><span class="line">        self.nullable = nullable</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&lt;Field &#123;&#125;&gt;&quot;</span>.<span class="built_in">format</span>(self.fieldname)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ModelMeta</span>(<span class="params"><span class="built_in">type</span></span>):</span>  <span class="comment"># 继承自type</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__new__</span>(<span class="params">cls, name, bases, attrs: <span class="built_in">dict</span></span>):</span></span><br><span class="line">        <span class="built_in">print</span>(cls)</span><br><span class="line">        <span class="built_in">print</span>(name)</span><br><span class="line">        <span class="built_in">print</span>(bases)</span><br><span class="line">        <span class="built_in">print</span>(attrs, <span class="string">&#x27;-------------&#x27;</span>)</span><br><span class="line">        <span class="comment">#    使用元类动态注入表名</span></span><br><span class="line">        tblname = <span class="string">&#x27;__tablename__&#x27;</span></span><br><span class="line">        <span class="keyword">if</span> tblname <span class="keyword">not</span> <span class="keyword">in</span> attrs.keys():</span><br><span class="line">            attrs[tblname] = name</span><br><span class="line"></span><br><span class="line">        primarykeys = []</span><br><span class="line">        <span class="keyword">for</span> k, v <span class="keyword">in</span> attrs.items():</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">isinstance</span>(v, Field):</span><br><span class="line">                <span class="built_in">print</span>(k)</span><br><span class="line">                <span class="built_in">print</span>(v)</span><br><span class="line">                <span class="built_in">print</span>(v.fieldname)</span><br><span class="line">                <span class="keyword">if</span> v.fieldname <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                    v.fieldname = k  <span class="comment"># 没有名字则使用属性名</span></span><br><span class="line">                <span class="keyword">if</span> v.pk:</span><br><span class="line">                    primarykeys.append(v)</span><br><span class="line"></span><br><span class="line">        attrs[<span class="string">&#x27;__primarykeys__&#x27;</span>] = primarykeys</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>().__new__(cls, name, bases, attrs)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ModelBase</span>(<span class="params">metaclass=ModelMeta</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params">ModelBase</span>):</span></span><br><span class="line">    <span class="built_in">id</span> = Field(pk=<span class="literal">True</span>, nullable=<span class="literal">False</span>)</span><br><span class="line">    name = Field(<span class="string">&#x27;username&#x27;</span>, nullable=<span class="literal">False</span>)</span><br><span class="line">    age = Field()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;----------------&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(Student.__dict__)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="元编程的总结"><a href="#元编程的总结" class="headerlink" title="元编程的总结"></a>元编程的总结</h3><p>元类是制造类的工厂，是生成类的类。<br>构造好元类，就可以在类定义时，使用关键字参数metaclass指定元类，可以使用最原始的metatype(name,bases, dict)的方式构造一个类。<br>元类的 <code>__new__() </code>方法中，可以获取元类信息、当前类、基类、类属性字典。 </p>
+<p>元编程一般用于框架开发中。 </p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/01/05/19%E6%8C%89%E4%BD%8D%E4%B8%8E%E3%80%81%E6%88%96%E3%80%81%E9%9D%9E%E3%80%81%E5%BC%82%E6%88%96%E7%9A%84%E6%80%BB%E7%BB%93/" rel="prev" title="按位与、或、非、异或总结">
+                  <i class="fa fa-chevron-left"></i> 按位与、或、非、异或总结
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/04/26/%E5%9C%A8Windows10%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%96%B0%E5%BB%BA%E7%9A%84%E5%8F%B3%E9%94%AE/" rel="next" title="在Windows10中给右键中添加新建的方式">
+                  在Windows10中给右键中添加新建的方式 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">luoqian</span>
+</div>
+  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

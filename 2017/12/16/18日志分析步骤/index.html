@@ -1,37 +1,336 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vampireqian.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"بحث...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="日志分析一般采集流程日志产出 -&gt; 采集（Logstash、Flume、Scribe） -&gt; 存储 -&gt; 分析 -&gt; 存储（数据库、NoSQL） -&gt; 可视化 开源实时日志分析ELK平台Logstash收集日志，并存放到ElasticSearch集群中，Kibana则从ES集群中查询数据生成图表，返回浏览器端 数据提取数据非结构化数据一眼看不出结构的数据。（二进制的，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python-日志分析步骤">
+<meta property="og:url" content="https://vampireqian.github.io/2017/12/16/18%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E6%AD%A5%E9%AA%A4/index.html">
+<meta property="og:site_name" content="luoqian">
+<meta property="og:description" content="日志分析一般采集流程日志产出 -&gt; 采集（Logstash、Flume、Scribe） -&gt; 存储 -&gt; 分析 -&gt; 存储（数据库、NoSQL） -&gt; 可视化 开源实时日志分析ELK平台Logstash收集日志，并存放到ElasticSearch集群中，Kibana则从ES集群中查询数据生成图表，返回浏览器端 数据提取数据非结构化数据一眼看不出结构的数据。（二进制的，">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-12-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2018-12-11T13:03:36.000Z">
+<meta property="article:author" content="luoqian">
+<meta property="article:tag" content="日志分析">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://vampireqian.github.io/2017/12/16/18%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E6%AD%A5%E9%AA%A4/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh","comments":true,"permalink":"https://vampireqian.github.io/2017/12/16/18%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E6%AD%A5%E9%AA%A4/","path":"2017/12/16/18日志分析步骤/","title":"python-日志分析步骤"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>python-日志分析步骤 | luoqian</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="تشغيل شريط التصفح" role="button">
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">luoqian</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          المحتويات
+        </li>
+        <li class="sidebar-nav-overview">
+          عام
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">日志分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E9%87%87%E9%9B%86%E6%B5%81%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">一般采集流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%80%E6%BA%90%E5%AE%9E%E6%97%B6%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90ELK%E5%B9%B3%E5%8F%B0"><span class="nav-number">1.2.</span> <span class="nav-text">开源实时日志分析ELK平台</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96"><span class="nav-number">2.</span> <span class="nav-text">数据提取</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE"><span class="nav-number">2.1.</span> <span class="nav-text">数据</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%9D%9E%E7%BB%93%E6%9E%84%E5%8C%96%E6%95%B0%E6%8D%AE"><span class="nav-number">2.1.1.</span> <span class="nav-text">非结构化数据</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8D%8A%E7%BB%93%E6%9E%84%E5%8C%96%E6%95%B0%E6%8D%AE"><span class="nav-number">2.1.2.</span> <span class="nav-text">半结构化数据</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E5%8C%96%E6%95%B0%E6%8D%AE"><span class="nav-number">2.1.3.</span> <span class="nav-text">结构化数据</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E5%88%86%E6%9E%90"><span class="nav-number">2.2.</span> <span class="nav-text">文本分析</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">luoqian</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">المقالات</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">التصنيفات</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">الوسوم</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh">
+    <link itemprop="mainEntityOfPage" href="https://vampireqian.github.io/2017/12/16/18%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E6%AD%A5%E9%AA%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="luoqian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="luoqian">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python-日志分析步骤
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">نُشر في</span>
+
+      <time title="أُنشأ: 2017-12-16 00:00:00" itemprop="dateCreated datePublished" datetime="2017-12-16T00:00:00+08:00">2017-12-16</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">عُدل في</span>
+        <time title="عُدل: 2018-12-11 21:03:36" itemprop="dateModified" datetime="2018-12-11T21:03:36+08:00">2018-12-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">في</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h4 id="日志分析"><a href="#日志分析" class="headerlink" title="日志分析"></a>日志分析</h4><h5 id="一般采集流程"><a href="#一般采集流程" class="headerlink" title="一般采集流程"></a>一般采集流程</h5><p>日志产出 -&gt; 采集（Logstash、Flume、Scribe） -&gt; 存储 -&gt; 分析 -&gt; 存储（数据库、NoSQL） -&gt; 可视化</p>
+<h5 id="开源实时日志分析ELK平台"><a href="#开源实时日志分析ELK平台" class="headerlink" title="开源实时日志分析ELK平台"></a>开源实时日志分析ELK平台</h5><p>Logstash收集日志，并存放到ElasticSearch集群中，Kibana则从ES集群中查询数据生成图表，返回浏览器端</p>
+<h4 id="数据提取"><a href="#数据提取" class="headerlink" title="数据提取"></a>数据提取</h4><h5 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h5><h6 id="非结构化数据"><a href="#非结构化数据" class="headerlink" title="非结构化数据"></a>非结构化数据</h6><p>一眼看不出结构的数据。（二进制的，无法用文本理解）</p>
+<h6 id="半结构化数据"><a href="#半结构化数据" class="headerlink" title="半结构化数据"></a>半结构化数据</h6><p>日志是半结构化数据，是有组织的，有格式的数据。可以分割成行和列，就可以当做表理解和处理了，当然也可以分析里面的数据。</p>
+<h6 id="结构化数据"><a href="#结构化数据" class="headerlink" title="结构化数据"></a>结构化数据</h6><p>数据库内的数据（能够像是行和列一样很好的组织起来）</p>
+<h5 id="文本分析"><a href="#文本分析" class="headerlink" title="文本分析"></a>文本分析</h5><p>日志是文本文件，需要依赖文件IO、字符串操作、正则表达式等技术。<br>通过这些技术就能够把日志中需要的数据提取出来。4</p>
+<p>这是最常见的日志，nginx、tomcat等WEB Server都会产生这样的日志。 这里面每一段有效的数据对后期的分析都是必须的。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">183</span><span class="variable">.60</span><span class="variable">.212</span><span class="variable">.153</span> - - [<span class="number">19</span>/Feb/<span class="number">2013</span>:<span class="number">10</span>:<span class="number">23</span>:<span class="number">29</span> +<span class="number">0800</span>] <span class="string">&quot;GET /o2o/media.html?menu=3 HTTP/1.1&quot;</span> <span class="number">200</span> <span class="number">16691</span> </span><br><span class="line"><span class="string">&quot;-&quot;</span> <span class="string">&quot;Mozilla/5.0 (compatible; EasouSpider; +http://www.easou.com/search/spider.html)&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>思路：如果用空格切割，数据并没有按照业务分割好，比如时间就被分开了，URL相关的也被分开了，User Agent的空格最多，被分割了。 所以，定义的时候不选用这种在filed中出现的字符就可以省很多事，例如使用’\x01’、‘\0x02’这个不可见的ASCII。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> field <span class="keyword">in</span> line.split(<span class="string">&quot;\x02&quot;</span>):</span><br><span class="line">    <span class="built_in">print</span>(field)</span><br></pre></td></tr></table></figure>
+
+<p>类型转换</p>
+<p>fields中的数据是有类型的，例如时间、状态码等。对不同的field要做不同的类型转换，甚至是自定义的转换</p>
+<p>时间转换<br>19/Feb/2013:10:23:29 +0800 对应格式是<br>%d/%b/%Y:%H:%M:%S %z<br>使用的函数是datetime类的strptime方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">convert_time</span>(<span class="params">timestr</span>):</span></span><br><span class="line">    <span class="keyword">return</span> datetime.datetime.strptime(timestr, <span class="string">&#x27;%d/%b/%Y:%H:%M:%S %z&#x27;</span>)</span><br><span class="line"><span class="comment">#lambda timestr: datetime.datetime.strptime(timestr, &#x27;%d/%b/%Y:%H:%M:%S %z&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>请求信息的解析 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#GET /o2o/media.html?menu=3 HTTP/1.1 </span></span><br><span class="line"><span class="comment">#method url protocol  三部分都非常重要</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_request</span>(<span class="params">request:<span class="built_in">str</span></span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">dict</span>(<span class="built_in">zip</span>([<span class="string">&#x27;method&#x27;</span>,<span class="string">&#x27;url&#x27;</span>,<span class="string">&#x27;protocol&#x27;</span>],request.split()))</span><br><span class="line"></span><br><span class="line"><span class="comment">#lambda request: dict(zip([&#x27;method&#x27;,&#x27;url&#x27;,&#x27;protocol&#x27;],request.split()))</span></span><br></pre></td></tr></table></figure>
+
+<p>映射<br>对每一个字段命名，然后与值和类型转换的方法对应。解析每一行是有顺序的</p>
+<p>映射<br>对每一个字段命名，然后与值和类型转换的方法对应。解析每一行是有顺序的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">line = <span class="string">&#x27;&#x27;&#x27;183.60.212.153 - - [19/Feb/2013:10:23:29 +0800] \</span></span><br><span class="line"><span class="string">&quot;GET /o2o/media.html?menu=3 HTTP/1.1&quot; 200 16691 &quot;-&quot; \</span></span><br><span class="line"><span class="string">&quot;Mozilla/5.0 (compatible; EasouSpider; +http://www.easou.com/search/spider.html)&quot;&#x27;&#x27;&#x27;</span></span><br><span class="line"> </span><br><span class="line">CHARS = <span class="built_in">set</span>(<span class="string">&#x27; \&#x27;&quot;[]&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(CHARS)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">makekey</span>(<span class="params">line:<span class="built_in">str</span></span>):</span></span><br><span class="line">    start = <span class="number">0</span></span><br><span class="line">    flag = <span class="literal">False</span></span><br><span class="line">    stopchar = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(line): <span class="comment"># [a]</span></span><br><span class="line">        <span class="keyword">if</span> c <span class="keyword">in</span> CHARS:</span><br><span class="line">            <span class="keyword">if</span> c == <span class="string">&#x27;[&#x27;</span>:</span><br><span class="line">                flag = <span class="literal">True</span></span><br><span class="line">                start = i + <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> c == <span class="string">&#x27;]&#x27;</span>:</span><br><span class="line">                flag = <span class="literal">False</span></span><br><span class="line">            <span class="keyword">if</span> c == <span class="string">&#x27;&quot;&#x27;</span>:</span><br><span class="line">                flag = <span class="keyword">not</span> flag</span><br><span class="line">                <span class="keyword">if</span> flag:</span><br><span class="line">                    start = i + <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> flag:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> start == i:</span><br><span class="line">                start = i + <span class="number">1</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">yield</span> line[start:i]</span><br><span class="line">            start = i + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> start &lt; <span class="built_in">len</span>(line):</span><br><span class="line">            <span class="keyword">yield</span> line[start:]</span><br><span class="line">names = (<span class="string">&#x27;remote&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;datetime&#x27;</span>, <span class="string">&#x27;request&#x27;</span>, <span class="string">&#x27;status&#x27;</span>, <span class="string">&#x27;length&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;useragent&#x27;</span>)</span><br><span class="line">ops = (<span class="literal">None</span>, <span class="literal">None</span>, <span class="literal">None</span>, <span class="keyword">lambda</span> timestr: datetime.datetime.strptime(timestr, <span class="string">&#x27;%d/%b/%Y:%H:%M:%S </span></span><br><span class="line"><span class="string">       lambda request: dict(zip([&#x27;</span>method<span class="string">&#x27;, &#x27;</span>url<span class="string">&#x27;, &#x27;</span>protocol<span class="string">&#x27;], request.split())),</span></span><br><span class="line"><span class="string">       int, int, None, None</span></span><br><span class="line"><span class="string">def extract(line:str):</span></span><br><span class="line"><span class="string">    return dict(map(lambda item: (item[0], item[2](item[1]) if item[2] is not None else </span></span><br><span class="line"><span class="string">item[1]),zip(names, makekey(line), ops)))</span></span><br><span class="line"><span class="string">print(extract(line))</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<p>正则表达式的提取</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">line = <span class="string">&#x27;&#x27;&#x27;183.60.212.153 - - [19/Feb/2013:10:23:29 +0800] \</span></span><br><span class="line"><span class="string">&quot;GET /o2o/media.html?menu=3 HTTP/1.1&quot; 200 16691 &quot;-&quot; \</span></span><br><span class="line"><span class="string">&quot;Mozilla/5.0 (compatible; EasouSpider; +http://www.easou.com/search/spider.html)&quot;&#x27;&#x27;&#x27;</span></span><br><span class="line"> </span><br><span class="line">ops = &#123;</span><br><span class="line">    <span class="string">&#x27;datetime&#x27;</span>: <span class="keyword">lambda</span> timestr: datetime.datetime.strptime(timestr, <span class="string">&#x27;%d/%b/%Y:%H:%M:%S %z&#x27;</span>),</span><br><span class="line">    <span class="string">&#x27;status&#x27;</span>: <span class="built_in">int</span>,</span><br><span class="line">    <span class="string">&#x27;length&#x27;</span>: <span class="built_in">int</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">pattern = <span class="string">&#x27;&#x27;&#x27;(?P&lt;remote&gt;[\d.]&#123;7,&#125;) - - \[(?P&lt;datetime&gt;[/\w +:]+)\] \</span></span><br><span class="line"><span class="string">&quot;(?P&lt;method&gt;\w+) (?P&lt;url&gt;\S+) (?P&lt;protocol&gt;[\w/\d.]+)&quot; \</span></span><br><span class="line"><span class="string">(?P&lt;status&gt;\d+) (?P&lt;length&gt;\d+) .+ &quot;(?P&lt;useragent&gt;.+)&quot;&#x27;&#x27;&#x27;</span></span><br><span class="line"> </span><br><span class="line">regex = re.<span class="built_in">compile</span>(pattern)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">extract</span>(<span class="params">line:<span class="built_in">str</span></span>) -&gt; <span class="built_in">dict</span>:</span></span><br><span class="line">    matcher = regex.match(line)</span><br><span class="line">    <span class="keyword">return</span> &#123;k:ops.get(k, <span class="keyword">lambda</span> x:x)(v) <span class="keyword">for</span> k,v <span class="keyword">in</span> matcher.groupdict().items()&#125;</span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span>(extract(line))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>异常处理<br>日志中不免会出现一些不匹配的行，需要处理。 </p>
+<p>这里使用re.match方法，有可能匹配不上。所以要增加一个判断<br>采用抛出异常的方式，让调用者获得异常并自行处理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">extract</span>(<span class="params">logline:<span class="built_in">str</span></span>) -&gt; <span class="built_in">dict</span>:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;返回字段的字典，如果返回None说明匹配失败&quot;&quot;&quot;</span></span><br><span class="line">    matcher = regex.match(line)</span><br><span class="line">    <span class="keyword">if</span> matcher:</span><br><span class="line">        <span class="keyword">return</span> &#123;k:ops.get(k, <span class="keyword">lambda</span> x:x)(v) <span class="keyword">for</span> k,v <span class="keyword">in</span> matcher.groupdict().items()&#125;</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span> <span class="comment"># 或输出日志记录</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>数据载入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load</span>(<span class="params">path</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;装载日志文件&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(path) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">            fields = extract(line)</span><br><span class="line">            <span class="keyword">if</span> fields:</span><br><span class="line">                <span class="keyword">yield</span> fields</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">continue</span> <span class="comment"># TODO 解析失败就抛弃，或者打印日志</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/" rel="tag"># 日志分析</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/11/09/17%E5%B9%B6%E5%8F%91%E5%92%8C%E7%BA%BF%E7%A8%8B/" rel="prev" title="python-并发和线程">
+                  <i class="fa fa-chevron-left"></i> python-并发和线程
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/01/05/19%E6%8C%89%E4%BD%8D%E4%B8%8E%E3%80%81%E6%88%96%E3%80%81%E9%9D%9E%E3%80%81%E5%BC%82%E6%88%96%E7%9A%84%E6%80%BB%E7%BB%93/" rel="next" title="按位与、或、非、异或总结">
+                  按位与、或、非、异或总结 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">luoqian</span>
+</div>
+  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
